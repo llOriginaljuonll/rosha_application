@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load tailwind_filters %}
+
+{% block content %}
+    <div class="w-1/3 h-full py-12 content-center mx-auto">
+        <h1 class="text-center text-4xl font-semibold mb-8 uppercase">Competition Form</h1>
+        <form action="{% url "competition:form" %}" method="post" novalidate>
+            {% csrf_token %}
+            {{ form|crispy }}
+            <div class="flex justify-center mt-5">
+                <button 
+                    type="submit" 
+                    class="text-white bg-blue-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-bold rounded-lg text-md px-5 py-2.5 text-center">
+                    Submit
+                </button>
+            </div>
+        </form>
+    </div>
+{% endblock content %}
