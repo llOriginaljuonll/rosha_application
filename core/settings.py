@@ -40,6 +40,7 @@ INSTALLED_APPS = [
 
     # Local apps
     'apps.competition',
+    'apps.participant',
 
     # Third parties
     'crispy_forms',
