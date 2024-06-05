@@ -32,11 +32,11 @@
             </thead>
             {% for participant in participants %}
                 <tbody>
-                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 cursor-pointer">
+                    <tr class="bg-white font-medium border-b dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-600">
                         <td class="px-6 py-4">
                             {{ participant.competition.name }}
                         </td>
-                        <td class="px-6 py-4">
+                        <td class="px-6 py-4 hover:bg-gray-50 cursor-pointer" onclick="location.href='{% url "participant:detail" participant.id %}'">
                             {{ participant.name }}
                         </td>
                         <td class="px-6 py-4">
