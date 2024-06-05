@@ -26,6 +26,9 @@ class ParticipantForm(forms.ModelForm):
         }
 
         widgets = {
+            'competition': forms.TimeInput(attrs={
+                'value': '', 'id': 'competition_id', 'type': 'hidden'
+            }),
             'personal_info': forms.Textarea(attrs={
                 'rows': '4'
             }),
