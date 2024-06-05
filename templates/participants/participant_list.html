@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="w-11/12 h-full my-6 content-center mx-auto">
+    <h1 class="text-5xl font-bold text-center">Participants List</h1>
+    <div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-10">
+        <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                <tr>
+                    <th scope="col" class="px-6 py-3">
+                        Competition
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Participant name
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Age (year)
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Nationality
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        School name
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Instrument
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Phone number
+                    </th>
+                </tr>
+            </thead>
+            {% for participant in participants %}
+                <tbody>
+                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 cursor-pointer">
+                        <td class="px-6 py-4">
+                            {{ participant.competition.name }}
+                        </td>
+                        <td class="px-6 py-4">
+                            {{ participant.name }}
+                        </td>
+                        <td class="px-6 py-4">
+                            {{ participant.calculate_age }}
+                        </td>
+                        <td class="px-6 py-4">
+                            {{ participant.nationality }}
+                        </td>
+                        <td class="px-6 py-4">
+                            {{ participant.school }}
+                        </td>
+                        <td class="px-6 py-4">
+                            {{ participant.instrument }}
+                        </td>
+                        <td class="px-6 py-4">
+                            {{ participant.phone }}
+                        </td>
+                    </tr>
+                </tbody>
+            {% endfor %}
+        </table>
+    </div>
+    </div>
+    
+{% endblock content %}
