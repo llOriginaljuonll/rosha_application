@@ -30,6 +30,8 @@ class Participant(models.Model):
 
     # 'cpr' stand for 'copyrights'
     cpr_permission = models.BooleanField()
+
+    # standfor 'registration confirmation'
     regis_confirm = models.BooleanField()
     slip = VersatileImageField('Slip', upload_to='slip/')
 
