@@ -1,0 +1,27 @@
+.asteriskField {
+    display: none;
+}
+
+#div_id_cpr_permission{
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: start;
+    align-items: center;
+    gap: 10px;
+}
+
+#div_id_cpr_permission > label{
+    margin-top: 8px;
+}
+
+#div_id_regis_confirm{
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: start;
+    align-items: center;
+    gap: 10px;
+}
+
+#div_id_regis_confirm > label{
+    margin-top: 8px;
+}

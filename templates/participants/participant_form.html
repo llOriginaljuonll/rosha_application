@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load tailwind_filters %}
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+{% endblock style %}
+
+{% block content %}
+    <div class="mt-5 w-1/2 mx-auto">
+        <div>
+            <h1 class="text-2xl font-semibold border-b border-gray-800 py-2">
+                {{ competition.name }}
+            </h1>
+            <div class="flex flex-col gap-2.5 text-lg font-semibold mt-3">
+                <div class="flex">
+                    <h2 class="me-3 px-1.5 bg-yellow-400 text-white rounded-xl">Concert Date</h2><h2>{{ competition.concert_date|date:"F j Y" }}</h2>
+                </div>
+                <div class="flex">
+                    <h2 class="me-3 px-1.5 bg-red-500 text-white rounded-xl">Deadline to submit the video</h2><h2>{{ competition.deadline|date:"F j Y" }}</h2>
+                </div>
+                <div class="flex">
+                    <h2 class="me-3 px-1.5 bg-blue-500 text-white rounded-xl">Announcement Date</h2><h2>{{ competition.announcement_date|date:"F j Y" }}</h2>
+                </div>
+                <div class="flex">
+                    <h2 class="me-3 px-1.5 text-white bg-green-700 rounded-xl">Contact us</h2><h2>{{ competition.email }}</h2>
+                </div>
+            </div>
+        </div>
+        <img src="{{ competition.image.url }}" class="mt-5">
+        <form class="mt-5" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <button 
+                    type="submit" 
+                    class="my-5 mx-auto text-white bg-blue-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-bold rounded-lg text-md px-5 py-2.5">
+                    Submit
+            </button>
+        </form>
+    </div>
+{% endblock content %}
+{% block script %}
+    <script>
+        var name = "{{ competition.id }}";
+        document.getElementById('competition_id').value = name;
+    </script>
+{% endblock script %}
