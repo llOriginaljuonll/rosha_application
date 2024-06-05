@@ -10,7 +10,7 @@ class CompetitionCreateView(CreateView):
     template_name = 'competition/competition_form.html'
 
     def get_success_url(self) -> str:
-        return reverse_lazy('competition:form')
+        return reverse_lazy('competition:list')
     
 class CompetitionListView(ListView):
 
