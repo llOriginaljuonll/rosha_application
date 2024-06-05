@@ -16,7 +16,7 @@
                 <tbody>
                     {% for competition in competitions %}
                         <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                            <th scope="row" class="px-6 py-2 text-lg font-medium text-gray-900 whitespace-nowrap dark:text-white cursor-pointer"  onclick="location.href='{% url "competition:detail" competition.id %}'">
+                            <th scope="row" class="px-6 py-2 text-lg font-medium text-gray-900 whitespace-nowrap dark:text-white cursor-pointer"  onclick="location.href='{% url "participant:form" competition.id %}'">
                                 {{ competition.name }}
                             </th>
                         </tr>
