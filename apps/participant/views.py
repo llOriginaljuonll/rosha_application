@@ -1,8 +1,17 @@
-from django.views.generic import DetailView
+from django.views.generic import DetailView, ListView
 from django.views.generic.edit import FormMixin
 from apps.competition.models import Competition
+from apps.participant.models import Participant
 from apps.participant.forms import ParticipantForm
 from django.urls import reverse_lazy
+
+class ParticipantListView(ListView):
+
+    model = Participant
+    template_name = 'participants/participant_list.html'
+    context_object_name = 'participants'
+
+    ordering = ['-pk']
 
 class ParticipantFormView(DetailView, FormMixin):
 
