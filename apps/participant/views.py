@@ -13,6 +13,13 @@ class ParticipantListView(ListView):
 
     ordering = ['-pk']
 
+class ParticipandDetailView(DetailView):
+
+    model = Participant
+    object_name = 'participant'
+    template_name = 'participants/participant_detail.html'
+    context_object_name = 'participant'
+
 class ParticipantFormView(DetailView, FormMixin):
 
     model = Competition
