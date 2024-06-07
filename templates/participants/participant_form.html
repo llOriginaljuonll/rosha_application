@@ -28,7 +28,9 @@
                 </div>
             </div>
         </div>
-        <img src="{{ competition.image.url }}" class="mt-5">
+        {% if competition.image %}
+            <img src="{{ competition.image.url }}" class="mt-5 mx-auto">
+        {% endif %}
         <form class="mt-5" method="post" enctype="multipart/form-data">
             {% csrf_token %}
             {{ form|crispy }}

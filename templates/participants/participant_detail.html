@@ -4,7 +4,9 @@
     <div class="w-10/12 h-screen mx-auto mt-4">
         <div class="w-9/12 mx-auto mt-10">
             <div class="flex gap-4">
-                <img class="rounded-md" src="{{ participant.image.crop.130x150 }}">
+                {% if participant.image %}
+                    <img class="rounded-md" src="{{ participant.image.crop.130x150 }}">
+                {% endif %}
                 <div class="wrapper w-full flex flex-col justify-center">
                     <div class="flex items-center w-full">
                         <p class="text-white text-center text-md font-semibold bg-blue-600 rounded w-2/12 py-0.5">Name</p>
