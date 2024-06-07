@@ -25,3 +25,7 @@
 #div_id_regis_confirm > label{
     margin-top: 8px;
 }
+
+#div_id_remember{
+    display: none;
+}

@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     'apps.participant',
 
     # Third parties
+    'allauth',
+    'allauth.account',
     'crispy_forms',
     'crispy_tailwind',
     'versatileimagefield',
@@ -58,6 +60,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    # django-allauth
+    'allauth.account.middleware.AccountMiddleware',
 ]
 
 ROOT_URLCONF = 'core.urls'
@@ -142,6 +147,12 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.template.context_processors.request',
 )
 
+# django-allauth
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
+
 MEDIA_ROOT = str(BASE_DIR / "media")
 
 MEDIA_URL = "/media/"
@@ -149,3 +160,16 @@ MEDIA_URL = "/media/"
 CRISPY_ALLOWED_TEMPLATE_PACKS = "tailwind"
 
 CRISPY_TEMPLATE_PACK = "tailwind"
+
+LOGIN_REDIRECT_URL = '/'
+
+LOGOUT_REDIRECT_URL = 'account_login'
+
+# Skip logout confirmation
+ACCOUNT_LOGOUT_ON_GET= True
+
+ACCOUNT_USER_MODEL_EMAIL_FIELD = None
+
+ACCOUNT_EMAIL_REQUIRED = False
+
+ACCOUNT_FORMS = {"login": "apps.accounts.forms.UserLoginForm", "signup": "apps.accounts.forms.UserSignupForm"}
