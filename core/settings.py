@@ -165,3 +165,11 @@ LOGIN_REDIRECT_URL = '/'
 
 LOGOUT_REDIRECT_URL = 'account_login'
 
+# Skip logout confirmation
+ACCOUNT_LOGOUT_ON_GET= True
+
+ACCOUNT_USER_MODEL_EMAIL_FIELD = None
+
+ACCOUNT_EMAIL_REQUIRED = False
+
+ACCOUNT_FORMS = {"login": "apps.accounts.forms.UserLoginForm", "signup": "apps.accounts.forms.UserSignupForm"}
