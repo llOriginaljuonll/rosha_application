@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     # Local apps
     'apps.competition',
     'apps.participant',
+    'apps.accounts',
 
     # Third parties
     'allauth',
@@ -173,3 +174,5 @@ ACCOUNT_USER_MODEL_EMAIL_FIELD = None
 ACCOUNT_EMAIL_REQUIRED = False
 
 ACCOUNT_FORMS = {"login": "apps.accounts.forms.UserLoginForm", "signup": "apps.accounts.forms.UserSignupForm"}
+
+AUTH_USER_MODEL = "accounts.CustomUser"
