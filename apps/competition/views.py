@@ -1,11 +1,13 @@
 from django.views.generic import CreateView, ListView
 from apps.competition.models import Competition
 from apps.competition.forms import CompetitionForm
+from core.mixins import IsStaffMixin
 from django.urls import reverse_lazy
 
-class CompetitionCreateView(CreateView):
+class CompetitionCreateView(IsStaffMixin, CreateView):
 
     model = Competition
+    object_name = "competition"
     form_class = CompetitionForm
     template_name = 'competition/competition_form.html'
 

@@ -4,8 +4,9 @@ from apps.competition.models import Competition
 from apps.participant.models import Participant
 from apps.participant.forms import ParticipantForm
 from django.urls import reverse_lazy
+from core.mixins import IsStaffMixin
 
-class ParticipantListView(ListView):
+class ParticipantListView(IsStaffMixin, ListView):
 
     model = Participant
     template_name = 'participants/participant_list.html'
@@ -13,7 +14,7 @@ class ParticipantListView(ListView):
 
     ordering = ['-pk']
 
-class ParticipandDetailView(DetailView):
+class ParticipandDetailView(IsStaffMixin, DetailView):
 
     model = Participant
     object_name = 'participant'
