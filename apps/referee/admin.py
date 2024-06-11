@@ -1,3 +1,6 @@
 from django.contrib import admin
+from apps.referee.models import Score
 
-# Register your models here.
+@admin.register(Score)
+class ScoreAdmin(admin.ModelAdmin):
+    pass
