@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'apps.competition',
     'apps.participant',
     'apps.accounts',
+    'apps.referee',
 
     # Third parties
     'allauth',
