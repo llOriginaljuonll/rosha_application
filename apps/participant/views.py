@@ -14,6 +14,14 @@ class ParticipantListView(IsStaffMixin, ListView):
 
     ordering = ['-pk']
 
+class ParticipantListAllView(IsStaffMixin, ListView):
+
+    model = Participant
+    template_name = 'participants/participant_list_all.html'
+    context_object_name = 'participants'
+
+    ordering = ['-pk']
+
 class ParticipandDetailView(IsStaffMixin, DetailView):
 
     model = Participant
