@@ -14,6 +14,14 @@ class ParticipantListView(IsStaffMixin, ListView):
 
     ordering = ['-pk']
 
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     context["competition"] = Participant.objects.get(id=self.kwargs.get('competition'))
+    #     return context
+
+    def get_queryset(self, *args, **kwargs):
+        return Participant.objects.filter(competition__id=self.kwargs.get('competition'))
+
 class ParticipantListAllView(IsStaffMixin, ListView):
 
     model = Participant
@@ -55,3 +63,4 @@ class ParticipantFormView(DetailView, FormMixin):
     
     def form_valid(self, form):
         return super().form_valid(form)
+    
