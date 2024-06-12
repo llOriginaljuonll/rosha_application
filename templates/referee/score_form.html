@@ -9,34 +9,24 @@
 {% endblock style %}
 
 {% block content %}
-    <div class="mt-5 w-1/2 mx-auto">
-        <div>
-            <h1 class="text-2xl font-semibold border-b border-gray-800 py-2">
-                {{ competition.name }}
-            </h1>
-            <div class="flex flex-col gap-2.5 text-lg font-semibold mt-3">
-                <div class="flex">
-                    <h2 class="me-3 px-1.5 bg-yellow-400 text-white rounded-xl">Participant name<h2>{{ participant.name }}</h2>
-                </div>
-                <div class="flex">
-                    {% if participant.shorts_url %}
-                        <div class="hidden xl:block">{% video participant.shorts_url "324x576" %}</div>
-                    {% endif %}
-                </div>
-            </div>
+    <div class="mt-5 w-1/2 mx-auto flex justify-center gap-10">
+        <div class="flex flex-col items-center">
+            {% if participant.shorts_url %}
+                <p class="w-full bg-gray-100 rounded-tr rounded-tl py-1 text-center border-x border-t font-medium text-lg">{{ participant.name }}</p>
+                <div>{% video participant.shorts_url "282x500" %}</div>
+            {% endif %}
         </div>
-        {% if competition.image %}
-            <img src="{{ competition.image.url }}" class="mt-5 mx-auto">
-        {% endif %}
-        <form class="mt-5" method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            {{ form|crispy }}
-            <button 
+        <div class="content-center">
+            <form class="w-1/2" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form|crispy }}
+                <button 
                     type="submit" 
-                    class="my-5 mx-auto text-white bg-blue-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-bold rounded-lg text-md px-5 py-2.5">
+                    class="w-full my-1 text-lg text-white bg-blue-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-bold rounded text-md px-2.5 py-0.5">
                     Submit
-            </button>
-        </form>
+                </button>
+            </form>
+        </div>
     </div>
 {% endblock content %}
 {% block script %}
