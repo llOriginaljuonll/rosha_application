@@ -18,6 +18,10 @@
         </div>
         <form class="w-2/3 content-center ps-10" method="post" enctype="multipart/form-data">
             {% csrf_token %}
+            <div class="flex flex-col gap-1">
+                <p class="font-medium">Name</p>
+                <input type="text" class="rounded-lg mb-1 border border-gray-300" value={{ participant.name }}>
+            </div>
             {{ form|crispy }}
             <div class="flex justify-center mt-7">
                 <button 
@@ -31,7 +35,7 @@
 {% endblock content %}
 {% block script %}
     <script>
-        var name = "{{ participant.name }}";
+        var name = "{{ participant.id }}";
         document.getElementById('participant_id').value = name;
     </script>
 {% endblock script %}

@@ -9,6 +9,6 @@ class ScoreForm(forms.ModelForm):
 
         widgets = {
             'participant': forms.TimeInput(attrs={
-                'value': '', 'id': 'participant_id', 'readonly': 'readonly'
+                'value': '', 'id': 'participant_id', 'type': 'hidden'
             }),
         }
