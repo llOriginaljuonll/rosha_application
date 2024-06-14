@@ -1,4 +1,4 @@
-from django.views.generic import DetailView
+from django.views.generic import DetailView, ListView
 from django.views.generic.edit import FormMixin
 from apps.referee.models import Score
 from apps.participant.models import Participant
@@ -31,3 +31,9 @@ class ScoreFormView(DetailView, FormMixin):
     
     def form_valid(self, form):
         return super().form_valid(form)
+    
+class ScoreListView(ListView):
+
+    model = Score
+    template_name = 'referee/result_list.html'
+    context_object_name = 'scores'
