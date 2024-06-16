@@ -31,9 +31,3 @@ class ScoreFormView(DetailView, FormMixin):
     
     def form_valid(self, form):
         return super().form_valid(form)
-    
-class ScoreListView(ListView):
-
-    model = Score
-    template_name = 'referee/result_list.html'
-    context_object_name = 'scores'
