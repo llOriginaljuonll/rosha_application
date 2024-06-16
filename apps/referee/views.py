@@ -13,8 +13,8 @@ class ScoreFormView(DetailView, FormMixin):
     context_object_name = 'participant'
 
     def get_success_url(self) -> str:
-        return reverse_lazy('competition:list')
-    
+        return reverse_lazy('participant:list', kwargs={"pk": self.get_object().competition.id})
+
     def get_context_data(self, **kwargs):
         context = super(ScoreFormView, self).get_context_data(**kwargs)
         context['form'] = self.get_form()
