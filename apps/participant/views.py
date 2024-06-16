@@ -3,6 +3,7 @@ from django.views.generic.edit import FormMixin
 from apps.competition.models import Competition
 from apps.participant.models import Participant
 from apps.participant.forms import ParticipantForm
+from apps.referee.models import Score
 from django.urls import reverse_lazy
 from core.mixins import IsStaffMixin
 
@@ -12,7 +13,18 @@ class ParticipantListView(IsStaffMixin, ListView):
     template_name = 'participants/participant_list.html'
     context_object_name = 'participants'
 
-    ordering = ['-pk']
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     context["competition"] = Participant.objects.get(id=self.kwargs.get('competition'))
+    #     return context
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["score"] = Score.objects.filter(id=self.kwargs.get('id'))
+        return context
+
+    def get_queryset(self, *args, **kwargs):
+        return Participant.objects.filter(competition__id=self.kwargs.get('pk')).order_by('score__average')
 
 class ParticipandDetailView(IsStaffMixin, DetailView):
 
@@ -20,6 +32,7 @@ class ParticipandDetailView(IsStaffMixin, DetailView):
     object_name = 'participant'
     template_name = 'participants/participant_detail.html'
     context_object_name = 'participant'
+
 
 class ParticipantFormView(DetailView, FormMixin):
 
@@ -47,3 +60,4 @@ class ParticipantFormView(DetailView, FormMixin):
     
     def form_valid(self, form):
         return super().form_valid(form)
+    
