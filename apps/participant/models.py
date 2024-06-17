@@ -4,10 +4,11 @@ from embed_video.fields import EmbedVideoField
 from django.core.validators import RegexValidator
 from datetime import date
 from apps.competition.models import Competition
-
+from apps.accounts.models import CustomUser
 
 class Participant(models.Model):
     competition = models.ForeignKey(Competition, on_delete=models.CASCADE)
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
     personal_info = models.CharField(max_length=255, blank=True, null=True)
     name = models.CharField(max_length=255)
     nationality = models.CharField(max_length=255)
