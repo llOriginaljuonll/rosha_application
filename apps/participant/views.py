@@ -24,7 +24,7 @@ class ParticipantListView(IsEditorMixin, ListView):
         return Participant.objects.filter(competition__id=self.kwargs.get('pk')).order_by('score__average')
     
 
-class ParticipandDetailView(DetailView):
+class ParticipantDetailView(DetailView):
 
     model = Participant
     object_name = 'participant'
