@@ -5,18 +5,15 @@ from apps.participant.models import Participant
 from apps.participant.forms import ParticipantForm
 from apps.referee.models import Score
 from django.urls import reverse_lazy
-from core.mixins import IsStaffMixin
+from core.mixins import IsActiveMixin, IsEditorMixin
+from django.contrib import messages
+from django.shortcuts import redirect
 
-class ParticipantListView(IsStaffMixin, ListView):
+class ParticipantListView(IsEditorMixin, ListView):
 
     model = Participant
     template_name = 'participants/participant_list.html'
     context_object_name = 'participants'
-
-    # def get_context_data(self, **kwargs):
-    #     context = super().get_context_data(**kwargs)
-    #     context["competition"] = Participant.objects.get(id=self.kwargs.get('competition'))
-    #     return context
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -25,16 +22,32 @@ class ParticipantListView(IsStaffMixin, ListView):
 
     def get_queryset(self, *args, **kwargs):
         return Participant.objects.filter(competition__id=self.kwargs.get('pk')).order_by('score__average')
+    
 
-class ParticipandDetailView(IsStaffMixin, DetailView):
+class ParticipandDetailView(DetailView):
 
     model = Participant
     object_name = 'participant'
     template_name = 'participants/participant_detail.html'
     context_object_name = 'participant'
 
+    def handle_no_permission(self, request):
+        messages.add_message(request, messages.ERROR, "You need higher permissions in order to access this page.")
+        return redirect("competition:list")
 
-class ParticipantFormView(DetailView, FormMixin):
+    def dispatch(self, request, *args, **kwargs):
+        obj = self.get_object()
+        if not request.user.is_authenticated:
+            messages.add_message(request, messages.ERROR, "You need to be logged in in order to access this page.")
+            return redirect("account_login")
+        if request.user.is_editor or request.user.id == obj.user.id:
+            pass
+        else:
+            return self.handle_no_permission(request)
+        return super().dispatch(request, *args, **kwargs)
+
+
+class ParticipantFormView(IsActiveMixin, DetailView, FormMixin):
 
     model = Competition
     form_class = ParticipantForm
