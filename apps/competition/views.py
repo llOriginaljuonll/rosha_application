@@ -1,7 +1,7 @@
 from django.views.generic import CreateView, ListView
 from apps.competition.models import Competition
 from apps.competition.forms import CompetitionForm
-from core.mixins import IsStaffMixin
+from core.mixins import IsStaffMixin, IsActiveMixin
 from django.urls import reverse_lazy
 
 class CompetitionCreateView(IsStaffMixin, CreateView):
@@ -14,7 +14,7 @@ class CompetitionCreateView(IsStaffMixin, CreateView):
     def get_success_url(self) -> str:
         return reverse_lazy('competition:list')
     
-class CompetitionListView(ListView):
+class CompetitionListView(IsActiveMixin, ListView):
 
     model = Competition
     template_name = 'competition/competition_list.html'
