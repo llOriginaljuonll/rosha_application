@@ -46,5 +46,7 @@
     <script>
         var name = "{{ competition.id }}";
         document.getElementById('competition_id').value = name;
+        var name = "{{ request.user.id }}";
+        document.getElementById('user_id').value = name;
     </script>
 {% endblock script %}
