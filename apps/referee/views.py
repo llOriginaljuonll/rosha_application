@@ -1,11 +1,11 @@
-from django.views.generic import DetailView, ListView
+from django.views.generic import DetailView
 from django.views.generic.edit import FormMixin
-from apps.referee.models import Score
 from apps.participant.models import Participant
 from apps.referee.forms import ScoreForm
+from core.mixins import IsEditorMixin
 from django.urls import reverse_lazy
 
-class ScoreFormView(DetailView, FormMixin):
+class ScoreFormView(IsEditorMixin, DetailView, FormMixin):
 
     model = Participant
     form_class = ScoreForm
