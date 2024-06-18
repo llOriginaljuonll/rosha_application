@@ -8,11 +8,12 @@ from apps.accounts.models import CustomUser
 
 class Participant(models.Model):
     competition = models.ForeignKey(Competition, on_delete=models.CASCADE)
-    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     personal_info = models.CharField(max_length=255, blank=True, null=True)
     name = models.CharField(max_length=255)
     nationality = models.CharField(max_length=255)
     birthdate = models.DateField()
+    age = models.IntegerField(blank=True, null=True)
     phone = models.CharField(
         max_length=20,
         validators=[
