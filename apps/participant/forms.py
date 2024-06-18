@@ -36,4 +36,7 @@ class ParticipantForm(forms.ModelForm):
                 'rows': '4'
             }),
             'birthdate': forms.DateInput(attrs={'type': 'date'}),
+            'age': forms.TextInput(attrs={
+                'type': 'hidden'
+            }),
         }
