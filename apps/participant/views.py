@@ -1,4 +1,4 @@
-from django.views.generic import DetailView, ListView
+from django.views.generic import DetailView, ListView, UpdateView, DeleteView
 from django.views.generic.edit import FormMixin
 from apps.competition.models import Competition
 from apps.participant.models import Participant
@@ -75,4 +75,14 @@ class ParticipantFormView(IsActiveMixin, DetailView, FormMixin):
     
     def form_valid(self, form):
         return super().form_valid(form)
+    
+class ParticipantUpdateView(UpdateView):
+
+    model = Participant
+    form_class = ParticipantForm
+    template_name = 'participants/participant_update.html'
+
+    def get_success_url(self) -> str:
+        return reverse_lazy('competition:list')
+
     
