@@ -42,6 +42,12 @@ class Participant(models.Model):
         if self.birthdate:
             competitor_age = today.year - self.birthdate.year - ((today.month, today.day) < (self.birthdate.month, self.birthdate.day))
             return competitor_age
+    
+    def save(self, *args, **kwargs):
+        if not self.age or self.age:
+            self.age = self.calculate_age()
+
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return f"{self.name} {self.competition}"
