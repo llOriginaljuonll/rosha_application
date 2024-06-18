@@ -1,70 +1,71 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <div class="w-10/12 h-screen mx-auto mt-4">
-        <div class="w-9/12 mx-auto mt-10">
+    <div class="w-8/12 h-screen mx-auto my-12">
+        <div class="w-full mx-auto mt-10 border border-gray-400 p-10">
             <div class="flex gap-4">
+                
+                <div class="wrapper w-full flex flex-col justify-center gap-5">
+                    <div class="flex items-center w-full border border-gray-400">
+                        <p class="text-center text-md font-semibold bg-gray-100 w-2/12 py-0.5 border-e border-gray-400">Name</p>
+                        <p class="text-md font-semibold px-4 border-gray-950 w-10/12 py-0.5">&nbsp;{{ participant.name|capfirst }}</p>
+                    </div>
+                    <div class="flex items-center w-full border border-gray-400">
+                        <p class="text-center text-md font-semibold bg-gray-100 w-2/12 py-0.5 border-e border-gray-400">Nationality</p>
+                        <p class="text-md font-semibold px-4 border-gray-950 w-10/12 py-0.5">&nbsp;{{ participant.nationality|capfirst }}</p>
+                    </div>
+                    <div class="flex items-center w-full border border-gray-400">
+                        <p class="text-center text-md font-semibold bg-gray-100 w-2/12 py-0.5 border-e border-gray-400">Competition</p>
+                        <p class="text-md font-semibold px-4 border-gray-950 w-10/12 py-0.5">&nbsp;{{ participant.competition.name|capfirst }}</p>
+                    </div>
+                </div>
                 {% if participant.image %}
-                    <img class="rounded-md" src="{{ participant.image.crop.130x150 }}">
+                    <img src="{{ participant.image.crop.130x150 }}" class="border border-gray-200">
                 {% endif %}
-                <div class="wrapper w-full flex flex-col justify-center">
-                    <div class="flex items-center w-full">
-                        <p class="text-white text-center text-md font-semibold bg-blue-600 rounded w-2/12 py-0.5">Name</p>
-                        <p class="text-md font-semibold px-4 border-b border-gray-950 w-10/12 py-0.5">&nbsp;{{ participant.name|capfirst }}</p>
-                    </div>
-                    <div class="mt-6 flex items-center w-full">
-                        <p class="text-white text-center text-md font-semibold bg-blue-600 rounded w-2/12 py-0.5">Nationality</p>
-                        <p class="text-md font-semibold px-4 border-b border-gray-950 w-10/12 py-0.5">&nbsp;{{ participant.nationality|capfirst }}</p>
-                    </div>
-                    <div class="mt-6 flex items-center w-full">
-                        <p class="text-white text-center text-md font-semibold bg-blue-600 rounded w-2/12 py-0.5">Competition</p>
-                        <p class="text-md font-semibold px-4 border-b border-gray-950 w-10/12 py-0.5">&nbsp;{{ participant.competition.name|capfirst }}</p>
-                    </div>
+            </div>
+            <div class="mt-6 flex items-center gap-5">
+                <div class="flex tems-center w-7/12 border border-gray-400">
+                    <p class="text-center text-md font-semibold bg-gray-100 w-3/12 py-0.5 border-e border-gray-400">Birthdate</p>
+                    <p class="text-md font-semibold px-4 w-9/12 py-0.5">&nbsp;{{ participant.birthdate|date:"j F Y" }}</p>
+                </div>
+                <div class="flex tems-center w-5/12 border border-gray-400">
+                    <p class="text-center text-md font-semibold bg-gray-100 w-4/12 py-0.5 border-e border-gray-400">Age</p>
+                    <p class="text-md font-semibold px-4 w-9/12 py-0.5">&nbsp;{{ participant.calculate_age }} year</p>
                 </div>
             </div>
-            <div class="mt-6 flex items-center gap-1">
-                <div class="flex items-center w-7/12">
-                    <p class="text-md text-white text-center font-semibold bg-blue-600 rounded w-3/12 py-0.5">Birthdate</p>
-                    <p class="text-md font-semibold px-4 border-b border-gray-950 w-9/12 py-0.5">&nbsp;{{ participant.birthdate|date:"j F Y" }}</p>
+            <div class="mt-6 flex items-center gap-5">
+                <div class="flex tems-center w-7/12 border border-gray-400">
+                    <p class="text-center text-md font-semibold bg-gray-100 w-3/12 py-0.5 border-e border-gray-400">School</p>
+                    <p class="text-md font-semibold px-4 w-9/12 py-0.5">&nbsp;{{ participant.school|capfirst }}</p>
                 </div>
-                <div class="flex items-center w-5/12">
-                    <p class="text-md text-white text-center font-semibold bg-blue-600 rounded w-4/12 py-0.5">Age</p>
-                    <p class="text-md font-semibold px-4 border-b border-gray-950 w-8/12 py-0.5">&nbsp;{{ participant.calculate_age }} year</p>
-                </div>
-            </div>
-            <div class="mt-6 flex items-center gap-1">
-                <div class="flex items-center w-7/12">
-                    <p class="text-md text-white text-center font-semibold bg-blue-600 rounded w-3/12 py-0.5">School</p>
-                    <p class="text-md font-semibold px-4 border-b border-gray-950 w-9/12 py-0.5">&nbsp;{{ participant.school|capfirst }}</p>
-                </div>
-                <div class="flex items-center w-5/12">
-                    <p class="text-md text-white text-center font-semibold bg-blue-600 rounded w-4/12 py-0.5">Grade</p>
-                    <p class="text-md font-semibold px-4 border-b border-gray-950 w-8/12 py-0.5">&nbsp;{{ participant.grade }}</p>
+                <div class="flex tems-center w-5/12 border border-gray-400">
+                    <p class="text-center text-md font-semibold bg-gray-100 w-4/12 py-0.5 border-e border-gray-400">Grade</p>
+                    <p class="text-md font-semibold px-4 w-9/12 py-0.5">&nbsp;{{ participant.grade }}</p>
                 </div>
             </div>
-            <div class="mt-6 flex items-center gap-1">
-                <div class="flex items-center w-7/12">
-                    <p class="text-md text-white text-center font-semibold bg-blue-600 rounded w-3/12 py-0.5">Song</p>
-                    <p class="text-md font-semibold px-4 border-b border-gray-950 w-9/12 py-0.5">&nbsp;{{ participant.song|capfirst }}</p>
+            <div class="mt-6 flex items-center gap-5">
+                <div class="flex tems-center w-7/12 border border-gray-400">
+                    <p class="text-center text-md font-semibold bg-gray-100 w-3/12 py-0.5 border-e border-gray-400">Song</p>
+                    <p class="text-md font-semibold px-4 w-9/12 py-0.5">&nbsp;{{ participant.song|capfirst }}</p>
                 </div>
-                <div class="flex items-center w-5/12">
-                    <p class="text-md text-white text-center font-semibold bg-blue-600 rounded w-4/12 py-0.5">Instrument</p>
-                    <p class="text-md font-semibold px-4 border-b border-gray-950 w-8/12 py-0.5">&nbsp;{{ participant.instrument|capfirst }}</p>
-                </div>
-            </div>
-            <div class="mt-6 flex items-center gap-1">
-                <div class="flex items-center w-7/12">
-                    <p class="text-md text-white text-center font-semibold bg-blue-600 rounded w-3/12 py-0.5">Email</p>
-                    <p class="text-md font-semibold px-4 border-b border-gray-950 w-9/12 py-0.5">&nbsp;{{ participant.email|lower }}</p>
-                </div>
-                <div class="flex items-center w-5/12">
-                    <p class="text-md text-white text-center font-semibold bg-blue-600 rounded w-4/12 py-0.5">Phone</p>
-                    <p class="text-md font-semibold px-4 border-b border-gray-950 w-8/12 py-0.5">&nbsp;{{ participant.phone }}</p>
+                <div class="flex tems-center w-5/12 border border-gray-400">
+                    <p class="text-center text-md font-semibold bg-gray-100 w-4/12 py-0.5 border-e border-gray-400">Instrument</p>
+                    <p class="text-md font-semibold px-4 w-9/12 py-0.5">&nbsp;{{ participant.instrument|capfirst }}</p>
                 </div>
             </div>
-            <div class="mt-6 flex items-center">
-                <p class="text-md text-white text-center font-semibold bg-blue-600 rounded w-3/12 py-0.5">Copyright Permission</p>
-                <p class="text-md px-4 border-b border-gray-950 w-9/12 py-0.5">
+            <div class="mt-6 flex items-center gap-5">
+                <div class="flex tems-center w-7/12 border border-gray-400">
+                    <p class="text-center text-md font-semibold bg-gray-100 w-3/12 py-0.5 border-e border-gray-400">Email</p>
+                    <p class="text-md font-semibold px-4 w-9/12 py-0.5">&nbsp;{{ participant.email|lower }}</p>
+                </div>
+                <div class="flex tems-center w-5/12 border border-gray-400">
+                    <p class="text-center text-md font-semibold bg-gray-100 w-4/12 py-0.5 border-e border-gray-400">Phone</p>
+                    <p class="text-md font-semibold px-4 w-9/12 py-0.5">&nbsp;{{ participant.phone }}</p>
+                </div>
+            </div>
+            <div class="mt-6 flex items-center border border-gray-400">
+                <p class="text-center text-md font-semibold bg-gray-100 w-3/12 py-0.5 border-e border-gray-400">Copyright Permission</p>
+                <p class="text-md px-4 w-9/12 py-0.5">
                     {% if participant.cpr_permission %}
                     <svg class="w-5.5 h-5.5 text-green-400 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                         <path fill-rule="evenodd" d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm13.707-1.293a1 1 0 0 0-1.414-1.414L11 12.586l-1.793-1.793a1 1 0 0 0-1.414 1.414l2.5 2.5a1 1 0 0 0 1.414 0l4-4Z" clip-rule="evenodd"/>
@@ -76,9 +77,9 @@
                     {% endif %}
                 </p>
             </div>
-            <div class="mt-6 flex items-center">
-                <p class="text-sm text-white text-center font-semibold bg-blue-600 rounded w-3/12 py-1">Registration Confirmation</p>
-                <p class="text-md px-4 border-b border-gray-950 w-9/12 py-0.5">
+            <div class="mt-6 flex items-center border border-gray-400">
+                <p class="text-center text-md font-semibold bg-gray-100 w-3/12 py-0.5 border-e border-gray-400">Registration Confirmation</p>
+                <p class="text-md px-4 w-9/12 py-0.5">
                     {% if participant.regis_confirm %}
                     <svg class="w-5.5 h-5.5 text-green-400 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                         <path fill-rule="evenodd" d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm13.707-1.293a1 1 0 0 0-1.414-1.414L11 12.586l-1.793-1.793a1 1 0 0 0-1.414 1.414l2.5 2.5a1 1 0 0 0 1.414 0l4-4Z" clip-rule="evenodd"/>
