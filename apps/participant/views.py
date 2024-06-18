@@ -18,6 +18,8 @@ class ParticipantListView(IsEditorMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["score"] = Score.objects.filter(id=self.kwargs.get('id'))
+        title = context["object_list"][0]
+        context["title"] = title.competition.name
         return context
 
     def get_queryset(self, *args, **kwargs):
