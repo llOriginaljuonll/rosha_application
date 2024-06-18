@@ -29,3 +29,8 @@
 #div_id_remember{
     display: none;
 }
+
+/* remove text => "No File Chosen */
+input[type='file'] {
+    color: transparent;
+}
