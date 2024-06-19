@@ -1,4 +1,4 @@
-from django.views.generic import DetailView, ListView
+from django.views.generic import DetailView, ListView, UpdateView, DeleteView
 from django.views.generic.edit import FormMixin
 from apps.competition.models import Competition
 from apps.participant.models import Participant
@@ -17,7 +17,7 @@ class ParticipantListView(IsEditorMixin, ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["score"] = Score.objects.filter(id=self.kwargs.get('id'))
+        context["score"] = Score.objects.filter(id=self.kwargs.get('id'))      
         title = context["object_list"][0]
         context["title"] = title.competition.name
         return context
@@ -35,7 +35,7 @@ class ParticipantDetailView(DetailView):
 
     def handle_no_permission(self, request):
         messages.add_message(request, messages.ERROR, "You need higher permissions in order to access this page.")
-        return redirect("competition:list")
+        return redirect("/")
 
     def dispatch(self, request, *args, **kwargs):
         obj = self.get_object()
@@ -76,3 +76,37 @@ class ParticipantFormView(IsActiveMixin, DetailView, FormMixin):
     def form_valid(self, form):
         return super().form_valid(form)
     
+class ParticipantUpdateView(UpdateView):
+
+    model = Participant
+    form_class = ParticipantForm
+    template_name = 'participants/participant_update.html'
+
+    def handle_no_permission(self, request):
+        messages.add_message(request, messages.ERROR, "You need higher permissions in order to access this page.")
+        return redirect("/")
+
+    def dispatch(self, request, *args, **kwargs):
+        obj = self.get_object()
+        if not request.user.is_authenticated:
+            messages.add_message(request, messages.ERROR, "You need to be logged in in order to access this page.")
+            return redirect("account_login")
+        if request.user.is_staff or request.user.id == obj.user.id:
+            pass
+        else:
+            return self.handle_no_permission(request)
+        return super().dispatch(request, *args, **kwargs)
+
+    def get_success_url(self):
+        return reverse_lazy('participant:detail', kwargs={"pk": self.get_object().id})
+
+class ParticipantDeleteView(DeleteView):
+
+    model = Participant
+
+    """Overide get method for Creating DeleteView without templates name"""
+    def get(self, request, *args, **kwargs):
+        return self.delete(request, *args, **kwargs)
+    
+    def get_success_url(self):
+        return reverse_lazy('participant:list', kwargs={"pk": self.get_object().competition.id})
