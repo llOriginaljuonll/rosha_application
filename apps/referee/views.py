@@ -31,3 +31,11 @@ class ScoreFormView(IsEditorMixin, DetailView, FormMixin):
     
     def form_valid(self, form):
         return super().form_valid(form)
+class ScoreUpdateView(UpdateView):
+
+    model = Score
+    form_class = ScoreForm
+    template_name = 'referee/score_update.html'
+
+    def get_success_url(self):
+        return reverse_lazy('participant:list', kwargs={"pk": self.get_object().participant.competition.id})
