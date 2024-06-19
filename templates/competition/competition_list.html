@@ -22,15 +22,15 @@
                                     <p>{{ competition.name }}</p>
                                 </th>
                                 {% if user.is_editor %}
-                                    <th scope="row" class="py-2 text-center border-s border-t hover:bg-gray-100 cursor-pointer" onclick="location.href='{% url "participant:list" competition.id %}'">
+                                    <th scope="row" class="w-1/12 py-2 text-center border-s border-t hover:bg-gray-100 cursor-pointer" onclick="location.href='{% url "participant:list" competition.id %}'">
                                         Details
                                     </th>
                                 {% endif %}
                                 {% if user.is_staff %}
-                                    <th scope="row" class="py-2 text-center border-s border-t hover:bg-gray-100 cursor-pointer" onclick="location.href='{% url "competition:update" competition.id %}'">
+                                    <th scope="row" class="w-1/12 py-2 text-center border-s border-t hover:bg-gray-100 cursor-pointer" onclick="location.href='{% url "competition:update" competition.id %}'">
                                         Edit
                                     </th>
-                                    <th scope="row" class="py-2 text-center text-red-500 border-s border-t hover:bg-gray-100 cursor-pointer" data-modal-target="popup-modal" data-modal-toggle="popup-modal">
+                                    <th scope="row" class="w-1/12 py-2 text-center text-red-500 border-s border-t hover:bg-gray-100 cursor-pointer" data-modal-target="popup-modal" data-modal-toggle="popup-modal">
                                         Delete
                                     </th>
                                 {% endif %}
