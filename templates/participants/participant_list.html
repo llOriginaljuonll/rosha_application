@@ -33,7 +33,7 @@
                     <tbody>
                         <tr class="bg-white font-medium border-b dark:bg-gray-800 dark:border-gray-700">
                             <td class="px-6 py-2 text-center" onclick="location.href='{% url "participant:detail" participant.id %}'">
-                                {{ participant.score.id }}
+                                {{ forloop.counter }}
                             </td>
                             <td class="ps-3 py-2 hover:bg-gray-50 cursor-pointer capitalize" onclick="location.href='{% url "participant:detail" participant.id %}'">
                                 {{ participant.name }}
