@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'crispy_tailwind',
     'versatileimagefield',
     'embed_video',
+    'compressor',
 
 ]
 
@@ -179,3 +180,10 @@ ACCOUNT_EMAIL_REQUIRED = False
 ACCOUNT_FORMS = {"login": "apps.accounts.forms.UserLoginForm", "signup": "apps.accounts.forms.UserSignupForm"}
 
 AUTH_USER_MODEL = "accounts.CustomUser"
+
+# https://www.geeksforgeeks.org/how-to-use-tailwind-css-with-django/
+COMPRESS_ROOT = BASE_DIR / 'static'
+
+COMPRESS_ENABLED = True
+
+STATICFILES_FINDERS = ('compressor.finders.CompressorFinder',)
