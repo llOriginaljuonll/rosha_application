@@ -3,7 +3,7 @@
 {% block content %}
     <div class="w-8/12 h-full my-12 content-center mx-auto">
         <h1 class="text-4xl font-semibold text-center">
-            {{ title }}
+            All Participants
         </h1>
         <div class="relative overflow-x-auto mt-10">
             <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 border">
@@ -13,13 +13,16 @@
                             No.
                         </th>
                         <th scope="col" class="ps-3 py-3">
-                            Participant name
+                            competition
                         </th>
-                        <th scope="col" class="py-3 text-center">
-                            Age (year)
+                        <th scope="col" class="ps-3 py-3">
+                            name
                         </th>
                         <th scope="col" class="py-3 text-center">
                             Nationality
+                        </th>
+                        <th scope="col" class="py-3 text-center">
+                            Age (year)
                         </th>
                         <th scope="col" class="py-3 text-center">
                             Instrument
@@ -35,14 +38,28 @@
                             <td class="px-6 py-2 text-center" onclick="location.href='{% url "participant:detail" participant.id %}'">
                                 {{ forloop.counter }}
                             </td>
+                            <td>
+                                <div 
+                                    class="ps-3 py-2 hover:bg-gray-50 cursor-pointer capitalize" 
+                                    onclick="location.href='{% url "participant:list" participant.competition.id %}'"
+                                    data-tooltip-target="tooptip-{{ participant.id }}">
+                                    {{ participant.competition.name|truncatewords_html:3 }}
+                                </div>
+                                {% if participant.word_number > 3 %}
+                                    <div id="tooptip-{{ participant.id }}" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:text-gray-800 dark:bg-gray-50">
+                                        {{ participant.competition }}
+                                        <div class="tooltip-arrow" data-popper-arrow></div>
+                                    </div>
+                                {% endif %}
+                            </td>
                             <td class="ps-3 py-2 hover:bg-gray-50 cursor-pointer capitalize" onclick="location.href='{% url "participant:detail" participant.id %}'">
                                 {{ participant.name }}
                             </td>
-                            <td class="py-2 text-center ">
-                                {{ participant.calculate_age }}
-                            </td>
                             <td class="py-2 text-center">
                                 {{ participant.nationality|capfirst }}
+                            </td>
+                            <td class="py-2 text-center ">
+                                {{ participant.calculate_age }}
                             </td>
                             <td class="py-2 text-center">
                                 {{ participant.instrument|capfirst }}
@@ -54,23 +71,6 @@
                                     -
                                 {% endif %}
                             </td>
-                            {% if user.is_editor %}
-                                {% if participant.score.average <= 0 %}
-                                    <td class="py-2 flex justify-center items-center gap-1 border-s hover:bg-gray-50 cursor-pointer" onclick="location.href='{% url "referee:update" participant.score.id %}'">
-                                        Fill in score
-                                        <svg class="w-[17px] h-[17px] text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-                                            <path fill-rule="evenodd" d="M15.514 3.293a1 1 0 0 0-1.415 0L12.151 5.24a.93.93 0 0 1 .056.052l6.5 6.5a.97.97 0 0 1 .052.056L20.707 9.9a1 1 0 0 0 0-1.415l-5.193-5.193ZM7.004 8.27l3.892-1.46 6.293 6.293-1.46 3.893a1 1 0 0 1-.603.591l-9.494 3.355a1 1 0 0 1-.98-.18l6.452-6.453a1 1 0 0 0-1.414-1.414l-6.453 6.452a1 1 0 0 1-.18-.98l3.355-9.494a1 1 0 0 1 .591-.603Z" clip-rule="evenodd"/>
-                                        </svg>
-                                    </td>
-                                {% else %}
-                                    <td class="py-2 flex justify-center items-center gap-1 border-s  cursor-pointer hover:bg-gray-100" onclick="location.href='{% url "referee:update" participant.score.id %}'">
-                                        Score details
-                                        <svg class="w-[17px] h-[17px] text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-                                            <path fill-rule="evenodd" d="M15.514 3.293a1 1 0 0 0-1.415 0L12.151 5.24a.93.93 0 0 1 .056.052l6.5 6.5a.97.97 0 0 1 .052.056L20.707 9.9a1 1 0 0 0 0-1.415l-5.193-5.193ZM7.004 8.27l3.892-1.46 6.293 6.293-1.46 3.893a1 1 0 0 1-.603.591l-9.494 3.355a1 1 0 0 1-.98-.18l6.452-6.453a1 1 0 0 0-1.414-1.414l-6.453 6.452a1 1 0 0 1-.18-.98l3.355-9.494a1 1 0 0 1 .591-.603Z" clip-rule="evenodd"/>
-                                        </svg>
-                                    </td>
-                                {% endif %}
-                            {% endif %}
                             {% if user.is_staff %}
                                 <td class="py-2 text-center gap-1 hover:bg-gray-100 text-red-500 border-s cursor-pointer" data-modal-target="popup-modal" data-modal-toggle="popup-modal">
                                     Delete

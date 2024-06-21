@@ -5,7 +5,7 @@ from apps.participant.models import Participant
 from apps.participant.forms import ParticipantForm
 from apps.referee.models import Score
 from django.urls import reverse_lazy
-from core.mixins import IsActiveMixin, IsEditorMixin
+from core.mixins import IsActiveMixin, IsEditorMixin, IsStaffMixin
 from django.contrib import messages
 from django.shortcuts import redirect
 
@@ -17,7 +17,7 @@ class ParticipantListView(IsEditorMixin, ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["score"] = Score.objects.filter(id=self.kwargs.get('id'))      
+        context["score"] = Score.objects.filter(id=self.kwargs.get('id'))     
         title = context["object_list"][0]
         context["title"] = title.competition.name
         return context
@@ -25,6 +25,12 @@ class ParticipantListView(IsEditorMixin, ListView):
     def get_queryset(self, *args, **kwargs):
         return Participant.objects.filter(competition__id=self.kwargs.get('pk')).order_by('score__average')
     
+class AllParticipantLisview(IsStaffMixin, ListView):
+
+    model = Participant
+    template_name = "participants/participant_all_list.html"
+    context_object_name = "participants"
+    ordering = ["-id"]
 
 class ParticipantDetailView(DetailView):
 

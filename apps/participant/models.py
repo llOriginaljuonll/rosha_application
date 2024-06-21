@@ -37,6 +37,11 @@ class Participant(models.Model):
     regis_confirm = models.BooleanField()
     slip = VersatileImageField('Slip', upload_to='slip/')
 
+    def word_number(self):
+        word = self.competition.name.split()
+        result = len(word)
+        return result
+
     def calculate_age(self):
         today = date.today()
         if self.birthdate:
