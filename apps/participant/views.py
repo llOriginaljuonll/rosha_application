@@ -16,10 +16,17 @@ class ParticipantListView(IsEditorMixin, ListView):
     context_object_name = 'participants'
 
     def get_context_data(self, **kwargs):
+        """
+            1. because self.kwargs is dict. I need to do loop for get value of self.kwargs.
+            2. self.kwargs of this class is id of competition.
+            3. compt_name is competition name after queryset.
+        """
         context = super().get_context_data(**kwargs)
-        context["score"] = Score.objects.filter(id=self.kwargs.get('id'))     
-        title = context["object_list"][0]
-        context["title"] = title.competition.name
+        context["score"] = Score.objects.filter(id=self.kwargs.get('id'))
+        for keys, values in self.kwargs.items():
+            value = values
+        context["compt_name"] = Competition.objects.get(id=value).name
+        
         return context
 
     def get_queryset(self, *args, **kwargs):
