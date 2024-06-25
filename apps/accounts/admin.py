@@ -2,6 +2,9 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from apps.accounts.models import CustomUser
 from allauth.account.admin import EmailAddress
+from django.contrib.auth.models import Group
+
+admin.site.unregister(Group)
 
 admin.site.unregister(EmailAddress)
 @admin.register(CustomUser)

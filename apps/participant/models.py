@@ -9,7 +9,7 @@ from apps.accounts.models import CustomUser
 class Participant(models.Model):
     competition = models.ForeignKey(Competition, on_delete=models.CASCADE)
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
-    personal_info = models.CharField(max_length=255, blank=True, null=True)
+    personal_info = models.TextField(max_length=255, blank=True, null=True)
     name = models.CharField(max_length=255)
     nationality = models.CharField(max_length=255)
     birthdate = models.DateField()
@@ -55,4 +55,4 @@ class Participant(models.Model):
         super().save(*args, **kwargs)
 
     def __str__(self):
-        return f"{self.name} {self.competition}"
+        return f"No.{self.id} {self.name}"
