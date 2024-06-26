@@ -5,7 +5,15 @@ module.exports = {
     './templates/**/*.html'
   ],
   theme: {
-    extend: {},
+    extend: {
+      screens: {
+        'sm': '300px',
+        'md': '640px',
+        'lg': '1024px',
+        'xl': '1280px',
+        '2xl': '1536px',
+      },
+    },
   },
   plugins: [],
 }
