@@ -1,5 +1,5 @@
 from django.contrib import admin
-from apps.competition.models import Competition
+from apps.events.models import Competition
 
 @admin.register(Competition)
 class CompetitionAdmin(admin.ModelAdmin):

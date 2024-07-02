@@ -1,7 +1,7 @@
 from django.urls import path
-from apps.competition import views
+from apps.events import views
 
-app_name = 'competition'
+app_name = 'events'
 
 urlpatterns = [
     path('', views.CompetitionListView.as_view(),name='list'),

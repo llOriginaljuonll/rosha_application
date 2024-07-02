@@ -1,5 +1,5 @@
 from django import forms
-from apps.competition.models import Competition
+from apps.events.models import Competition
 
 class CompetitionForm(forms.ModelForm):
 

@@ -12,7 +12,7 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('competition', '0001_initial'),
+        ('events', '0001_initial'),
     ]
 
     operations = [
@@ -35,7 +35,7 @@ class Migration(migrations.Migration):
                 ('cpr_permission', models.BooleanField()),
                 ('regis_confirm', models.BooleanField()),
                 ('slip', versatileimagefield.fields.VersatileImageField(upload_to='slip/', verbose_name='Slip')),
-                ('competition', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='competition.competition')),
+                ('competition', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='events.competition')),
             ],
         ),
     ]
