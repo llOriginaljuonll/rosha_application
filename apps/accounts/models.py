@@ -7,7 +7,7 @@ class CustomUser(AbstractUser):
     email = models.EmailField("Email Address", unique=True, blank=False, null=False)
     first_name = None
     last_name = None
-    is_editor = models.BooleanField("Editor Status", default=False, help_text="Designates whether the user can create and update contents.")
+    is_judge = models.BooleanField("Judge Status", default=False, help_text="Designates whether the user can grades participants.")
 
     def __str__(self):
         return f'{self.username} No.{self.id}'

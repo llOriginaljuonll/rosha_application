@@ -22,7 +22,7 @@ class IsActiveMixin(UserPassesTestMixin):
 class IsEditorMixin(UserPassesTestMixin):
 
     def test_func(self) -> bool:
-        return self.request.user.is_editor if self.request.user.is_authenticated else False
+        return self.request.user.is_judge if self.request.user.is_authenticated else False
 
     """Verify that the current user has editor status."""
     def handle_no_permission(self, request):
@@ -33,7 +33,7 @@ class IsEditorMixin(UserPassesTestMixin):
         if not request.user.is_authenticated:
             messages.add_message(request, messages.ERROR, "You need to be logged in in order to access this page.")
             return redirect("account_login")
-        if not request.user.is_editor:
+        if not request.user.is_judge:
             return self.handle_no_permission(request)
         return super().dispatch(request, *args, **kwargs)
 

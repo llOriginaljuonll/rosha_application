@@ -93,7 +93,7 @@
             </div>
         </div>
         <div class="flex justify-center gap-5 mb-10">
-            {% if user.is_editor %}
+            {% if user.is_judge %}
                 <button 
                     type="submit" 
                     onclick="location.href='{% url "participant:update" participant.id %}'"
