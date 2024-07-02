@@ -55,7 +55,7 @@ class ParticipantDetailView(DetailView):
         if not request.user.is_authenticated:
             messages.add_message(request, messages.ERROR, "You need to be logged in in order to access this page.")
             return redirect("account_login")
-        if request.user.is_editor or request.user.id == obj.user.id:
+        if request.user.is_judge or request.user.id == obj.user.id:
             pass
         else:
             return self.handle_no_permission(request)

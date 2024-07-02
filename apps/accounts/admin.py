@@ -16,7 +16,7 @@ class CustomUserAdmin(UserAdmin):
             {
                 "fields": (
                     "is_active",
-                    "is_editor",
+                    "is_judge",
                     "is_staff",
                     "is_superuser",
                     "groups",
@@ -31,7 +31,7 @@ class CustomUserAdmin(UserAdmin):
         "id",
         "username",
         "is_active",
-        "is_editor",
+        "is_judge",
         "is_staff",
         "is_superuser",
         "date_joined",
@@ -41,7 +41,7 @@ class CustomUserAdmin(UserAdmin):
     search_fields = ["username", ]
     list_filter = (
         "is_superuser",
-        "is_editor",
+        "is_judge",
         "is_staff",
         "is_active",
         "date_joined",
@@ -51,7 +51,7 @@ class CustomUserAdmin(UserAdmin):
         "id",
         "username",
         "is_active",
-        "is_editor",
+        "is_judge",
         "is_staff",
         "is_superuser",
         "date_joined",

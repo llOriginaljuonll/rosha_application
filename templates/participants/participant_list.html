@@ -73,7 +73,7 @@
                                     -
                                 {% endif %}
                             </td>
-                            {% if user.is_editor %}
+                            {% if user.is_judge %}
                                 {% if participant.score.average <= 0 %}
                                     <td class="py-2 flex justify-center items-center gap-1 hover:bg-gray-50 cursor-pointer" onclick="location.href='{% url "referee:update" participant.score.id %}'">
                                         Fill in score
