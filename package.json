@@ -4,5 +4,8 @@
   },
   "scripts": {
     "build": "tailwindcss build -i ./static/src/input.css -o ./static/src/output.css -w"
+  },
+  "dependencies": {
+    "flowbite": "^2.4.1"
   }
 }
