@@ -1,5 +1,5 @@
 from django import forms
-from apps.participant.models import Participant
+from apps.performer.participant.models import Participant
 
 class ParticipantForm(forms.ModelForm):
 

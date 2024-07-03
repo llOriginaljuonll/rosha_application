@@ -1,5 +1,5 @@
 from django.urls import path
-from apps.participant import views
+from apps.performer.participant import views
 
 app_name = 'participant'
 

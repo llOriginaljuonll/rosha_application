@@ -40,7 +40,7 @@ INSTALLED_APPS = [
 
     # Local apps
     'apps.events.audition',
-    'apps.participant',
+    'apps.performer.participant',
     'apps.accounts',
     'apps.referee',
 

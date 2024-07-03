@@ -1,8 +1,8 @@
 from django.views.generic import DetailView, ListView, UpdateView, DeleteView
 from django.views.generic.edit import FormMixin
 from apps.events.audition.models import Audition
-from apps.participant.models import Participant
-from apps.participant.forms import ParticipantForm
+from apps.performer.participant.models import Participant
+from apps.performer.participant.forms import ParticipantForm
 from apps.referee.models import Score
 from django.urls import reverse_lazy
 from core.mixins import IsActiveMixin, IsEditorMixin, IsStaffMixin
@@ -70,7 +70,7 @@ class ParticipantFormView(IsActiveMixin, DetailView, FormMixin):
     context_object_name = 'competition'
 
     def get_success_url(self) -> str:
-        return reverse_lazy('competition:list')
+        return reverse_lazy('audition:list')
     
     def get_context_data(self, **kwargs):
         context = super(ParticipantFormView, self).get_context_data(**kwargs)

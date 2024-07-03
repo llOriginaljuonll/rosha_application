@@ -23,7 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('allauth.urls')),
     path('', include('apps.events.audition.urls')),
-    path('participant/', include('apps.participant.urls')),
+    path('performer/', include('apps.performer.participant.urls')),
     path('referee/', include('apps.referee.urls')),
 ]
 
