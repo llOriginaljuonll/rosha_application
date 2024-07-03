@@ -39,8 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # Local apps
-    'apps.competition',
-    'apps.participant',
+    'apps.events.audition',
+    'apps.performer.auditioner',
     'apps.accounts',
     'apps.referee',
 
