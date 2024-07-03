@@ -1,10 +1,10 @@
 from django import forms
-from apps.performer.participant.models import Participant
+from apps.performer.auditioner.models import Auditioner
 
-class ParticipantForm(forms.ModelForm):
+class AuditionerForm(forms.ModelForm):
 
     class Meta:
-        model = Participant
+        model = Auditioner
         fields = ('__all__')
 
         labels = {

@@ -6,7 +6,7 @@ from datetime import date
 from apps.events.audition.models import Audition
 from apps.accounts.models import CustomUser
 
-class Participant(models.Model):
+class Auditioner(models.Model):
     competition = models.ForeignKey(Audition, on_delete=models.CASCADE)
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     personal_info = models.TextField(max_length=255, blank=True, null=True)
