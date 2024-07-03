@@ -1,6 +1,6 @@
 from django.contrib import admin
-from apps.events.models import Competition
+from apps.events.audition.models import Audition
 
-@admin.register(Competition)
-class CompetitionAdmin(admin.ModelAdmin):
+@admin.register(Audition)
+class AuditionAdmin(admin.ModelAdmin):
     pass

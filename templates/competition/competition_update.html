@@ -5,7 +5,7 @@
 {% block content %}
     <div class="w-8/12 h-full my-12 content-center mx-auto">
         <h1 class="text-4xl font-semibold text-center pb-5">Edit Form</h1>
-        <form action="{% url "competition:update" competition.id %}" method="post" enctype="multipart/form-data" class="mt-5 border border-gray-400 pt-5 pb-2 px-6">
+        <form action="{% url "audition:update" audition.id %}" method="post" enctype="multipart/form-data" class="mt-5 border border-gray-400 pt-5 pb-2 px-6">
             {% csrf_token %}
             {{ form|crispy }}
             <div class="flex justify-center items-center mt-5">

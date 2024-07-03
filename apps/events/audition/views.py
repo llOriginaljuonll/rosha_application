@@ -7,7 +7,7 @@ from django.urls import reverse_lazy
 class AuditionCreateView(IsStaffMixin, CreateView):
 
     model = Audition
-    object_name = "competition"
+    object_name = "audition"
     form_class = AuditionForm
     template_name = 'competition/competition_form.html'
 
@@ -37,4 +37,4 @@ class AuditionListView(IsActiveMixin, ListView):
 
     model = Audition
     template_name = 'competition/competition_list.html'
-    context_object_name = 'competitions'
+    context_object_name = 'auditions'
