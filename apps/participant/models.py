@@ -3,11 +3,11 @@ from versatileimagefield.fields import VersatileImageField
 from embed_video.fields import EmbedVideoField
 from django.core.validators import RegexValidator
 from datetime import date
-from apps.events.audition.models import Competition
+from apps.events.audition.models import Audition
 from apps.accounts.models import CustomUser
 
 class Participant(models.Model):
-    competition = models.ForeignKey(Competition, on_delete=models.CASCADE)
+    competition = models.ForeignKey(Audition, on_delete=models.CASCADE)
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     personal_info = models.TextField(max_length=255, blank=True, null=True)
     name = models.CharField(max_length=255)

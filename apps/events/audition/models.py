@@ -2,7 +2,7 @@ from django.db import models
 from datetime import date
 from versatileimagefield.fields import VersatileImageField
 
-class Competition(models.Model):
+class Audition(models.Model):
     name = models.CharField(max_length=255)
     image = VersatileImageField('Image', upload_to='image/', null=True, blank=True)
     email = models.EmailField(default='rosha.thailand@gmail.com', null=True, blank=True)

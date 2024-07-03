@@ -1,6 +1,6 @@
 from django.contrib import admin
 from apps.participant.models import Participant
-from apps.events.audition.models import Competition
+from apps.events.audition.models import Audition
 from apps.referee.models import Score
 from django.db import models
 from django import forms

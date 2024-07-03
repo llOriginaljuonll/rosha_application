@@ -1,31 +1,31 @@
 from django.views.generic import CreateView, ListView, UpdateView, DeleteView
-from apps.events.audition.models import Competition
-from apps.events.audition.forms import CompetitionForm
+from apps.events.audition.models import Audition
+from apps.events.audition.forms import AuditionForm
 from core.mixins import IsStaffMixin, IsActiveMixin
 from django.urls import reverse_lazy
 
-class CompetitionCreateView(IsStaffMixin, CreateView):
+class AuditionCreateView(IsStaffMixin, CreateView):
 
-    model = Competition
+    model = Audition
     object_name = "competition"
-    form_class = CompetitionForm
+    form_class = AuditionForm
     template_name = 'competition/competition_form.html'
 
     def get_success_url(self) -> str:
-        return reverse_lazy('competition:list')
+        return reverse_lazy('audition:list')
 
-class CompetitionUpdateView(IsStaffMixin, UpdateView):
+class AuditionUpdateView(IsStaffMixin, UpdateView):
 
-    model = Competition
-    form_class = CompetitionForm
+    model = Audition
+    form_class = AuditionForm
     template_name = 'competition/competition_update.html'
 
     def get_success_url(self) -> str:
-        return reverse_lazy('competition:list')
+        return reverse_lazy('audition:list')
     
-class CompetitionDeleteView(IsStaffMixin, DeleteView):
+class AuditionDeleteView(IsStaffMixin, DeleteView):
 
-    model = Competition
+    model = Audition
     success_url = "/"
 
     """Overide get method for Creating DeleteView without templates name"""
@@ -33,8 +33,8 @@ class CompetitionDeleteView(IsStaffMixin, DeleteView):
         return self.delete(request, *args, **kwargs)
 
 
-class CompetitionListView(IsActiveMixin, ListView):
+class AuditionListView(IsActiveMixin, ListView):
 
-    model = Competition
+    model = Audition
     template_name = 'competition/competition_list.html'
     context_object_name = 'competitions'

@@ -1,6 +1,6 @@
 from django.views.generic import DetailView, ListView, UpdateView, DeleteView
 from django.views.generic.edit import FormMixin
-from apps.events.audition.models import Competition
+from apps.events.audition.models import Audition
 from apps.participant.models import Participant
 from apps.participant.forms import ParticipantForm
 from apps.referee.models import Score
@@ -25,7 +25,7 @@ class ParticipantListView(IsEditorMixin, ListView):
         context["score"] = Score.objects.filter(id=self.kwargs.get('id'))
         for keys, values in self.kwargs.items():
             value = values
-        context["compt_name"] = Competition.objects.get(id=value).name
+        context["compt_name"] = Audition.objects.get(id=value).name
         
         return context
 
@@ -64,7 +64,7 @@ class ParticipantDetailView(DetailView):
 
 class ParticipantFormView(IsActiveMixin, DetailView, FormMixin):
 
-    model = Competition
+    model = Audition
     form_class = ParticipantForm
     template_name = 'participants/participant_form.html'
     context_object_name = 'competition'
