@@ -9,7 +9,7 @@ class AuditionCreateView(IsStaffMixin, CreateView):
     model = Audition
     object_name = "audition"
     form_class = AuditionForm
-    template_name = 'competition/competition_form.html'
+    template_name = 'events/audition/audition_form.html'
 
     def get_success_url(self) -> str:
         return reverse_lazy('audition:list')
@@ -18,7 +18,7 @@ class AuditionUpdateView(IsStaffMixin, UpdateView):
 
     model = Audition
     form_class = AuditionForm
-    template_name = 'competition/competition_update.html'
+    template_name = 'events/audition/audition_update.html'
 
     def get_success_url(self) -> str:
         return reverse_lazy('audition:list')
@@ -36,5 +36,5 @@ class AuditionDeleteView(IsStaffMixin, DeleteView):
 class AuditionListView(IsActiveMixin, ListView):
 
     model = Audition
-    template_name = 'competition/competition_list.html'
+    template_name = 'events/audition/audition_list.html'
     context_object_name = 'auditions'
