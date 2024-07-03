@@ -3,7 +3,7 @@ from versatileimagefield.fields import VersatileImageField
 from embed_video.fields import EmbedVideoField
 from django.core.validators import RegexValidator
 from datetime import date
-from apps.events.models import Competition
+from apps.events.audition.models import Competition
 from apps.accounts.models import CustomUser
 
 class Participant(models.Model):

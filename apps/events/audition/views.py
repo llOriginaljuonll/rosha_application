@@ -1,6 +1,6 @@
 from django.views.generic import CreateView, ListView, UpdateView, DeleteView
-from apps.events.models import Competition
-from apps.events.forms import CompetitionForm
+from apps.events.audition.models import Competition
+from apps.events.audition.forms import CompetitionForm
 from core.mixins import IsStaffMixin, IsActiveMixin
 from django.urls import reverse_lazy
 

@@ -1,6 +1,6 @@
 from django.views.generic import DetailView, ListView, UpdateView, DeleteView
 from django.views.generic.edit import FormMixin
-from apps.events.models import Competition
+from apps.events.audition.models import Competition
 from apps.participant.models import Participant
 from apps.participant.forms import ParticipantForm
 from apps.referee.models import Score
