@@ -3,7 +3,7 @@
 {% block content %}
     <div class="w-8/12 h-full my-12 content-center mx-auto">
         <h1 class="text-4xl font-semibold text-center">
-            All Participants
+            All Auditioners
         </h1>
         <div class="relative overflow-x-auto mt-10">
             <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 border">
@@ -32,41 +32,41 @@
                         </th>
                     </tr>
                 </thead>
-                {% for participant in participants %}
+                {% for auditioner in auditioners %}
                     <tbody>
                         <tr class="bg-white font-medium border-b dark:bg-gray-800 dark:border-gray-700">
-                            <td class="px-6 py-2 text-center" onclick="location.href='{% url "participant:detail" participant.id %}'">
+                            <td class="px-6 py-2 text-center" onclick="location.href='{% url "auditioner:detail" auditioner.id %}'">
                                 {{ forloop.counter }}
                             </td>
                             <td>
                                 <div 
                                     class="ps-3 py-2 hover:bg-gray-50 cursor-pointer capitalize" 
-                                    onclick="location.href='{% url "participant:list" participant.competition.id %}'"
-                                    data-tooltip-target="tooptip-{{ participant.id }}">
-                                    {{ participant.competition.name|truncatewords_html:3 }}
+                                    onclick="location.href='{% url "auditioner:list" auditioner.competition.id %}'"
+                                    data-tooltip-target="tooptip-{{ auditioner.id }}">
+                                    {{ auditioner.competition.name|truncatewords_html:3 }}
                                 </div>
-                                {% if participant.word_number > 3 %}
-                                    <div id="tooptip-{{ participant.id }}" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:text-gray-800 dark:bg-gray-50">
-                                        {{ participant.competition }}
+                                {% if auditioner.word_number > 3 %}
+                                    <div id="tooptip-{{ auditioner.id }}" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:text-gray-800 dark:bg-gray-50">
+                                        {{ auditioner.competition }}
                                         <div class="tooltip-arrow" data-popper-arrow></div>
                                     </div>
                                 {% endif %}
                             </td>
-                            <td class="ps-3 py-2 hover:bg-gray-50 cursor-pointer capitalize" onclick="location.href='{% url "participant:detail" participant.id %}'">
-                                {{ participant.name }}
+                            <td class="ps-3 py-2 hover:bg-gray-50 cursor-pointer capitalize" onclick="location.href='{% url "auditioner:detail" auditioner.id %}'">
+                                {{ auditioner.name }}
                             </td>
                             <td class="py-2 text-center">
-                                {{ participant.nationality|capfirst }}
+                                {{ auditioner.nationality|capfirst }}
                             </td>
                             <td class="py-2 text-center ">
-                                {{ participant.calculate_age }}
+                                {{ auditioner.calculate_age }}
                             </td>
                             <td class="py-2 text-center">
-                                {{ participant.instrument|capfirst }}
+                                {{ auditioner.instrument|capfirst }}
                             </td>
                             <td class="pe-6 py-2 text-center">
-                                {% if participant.score.average %}
-                                    {{ participant.score.average|floatformat:2 }}
+                                {% if auditioner.score.average %}
+                                    {{ auditioner.score.average|floatformat:2 }}
                                 {% else %}
                                     -
                                 {% endif %}
@@ -91,8 +91,8 @@
                                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
                                                 </svg>
                                                 <h3 class="mb-2 text-lg font-normal text-gray-500 dark:text-gray-400">Are you sure you want to delete</h3>
-                                                <h3 class="mb-5 text-lg font-bold text-gray-500 dark:text-gray-400">{{ participant.name }}?</h3>
-                                                <button data-modal-hide="popup-modal" type="button" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center"  onclick="location.href='{% url "participant:delete" participant.id %}'">
+                                                <h3 class="mb-5 text-lg font-bold text-gray-500 dark:text-gray-400">{{ auditioner.name }}?</h3>
+                                                <button data-modal-hide="popup-modal" type="button" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center"  onclick="location.href='{% url "auditioner:delete" auditioner.id %}'">
                                                     Yes, I'm sure
                                                 </button>
                                                 <button data-modal-hide="popup-modal" type="button" class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">No, cancel</button>

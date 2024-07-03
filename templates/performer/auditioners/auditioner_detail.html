@@ -8,65 +8,65 @@
                 <div class="wrapper w-full flex flex-col justify-center gap-5">
                     <div class="flex items-center w-full border border-gray-400">
                         <p class="text-center text-md font-semibold bg-gray-100 w-2/12 py-0.5 border-e border-gray-400">Name</p>
-                        <p class="text-md font-semibold px-4 border-gray-950 w-10/12 py-0.5">&nbsp;{{ participant.name|capfirst }}</p>
+                        <p class="text-md font-semibold px-4 border-gray-950 w-10/12 py-0.5">&nbsp;{{ auditioner.name|capfirst }}</p>
                     </div>
                     <div class="flex items-center w-full border border-gray-400">
                         <p class="text-center text-md font-semibold bg-gray-100 w-2/12 py-0.5 border-e border-gray-400">Nationality</p>
-                        <p class="text-md font-semibold px-4 border-gray-950 w-10/12 py-0.5">&nbsp;{{ participant.nationality|capfirst }}</p>
+                        <p class="text-md font-semibold px-4 border-gray-950 w-10/12 py-0.5">&nbsp;{{ auditioner.nationality|capfirst }}</p>
                     </div>
                     <div class="flex items-center w-full border border-gray-400">
                         <p class="text-center text-md font-semibold bg-gray-100 w-2/12 py-0.5 border-e border-gray-400">Competition</p>
-                        <p class="text-md font-semibold px-4 border-gray-950 w-10/12 py-0.5">&nbsp;{{ participant.competition.name|capfirst }}</p>
+                        <p class="text-md font-semibold px-4 border-gray-950 w-10/12 py-0.5">&nbsp;{{ auditioner.competition.name|capfirst }}</p>
                     </div>
                 </div>
-                {% if participant.image %}
-                    <img src="{{ participant.image.crop.130x150 }}" class="border border-gray-200">
+                {% if auditioner.image %}
+                    <img src="{{ auditioner.image.crop.130x150 }}" class="border border-gray-200">
                 {% endif %}
             </div>
             <div class="mt-6 flex items-center gap-5">
                 <div class="flex tems-center w-7/12 border border-gray-400">
                     <p class="text-center text-md font-semibold bg-gray-100 w-3/12 py-0.5 border-e border-gray-400">Birthdate</p>
-                    <p class="text-md font-semibold px-4 w-9/12 py-0.5">&nbsp;{{ participant.birthdate|date:"j F Y" }}</p>
+                    <p class="text-md font-semibold px-4 w-9/12 py-0.5">&nbsp;{{ auditioner.birthdate|date:"j F Y" }}</p>
                 </div>
                 <div class="flex tems-center w-5/12 border border-gray-400">
                     <p class="text-center text-md font-semibold bg-gray-100 w-4/12 py-0.5 border-e border-gray-400">Age</p>
-                    <p class="text-md font-semibold px-4 w-9/12 py-0.5">&nbsp;{{ participant.calculate_age }} year</p>
+                    <p class="text-md font-semibold px-4 w-9/12 py-0.5">&nbsp;{{ auditioner.calculate_age }} year</p>
                 </div>
             </div>
             <div class="mt-6 flex items-center gap-5">
                 <div class="flex tems-center w-7/12 border border-gray-400">
                     <p class="text-center text-md font-semibold bg-gray-100 w-3/12 py-0.5 border-e border-gray-400">School</p>
-                    <p class="text-md font-semibold px-4 w-9/12 py-0.5">&nbsp;{{ participant.school|capfirst }}</p>
+                    <p class="text-md font-semibold px-4 w-9/12 py-0.5">&nbsp;{{ auditioner.school|capfirst }}</p>
                 </div>
                 <div class="flex tems-center w-5/12 border border-gray-400">
                     <p class="text-center text-md font-semibold bg-gray-100 w-4/12 py-0.5 border-e border-gray-400">Grade</p>
-                    <p class="text-md font-semibold px-4 w-9/12 py-0.5">&nbsp;{{ participant.grade }}</p>
+                    <p class="text-md font-semibold px-4 w-9/12 py-0.5">&nbsp;{{ auditioner.grade }}</p>
                 </div>
             </div>
             <div class="mt-6 flex items-center gap-5">
                 <div class="flex tems-center w-7/12 border border-gray-400">
                     <p class="text-center text-md font-semibold bg-gray-100 w-3/12 py-0.5 border-e border-gray-400">Song</p>
-                    <p class="text-md font-semibold px-4 w-9/12 py-0.5">&nbsp;{{ participant.song|capfirst }}</p>
+                    <p class="text-md font-semibold px-4 w-9/12 py-0.5">&nbsp;{{ auditioner.song|capfirst }}</p>
                 </div>
                 <div class="flex tems-center w-5/12 border border-gray-400">
                     <p class="text-center text-md font-semibold bg-gray-100 w-4/12 py-0.5 border-e border-gray-400">Instrument</p>
-                    <p class="text-md font-semibold px-4 w-9/12 py-0.5">&nbsp;{{ participant.instrument|capfirst }}</p>
+                    <p class="text-md font-semibold px-4 w-9/12 py-0.5">&nbsp;{{ auditioner.instrument|capfirst }}</p>
                 </div>
             </div>
             <div class="mt-6 flex items-center gap-5">
                 <div class="flex tems-center w-7/12 border border-gray-400">
                     <p class="text-center text-md font-semibold bg-gray-100 w-3/12 py-0.5 border-e border-gray-400">Email</p>
-                    <p class="text-md font-semibold px-4 w-9/12 py-0.5">&nbsp;{{ participant.email|lower }}</p>
+                    <p class="text-md font-semibold px-4 w-9/12 py-0.5">&nbsp;{{ auditioner.email|lower }}</p>
                 </div>
                 <div class="flex tems-center w-5/12 border border-gray-400">
                     <p class="text-center text-md font-semibold bg-gray-100 w-4/12 py-0.5 border-e border-gray-400">Phone</p>
-                    <p class="text-md font-semibold px-4 w-9/12 py-0.5">&nbsp;{{ participant.phone }}</p>
+                    <p class="text-md font-semibold px-4 w-9/12 py-0.5">&nbsp;{{ auditioner.phone }}</p>
                 </div>
             </div>
             <div class="mt-6 flex items-center border border-gray-400">
                 <p class="text-center text-md font-semibold bg-gray-100 w-3/12 py-0.5 border-e border-gray-400">Copyright Permission</p>
                 <p class="text-md px-4 w-9/12 py-0.5">
-                    {% if participant.cpr_permission %}
+                    {% if auditioner.cpr_permission %}
                         <svg class="w-5.5 h-5.5 text-green-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                             <path fill-rule="evenodd" d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm13.707-1.293a1 1 0 0 0-1.414-1.414L11 12.586l-1.793-1.793a1 1 0 0 0-1.414 1.414l2.5 2.5a1 1 0 0 0 1.414 0l4-4Z" clip-rule="evenodd"/>
                         </svg>
@@ -80,7 +80,7 @@
             <div class="mt-6 flex items-center border border-gray-400">
                 <p class="text-center text-sm font-semibold bg-gray-100 w-3/12 py-0.5 border-e border-gray-400">Registration Confirmation</p>
                 <p class="text-md px-4 w-9/12 py-0.5">
-                    {% if participant.regis_confirm %}
+                    {% if auditioner.regis_confirm %}
                         <svg class="w-5.5 h-5.5 text-green-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                             <path fill-rule="evenodd" d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm13.707-1.293a1 1 0 0 0-1.414-1.414L11 12.586l-1.793-1.793a1 1 0 0 0-1.414 1.414l2.5 2.5a1 1 0 0 0 1.414 0l4-4Z" clip-rule="evenodd"/>
                         </svg>
@@ -96,7 +96,7 @@
             {% if user.is_judge %}
                 <button 
                     type="submit" 
-                    onclick="location.href='{% url "participant:update" participant.id %}'"
+                    onclick="location.href='{% url "auditioner:update" auditioner.id %}'"
                     class="w-1/12 my-5 border border-gray-400 hover:text-gray-300 hover:border-gray-300 dark:focus:ring-blue-800 font-bold text-md px-5 py-1.5">
                     Edit
                 </button>
@@ -124,7 +124,7 @@
                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
                                 </svg>
                                 <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Are you sure you want to delete?</h3>
-                                <button data-modal-hide="popup-modal" type="button" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center"  onclick="location.href='{% url "participant:delete" participant.id %}'">
+                                <button data-modal-hide="popup-modal" type="button" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center"  onclick="location.href='{% url "auditioner:delete" auditioner.id %}'">
                                     Yes, I'm sure
                                 </button>
                                 <button data-modal-hide="popup-modal" type="button" class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">No, cancel</button>

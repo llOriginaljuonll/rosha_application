@@ -13,6 +13,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='customuser',
             name='is_judge',
-            field=models.BooleanField(default=False, help_text='Designates whether the user can grades participants.', verbose_name='Judge Status'),
+            field=models.BooleanField(default=False, help_text='Designates whether the user can grades Auditioners.', verbose_name='Judge Status'),
         ),
     ]

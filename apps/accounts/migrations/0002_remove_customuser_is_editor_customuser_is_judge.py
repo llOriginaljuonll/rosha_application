@@ -17,6 +17,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='customuser',
             name='is_judge',
-            field=models.BooleanField(default=False, help_text='Designates whether the user can grades participants.', verbose_name='Editor Status'),
+            field=models.BooleanField(default=False, help_text='Designates whether the user can grades auditioners.', verbose_name='Editor Status'),
         ),
     ]

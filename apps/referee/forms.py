@@ -13,8 +13,8 @@ class ScoreForm(forms.ModelForm):
 
 
         widgets = {
-            'participant': forms.TextInput(attrs={
-                'value': '', 'id': 'participant_id', 'type': 'hidden',
+            'auditioner': forms.TextInput(attrs={
+                'value': '', 'id': 'auditioner_id', 'type': 'hidden',
             }),
         }
 
@@ -25,7 +25,7 @@ class ScoreForm(forms.ModelForm):
         self.helper.label_class = "content-center h-full bg-gray-200 pb-0.5"
         self.helper.layout = Layout(
             Field(
-                "participant",
+                "auditioner",
                 "skill_score",
                 "rythm_score",
                 "perform_score",
