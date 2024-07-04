@@ -4,8 +4,8 @@
 
 {% block content %}
     <div class="w-8/12 h-full my-12 content-center mx-auto">
-        <h1 class="text-4xl font-semibold text-center pb-5">Competition Form</h1>
-        <form action="{% url "participation:form" %}" method="post" enctype="multipart/form-data" class="mt-5 border border-gray-400 pt-5 pb-2 px-6">
+        <h1 class="text-4xl font-semibold text-center pb-5">Participation Form</h1>
+        <form action="" method="post" enctype="multipart/form-data" class="mt-5 border border-gray-400 pt-5 pb-2 px-6">
             {% csrf_token %}
             {{ form|crispy }}
             <div class="flex justify-center items-center mt-5">
@@ -18,3 +18,9 @@
         </form>
     </div>
 {% endblock content %}
+{% block script %}
+    <script>
+        var name = "{{ audition.id }}";
+        document.getElementById('audition_id').value = name;
+    </script>
+{% endblock script %}

@@ -7,9 +7,21 @@ class ParticipationForm(forms.ModelForm):
         model = Participation
         fields = ('__all__')
         widgets = {
-            'deadline': forms.DateTimeInput(attrs={'type': 'datetime-local'}),
-            'concert_date': forms.DateTimeInput(attrs={'type': 'datetime-local'}),
-            'rehearsal_date': forms.DateTimeInput(attrs={'type': 'datetime-local'}),
+            'audition': forms.TextInput(attrs={
+                'value': '', 'id': 'audition_id', 'type': 'hidden'
+            }),
+            'name': forms.TextInput(attrs={
+                'value': '', 'id': 'name_id',
+            }),
+            'deadline': forms.DateTimeInput(attrs={
+                'type': 'datetime-local'
+            }),
+            'concert_date': forms.DateTimeInput(attrs={
+                'type': 'datetime-local'
+            }),
+            'rehearsal_date': forms.DateTimeInput(attrs={
+                'type': 'datetime-local'
+            }),
             'description_payment': forms.Textarea(attrs={
                 'rows': '4'
             })
