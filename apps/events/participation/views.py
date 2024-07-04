@@ -33,6 +33,13 @@ class ParticipationFormView(IsActiveMixin, DetailView, FormMixin):
     
     def form_valid(self, form):
         return super().form_valid(form)
+    
+class ParticipationUpdateView(IsStaffMixin, UpdateView):
+
+    model = Participation
+    form_class = ParticipationForm
+    template_name = 'events/participation/participation_update.html'
 
     def get_success_url(self) -> str:
-        return reverse_lazy('audition:list') 
+        return reverse_lazy('audition:list')
+    
