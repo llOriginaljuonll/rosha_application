@@ -25,8 +25,8 @@ class AuditionerListView(IsEditorMixin, ListView):
         context["score"] = Score.objects.filter(id=self.kwargs.get('id'))
         for keys, values in self.kwargs.items():
             value = values
-        context["compt_name"] = Audition.objects.get(id=value).name
-        
+        context["audit_object"] = Audition.objects.get(id=value)
+
         return context
 
     def get_queryset(self, *args, **kwargs):

@@ -1,11 +1,12 @@
 {% extends "base.html" %}
 {% load crispy_forms_tags %}
 {% load tailwind_filters %}
+{% load app_tags %}
 
 {% block content %}
     <div class="w-8/12 h-full my-12 content-center mx-auto">
-        <h1 class="text-4xl font-semibold text-center pb-5">Audition Form</h1>
-        <form action="{% url "audition:form" %}" method="post" enctype="multipart/form-data" class="mt-5 border border-gray-400 pt-5 pb-2 px-6">
+        <h1 class="text-4xl font-semibold text-center pb-5">Participation Form</h1>
+        <form action="" method="post" enctype="multipart/form-data" class="mt-5 border border-gray-400 pt-5 pb-2 px-6">
             {% csrf_token %}
             {{ form|crispy }}
             <div class="flex justify-center items-center mt-5">
@@ -18,3 +19,11 @@
         </form>
     </div>
 {% endblock content %}
+{% block script %}
+    <script>
+        var name = "{{ audition.id }}";
+        document.getElementById('audition_id').value = name;
+        var name = "{{ audition.name|replace_audition|safe|title }} Participation Application Form";
+        document.getElementById('name_id').value = name;
+    </script>
+{% endblock script %}

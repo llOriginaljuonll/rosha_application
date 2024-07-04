@@ -3,6 +3,7 @@ from apps.events.audition.models import Audition
 from apps.events.audition.forms import AuditionForm
 from core.mixins import IsStaffMixin, IsActiveMixin
 from django.urls import reverse_lazy
+from apps.events.participation.models import Participation
 
 class AuditionCreateView(IsStaffMixin, CreateView):
 
@@ -38,3 +39,9 @@ class AuditionListView(IsActiveMixin, ListView):
     model = Audition
     template_name = 'events/audition/audition_list.html'
     context_object_name = 'auditions'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["participations"] = Participation.objects.all()
+        return context
+    
