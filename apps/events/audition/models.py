@@ -4,12 +4,14 @@ from versatileimagefield.fields import VersatileImageField
 
 class Audition(models.Model):
     name = models.CharField(max_length=255)
+    category = models.CharField(max_length=255, default="audition")
     image = VersatileImageField('Image', upload_to='image/', null=True, blank=True)
     email = models.EmailField(default='rosha.thailand@gmail.com', null=True, blank=True)
     concert_date = models.DateField(default=date.today, null=True, blank=True)
     deadline = models.DateField(default=date.today, null=True, blank=True)
     announcement_date = models.DateField(default=date.today, null=True, blank=True)
     description_payment = models.CharField(max_length=255, null=True, blank=True)
+    create_at = models.DateTimeField(auto_now_add=True)
 
     def get_deadline(self):
         untildays = self.deadline - date.today()

@@ -7,6 +7,7 @@ class AuditionForm(forms.ModelForm):
         model = Audition
         fields = ('__all__')
         widgets = {
+            'category': forms.TextInput(attrs={'type': 'hidden'}),
             'concert_date': forms.DateInput(attrs={'type': 'date'}),
             'deadline': forms.DateInput(attrs={'type': 'date'}),
             'announcement_date': forms.DateInput(attrs={'type': 'date'}),
