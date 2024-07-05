@@ -10,6 +10,9 @@ class ParticipationForm(forms.ModelForm):
             'audition': forms.TextInput(attrs={
                 'value': '', 'id': 'audition_id', 'type': 'hidden'
             }),
+            'category': forms.TextInput(attrs={
+                'type': 'hidden'
+            }),
             'name': forms.TextInput(attrs={
                 'value': '', 'id': 'name_id',
             }),

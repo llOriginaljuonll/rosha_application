@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load tailwind_filters %}
+
+{% block content %}
+<div class="w-8/12 h-full my-12 content-center mx-auto">
+    {% include "components/navbar_home.html" %}
+    <div class="mx-auto mt-10">
+        <div class="relative sm:rounded-lg">
+            <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                <thead class="text-sm text-gray-700 uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-400">
+                    <th scope="col" class="text-center px-2 py-3 border">
+                        No.
+                    </th>
+                    <th scope="col" class="text-center py-3 border {% if user.is_judge and not user.is_staff %} w-10/12 {% elif  user.is_staff %} w-9/12 {% else %} w-full {% endif %}">
+                        Events
+                    </th>
+                    <th scope="col" class="text-center py-3 border {% if user.is_judge and not user.is_staff %} w-10/12 {% elif  user.is_staff %} w-9/12 {% else %} w-full {% endif %}">
+                        Category
+                    </th>
+                </thead>
+                <tbody>
+                    {% for event in events|dictsortreversed:"create_at" %}
+                        <tr class="bg-white border dark:bg-gray-800 dark:border-gray-700">
+                            <th class="border-e text-center text-md font-medium text-gray-900">{{ forloop.counter }}</th>
+                            <th scope="row" class="border-e flex justify-between px-6 py-2 text-md font-medium text-gray-900 whitespace-nowrap dark:text-white dark:hover:bg-gray-600">
+                                {{ event.name }}
+                            </th>
+                            <th class="border-e text-center text-md font-medium text-gray-900">
+                                {{ event.category }}
+                            </th>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock content %}
