@@ -29,7 +29,7 @@ class AuditionDeleteView(IsStaffMixin, DeleteView):
     model = Audition
     success_url = "/"
 
-    """Overide get method for Creating DeleteView without templates name"""
+    """Overide get method for Creating DeleteView without templates_name"""
     def get(self, request, *args, **kwargs):
         return self.delete(request, *args, **kwargs)
 
@@ -39,9 +39,4 @@ class AuditionListView(IsActiveMixin, ListView):
     model = Audition
     template_name = 'events/audition/audition_list.html'
     context_object_name = 'auditions'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["participations"] = Participation.objects.all()
-        return context
     
