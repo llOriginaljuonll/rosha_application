@@ -1,10 +1,8 @@
-{% extends "base.html" %}
+{% extends "base_home.html" %}
 {% load crispy_forms_tags %}
 {% load tailwind_filters %}
 
-{% block content %}
-<div class="w-8/12 h-full my-12 content-center mx-auto">
-    {% include "components/navbar_home.html" %}
+{% block inner %}
     <div class="mx-auto mt-10">
         <div class="relative sm:rounded-lg">
             <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
@@ -35,5 +33,4 @@
             </table>
         </div>
     </div>
-</div>
-{% endblock content %}
+{% endblock inner %}

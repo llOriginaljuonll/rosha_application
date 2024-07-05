@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+    {% block content %}
+        <div class="w-8/12 h-full my-12 content-center mx-auto">
+            {% include "components/navbar_home.html" %}
+            {% block inner %}{% endblock inner %}
+        </div>
+    {% endblock content %}
