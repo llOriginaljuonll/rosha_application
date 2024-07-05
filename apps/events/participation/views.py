@@ -1,4 +1,4 @@
-from django.views.generic import DetailView, UpdateView
+from django.views.generic import DetailView, UpdateView, ListView
 from django.views.generic.edit import FormMixin
 from .models import Participation
 from .forms import ParticipationForm
@@ -42,4 +42,9 @@ class ParticipationUpdateView(IsStaffMixin, UpdateView):
 
     def get_success_url(self) -> str:
         return reverse_lazy('audition:list')
-    
+
+class ParticipationListView(IsActiveMixin, ListView):
+
+    model = Participation
+    template_name = 'events/participation/participation_list.html'
+    context_object_name = 'participations'
