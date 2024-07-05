@@ -1,4 +1,3 @@
-from typing import Any
 from django.views.generic import TemplateView
 from apps.events.audition.models import Audition
 from apps.events.participation.models import Participation
@@ -10,7 +9,13 @@ class HomeView(TemplateView):
     def get_context_data(self, **kwargs):
         
         context = super().get_context_data(**kwargs)
-        context["auditions"] = Audition.objects.all()
-        context["participations"] = Participation.objects.all()
+        auditions = Audition.objects.all()
+        participations = Participation.objects.all()
+        all_objs = [auditions, participations]
+        events = []
+        for objs in all_objs:
+            for obj in objs:
+                events.append(obj)
+        context["events"] = events
 
         return context
