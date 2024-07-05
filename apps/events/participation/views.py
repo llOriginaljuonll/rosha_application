@@ -12,10 +12,10 @@ class ParticipationFormView(IsActiveMixin, DetailView, FormMixin):
     model = Audition
     form_class = ParticipationForm
     template_name = 'events/participation/participation_form.html'
-    context_object_name = 'audition'
+    context_object_name = 'participant'
 
     def get_success_url(self) -> str:
-        return reverse_lazy('audition:list')
+        return reverse_lazy('participation:list')
     
     def get_context_data(self, **kwargs):
         context = super(ParticipationFormView, self).get_context_data(**kwargs)

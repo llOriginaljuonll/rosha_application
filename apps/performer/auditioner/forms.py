@@ -22,7 +22,7 @@ class AuditionerForm(forms.ModelForm):
             'shorts_url': 'Video link for audition',
             'cpr_permission': 'We may feature your video on our social media channels to promote other competitions. Please indicate your consent by checking the box below to grant permission for the use of copyrighted content.',
             'regis_confirm': 'Registration Confirmation',
-            'slip': 'Proof of payment / transfer slip -> It can be the e-slip of transction or the picture of paper slip.',
+            'slip': 'Proof of payment / transfer slip -> It can be the e-slip of transaction or the picture of paper slip.',
         }
 
         widgets = {
