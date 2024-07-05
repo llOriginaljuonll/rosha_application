@@ -2,7 +2,7 @@
     display: none;
 }
 
-#div_id_cpr_permission{
+#div_id_cpr_permission, #div_id_practice_room{
     display: flex;
     flex-direction: row-reverse;
     justify-content: start;
@@ -10,7 +10,7 @@
     gap: 10px;
 }
 
-#div_id_cpr_permission > label{
+#div_id_cpr_permission > label, #div_id_practice_room > label{
     margin-top: 8px;
 }
 
