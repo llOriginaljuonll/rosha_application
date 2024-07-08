@@ -12,7 +12,7 @@ class ParticipationFormView(IsActiveMixin, DetailView, FormMixin):
     model = Audition
     form_class = ParticipationForm
     template_name = 'events/participation/participation_form.html'
-    context_object_name = 'participant'
+    context_object_name = 'audition'
 
     def get_success_url(self) -> str:
         return reverse_lazy('participation:list')
