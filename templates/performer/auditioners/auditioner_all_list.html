@@ -13,7 +13,7 @@
                             No.
                         </th>
                         <th scope="col" class="ps-3 py-3">
-                            competition
+                            Events
                         </th>
                         <th scope="col" class="ps-3 py-3">
                             name
@@ -41,13 +41,13 @@
                             <td>
                                 <div 
                                     class="ps-3 py-2 hover:bg-gray-50 cursor-pointer capitalize" 
-                                    onclick="location.href='{% url "auditioner:list" auditioner.competition.id %}'"
+                                    onclick="location.href='{% url "auditioner:list" auditioner.audition.id %}'"
                                     data-tooltip-target="tooptip-{{ auditioner.id }}">
-                                    {{ auditioner.competition.name|truncatewords_html:3 }}
+                                    {{ auditioner.audition.name|truncatewords_html:3 }}
                                 </div>
                                 {% if auditioner.word_number > 3 %}
                                     <div id="tooptip-{{ auditioner.id }}" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:text-gray-800 dark:bg-gray-50">
-                                        {{ auditioner.competition }}
+                                        {{ auditioner.audition }}
                                         <div class="tooltip-arrow" data-popper-arrow></div>
                                     </div>
                                 {% endif %}
