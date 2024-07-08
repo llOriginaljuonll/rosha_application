@@ -3,10 +3,13 @@ from apps.events.participation.models import Participation
 from apps.accounts.models import CustomUser
 from django.core.validators import RegexValidator
 from versatileimagefield.fields import VersatileImageField
+from apps.performer.auditioner.models import Auditioner
 
 
 class Participant(models.Model):
     participation = models.ForeignKey(Participation, on_delete=models.CASCADE)
+    auditioner = models.OneToOneField(Auditioner, on_delete=models.CASCADE)
+    name = models.CharField(max_length=255, blank=True, null=True)
     song = models.CharField(max_length=255)
     length_of_song = models.TimeField()
     accompanist = models.CharField(max_length=255)
