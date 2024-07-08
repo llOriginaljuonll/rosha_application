@@ -30,7 +30,7 @@ class AuditionerListView(IsEditorMixin, ListView):
         return context
 
     def get_queryset(self, *args, **kwargs):
-        return Auditioner.objects.filter(competition__id=self.kwargs.get('pk')).order_by('score__average')
+        return Auditioner.objects.filter(audition__id=self.kwargs.get('pk')).order_by('score__average')
     
 class AllAuditionerLisview(IsStaffMixin, ListView):
 
