@@ -10,12 +10,26 @@ class Participant(models.Model):
     participation = models.ForeignKey(Participation, on_delete=models.CASCADE)
     auditioner = models.OneToOneField(Auditioner, on_delete=models.CASCADE)
     name = models.CharField(max_length=255, blank=True, null=True)
+    email = models.EmailField()
+    phone = models.CharField(
+        max_length=20,
+        validators=[
+            RegexValidator(
+                regex=r'^[0-9]'
+            )
+        ]
+    )
+    instrument = models.CharField(max_length=255)
+    school = models.CharField(max_length=255)
+    grade = models.CharField(max_length=100)
+
+    teacher = models.CharField(max_length=255)
     song = models.CharField(max_length=255)
     length_of_song = models.TimeField()
     accompanist = models.CharField(max_length=255)
     award_history = models.CharField(max_length=1000)
     english_skill = models.CharField(max_length=255)
-    people_coming = models.IntegerField()
+    amount_people_coming = models.IntegerField()
     plan_comming = models.CharField(max_length=1000)
     practice_room = models.BooleanField()
 

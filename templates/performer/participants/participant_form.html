@@ -143,11 +143,36 @@
                 </button>
             </div>
         </form>
+        {{ audit }}
     </div>
 {% endblock content %}
 {% block script %}
     <script>
         var name = "{{ participation.id }}";
         document.getElementById('participation_id').value = name;
+
+        var name = "{{ auditioner_obj.id }}";
+        document.getElementById('auditioner_id').value = name;
+
+        var name = "{{ auditioner_obj.name }}";
+        document.getElementById('auditioner_name').value = name;
+
+        var name = "{{ auditioner_obj.email }}";
+        document.getElementById('auditioner_email').value = name;
+
+        var name = "{{ auditioner_obj.phone }}";
+        document.getElementById('auditioner_phone').value = name;
+
+        var name = "{{ auditioner_obj.instrument }}";
+        document.getElementById('auditioner_instrument').value = name;
+
+        var name = "{{ auditioner_obj.school }}";
+        document.getElementById('auditioner_school').value = name;
+
+        var name = "{{ auditioner_obj.grade }}";
+        document.getElementById('auditioner_grade').value = name;
+        
+        var name = "{{ auditioner_obj.teacher }}";
+        document.getElementById('auditioner_teacher').value = name;
     </script>
 {% endblock script %}
