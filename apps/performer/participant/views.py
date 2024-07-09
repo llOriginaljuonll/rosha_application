@@ -3,6 +3,7 @@ from django.views.generic.edit import FormMixin
 from core.mixins import IsActiveMixin
 from apps.events.participation.models import Participation
 from apps.performer.participant.forms import ParticipantForm
+from apps.performer.auditioner.models import Auditioner
 from django.urls import reverse_lazy
 
 class ParticipantFormView(IsActiveMixin, DetailView, FormMixin):
@@ -13,10 +14,11 @@ class ParticipantFormView(IsActiveMixin, DetailView, FormMixin):
     context_object_name = 'participation'
 
     def get_success_url(self) -> str:
-        return reverse_lazy('audition:list')
+        return reverse_lazy('participation:list')
     
     def get_context_data(self, **kwargs):
         context = super(ParticipantFormView, self).get_context_data(**kwargs)
+        context['auditioner_obj'] = Auditioner.objects.get(pk=self.kwargs["auditioner_id"])
         context['form'] = self.get_form()
         return context
     
