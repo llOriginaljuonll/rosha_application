@@ -39,7 +39,7 @@ class Auditioner(models.Model):
     slip = VersatileImageField('Slip', upload_to='slip/')
 
     def word_number(self):
-        word = self.competition.name.split()
+        word = self.audition.name.split()
         result = len(word)
         return result
 
