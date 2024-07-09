@@ -9,7 +9,7 @@ class AuditionerForm(forms.ModelForm):
 
         labels = {
             'personal_info': 'Personal Information',
-            'name': 'Participand Name(If Individual apply) / Name of group(If Group apply)',
+            'name': 'Auditioner Name(If Individual apply) / Name of group(If Group apply)',
             'nationlity': 'e.g. American, Korean, Thai',
             'birthdate': 'Date of Birth',
             'phone': 'Mobile number',
@@ -20,17 +20,20 @@ class AuditionerForm(forms.ModelForm):
             'instrument': 'Instrument / (If Group) Write all instruments',
             'song': 'Title of songs',
             'shorts_url': 'Video link for audition',
-            'cpr_permission': 'We may feature your video on our social media channels to promote other competitions. Please indicate your consent by checking the box below to grant permission for the use of copyrighted content.',
+            'cpr_permission': 'We may feature your video on our social media channels to promote other auditions. Please indicate your consent by checking the box below to grant permission for the use of copyrighted content.',
             'regis_confirm': 'Registration Confirmation',
-            'slip': 'Proof of payment / transfer slip -> It can be the e-slip of transction or the picture of paper slip.',
+            'slip': 'Proof of payment / transfer slip -> It can be the e-slip of transaction or the picture of paper slip.',
         }
 
         widgets = {
-            'competition': forms.TextInput(attrs={
-                'value': '', 'id': 'competition_id', 'type': 'hidden'
+            'audition': forms.TextInput(attrs={
+                'value': '', 'id': 'audition_id', 'type': 'hidden'
             }),
             'user': forms.TextInput(attrs={
                 'value': '', 'id': 'user_id', 'type': 'hidden'
+            }),
+            'slug': forms.TextInput(attrs={
+                'type': 'hidden',
             }),
             'personal_info': forms.Textarea(attrs={
                 'rows': '4'

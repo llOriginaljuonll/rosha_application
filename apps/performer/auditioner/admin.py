@@ -23,7 +23,7 @@ class AuditionerAdmin(admin.ModelAdmin):
         (None, {
             "fields": (
                 "name",
-                "competition",
+                "audition",
                 "instrument",
                 "song",
                 "slip",
@@ -59,7 +59,7 @@ class AuditionerAdmin(admin.ModelAdmin):
     list_display = [
         "id",
         "name",
-        "competition_name",
+        "audition_name",
         "age",
         "school",
         "grade",
@@ -74,11 +74,11 @@ class AuditionerAdmin(admin.ModelAdmin):
     ]
     search_fields = [
         "name",
-        "competition_name",
+        # "audition_name",
     ]
     list_filter = (
         "name",
-        "competition__name",
+        "audition__name",
         "school",
         "instrument",
         "nationality",
@@ -91,9 +91,9 @@ class AuditionerAdmin(admin.ModelAdmin):
         form.base_fields["slip"].label = "Proof of payment"
         return form
 
-    def competition_name(self, obj):
-        """Get competition name"""
-        return obj.competition.name
+    def audition_name(self, obj):
+        """Get audition name"""
+        return obj.audition.name
     
     def avg_score(self, obj):
         """Get average score"""

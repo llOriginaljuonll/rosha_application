@@ -3,7 +3,6 @@ from apps.events.audition.models import Audition
 from apps.events.audition.forms import AuditionForm
 from core.mixins import IsStaffMixin, IsActiveMixin
 from django.urls import reverse_lazy
-from apps.events.participation.models import Participation
 
 class AuditionCreateView(IsStaffMixin, CreateView):
 
@@ -27,7 +26,7 @@ class AuditionUpdateView(IsStaffMixin, UpdateView):
 class AuditionDeleteView(IsStaffMixin, DeleteView):
 
     model = Audition
-    success_url = "/"
+    success_url = reverse_lazy("audition:list")
 
     """Overide get method for Creating DeleteView without templates_name"""
     def get(self, request, *args, **kwargs):

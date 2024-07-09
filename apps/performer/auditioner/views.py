@@ -18,8 +18,8 @@ class AuditionerListView(IsEditorMixin, ListView):
     def get_context_data(self, **kwargs):
         """
             1. because self.kwargs is dict. I need to do loop for get value of self.kwargs.
-            2. self.kwargs of this class is id of competition.
-            3. compt_name is competition name after queryset.
+            2. self.kwargs of this class is id of audition.
+            3. audit_name is audition name after queryset.
         """
         context = super().get_context_data(**kwargs)
         context["score"] = Score.objects.filter(id=self.kwargs.get('id'))
@@ -30,7 +30,7 @@ class AuditionerListView(IsEditorMixin, ListView):
         return context
 
     def get_queryset(self, *args, **kwargs):
-        return Auditioner.objects.filter(competition__id=self.kwargs.get('pk')).order_by('score__average')
+        return Auditioner.objects.filter(audition__id=self.kwargs.get('pk')).order_by('score__average')
     
 class AllAuditionerLisview(IsStaffMixin, ListView):
 
@@ -67,7 +67,7 @@ class AuditionerFormView(IsActiveMixin, DetailView, FormMixin):
     model = Audition
     form_class = AuditionerForm
     template_name = 'performer/auditioners/auditioner_form.html'
-    context_object_name = 'competition'
+    context_object_name = 'audition'
 
     def get_success_url(self) -> str:
         return reverse_lazy('audition:list')

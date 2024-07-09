@@ -18,14 +18,14 @@
                     </th>
                 </thead>
                 <tbody>
-                    {% for event in events|dictsortreversed:"create_at" %}
+                    {% for event in events|dictsort:"category" %}
                         <tr class="bg-white border dark:bg-gray-800 dark:border-gray-700">
                             <th class="border-e text-center text-md font-medium text-gray-900">{{ forloop.counter }}</th>
                             <th scope="row" class="border-e flex justify-between px-6 py-2 text-md font-medium text-gray-900 whitespace-nowrap dark:text-white dark:hover:bg-gray-600">
                                 {{ event.name }}
                             </th>
                             <th class="border-e text-center text-md font-medium text-gray-900">
-                                {{ event.category }}
+                                {{ event.category|capfirst }}
                             </th>
                         </tr>
                     {% endfor %}

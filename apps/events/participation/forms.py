@@ -7,6 +7,9 @@ class ParticipationForm(forms.ModelForm):
         model = Participation
         fields = ('__all__')
         widgets = {
+            'slug': forms.TextInput(attrs={
+                'type': 'hidden',
+            }),
             'audition': forms.TextInput(attrs={
                 'value': '', 'id': 'audition_id', 'type': 'hidden'
             }),

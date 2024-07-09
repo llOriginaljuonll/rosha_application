@@ -1,4 +1,4 @@
-from django.views.generic import DetailView, UpdateView, ListView
+from django.views.generic import DetailView, UpdateView, ListView, DeleteView
 from django.views.generic.edit import FormMixin
 from .models import Participation
 from .forms import ParticipationForm
@@ -15,7 +15,7 @@ class ParticipationFormView(IsActiveMixin, DetailView, FormMixin):
     context_object_name = 'audition'
 
     def get_success_url(self) -> str:
-        return reverse_lazy('audition:list')
+        return reverse_lazy('participation:list')
     
     def get_context_data(self, **kwargs):
         context = super(ParticipationFormView, self).get_context_data(**kwargs)
@@ -42,6 +42,15 @@ class ParticipationUpdateView(IsStaffMixin, UpdateView):
 
     def get_success_url(self) -> str:
         return reverse_lazy('audition:list')
+    
+class ParticipationDeleteView(IsStaffMixin, DeleteView):
+
+    model = Participation
+    success_url = reverse_lazy("participation:list")
+
+    """Overide get method for Creating DeleteView without templates_name"""
+    def get(self, request, *args, **kwargs):
+        return self.delete(request, *args, **kwargs)
 
 class ParticipationListView(IsActiveMixin, ListView):
 

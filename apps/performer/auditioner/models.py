@@ -7,8 +7,9 @@ from apps.events.audition.models import Audition
 from apps.accounts.models import CustomUser
 
 class Auditioner(models.Model):
-    competition = models.ForeignKey(Audition, on_delete=models.CASCADE)
+    audition = models.ForeignKey(Audition, on_delete=models.CASCADE)
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    slug = models.SlugField(blank=True, null=True)
     personal_info = models.TextField(max_length=255, blank=True, null=True)
     name = models.CharField(max_length=255)
     nationality = models.CharField(max_length=255)
@@ -38,7 +39,7 @@ class Auditioner(models.Model):
     slip = VersatileImageField('Slip', upload_to='slip/')
 
     def word_number(self):
-        word = self.competition.name.split()
+        word = self.audition.name.split()
         result = len(word)
         return result
 
@@ -51,6 +52,8 @@ class Auditioner(models.Model):
     def save(self, *args, **kwargs):
         if not self.age or self.age:
             self.age = self.calculate_age()
+        if not self.slug or self.slug:
+            self.slug = self.audition.id
 
         super().save(*args, **kwargs)
 
