@@ -1,4 +1,6 @@
 {% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load tailwind_filters %}
 
 {% block content %}
     <div class="w-8/12 h-full my-12 content-center mx-auto">
@@ -72,7 +74,7 @@
                     <tbody>
                         <tr class="bg-white font-medium border-b dark:bg-gray-800 dark:border-gray-700">
                             <td class="px-6 py-2 text-center" onclick="location.href='{% url "auditioner:detail" auditioner.id %}'">
-                                {{ forloop.counter }}
+                                {{ forloop.counter }} {{ auditioner.id }}
                             </td>
                             <td class="ps-3 py-2 hover:bg-gray-50 cursor-pointer capitalize" onclick="location.href='{% url "auditioner:detail" auditioner.id %}'">
                                 {{ auditioner.name }}
@@ -149,28 +151,27 @@
                                 </td>
 
                                 <!-- Dropdown menu -->
-                                <div id="dropdownRadio{{ forloop.counter }}" class="z-10 hidden w-48 bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600">
-                                    <ul class="p-3 space-y-3 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownRadio{{ forloop.counter }}">
-                                        <li>
-                                            <div class="flex items-center">
-                                            <input id="radio-item-1" type="radio" name="radio" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                                            <label for="radio-item-1" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Pass</label>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="flex items-center">
-                                                <input id="radio-item-2" type="radio" name="radio" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                                                <label for="radio-item-2" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">No Pass</label>
-                                            </div>
-                                        </li>
-                                    </ul>
+                                <div id="dropdownRadio{{ forloop.counter }}" class="z-10 hidden w-48 bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600 px-3">
+                                    <form method="post">
+                                        {% csrf_token %}
+                                        {{ form|crispy }}
+                                        <button>click</button>
+                                        <script>
+                                            var name = "1";
+                                            document.getElementById('auditioner_id').value = name;
+                                        </script>
+                                    </form>
                                 </div>
                             {% endif %}
                         </tr>
                     </tbody>
-                {% endfor %}
+                    {% endfor %}
             </table>
+            {% for audition in auditioners %}
+                {{ forloop.counter }}
+            {% endfor %}
         </div>
     </div>
     
 {% endblock content %}
+

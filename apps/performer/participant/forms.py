@@ -3,6 +3,16 @@ from .models import Participant
 
 class ParticipantForm(forms.ModelForm):
 
+    # CHOICES = [
+    #     ('1', 'Option 1'),
+    #     ('2', 'Option 2'),
+    # ]
+
+    # english_skill = forms.ChoiceField(
+    #     widget=forms.RadioSelect,
+    #     choices=CHOICES, 
+    # )
+
     class Meta:
         model = Participant
         fields = ('__all__')
@@ -24,7 +34,7 @@ class ParticipantForm(forms.ModelForm):
             'amount_plan_coming': "When are you planning to come?",
             'practice_room': 'Do you need to reserve a practice room?',
             'cpr_permission': "We may feature your video on our social media channels to promote other competitions. Please indicate your consent by checking the box below to grant permission for the use of copyrighted content",
-            'regsi_confirm': "Registration Confirmation",
+            'regis_confirm': "Registration Confirmation",
             'slip': "Proof of payment / transfer slip -> It can be the e-slip of transaction or the picture of paper slip."
         }
 
