@@ -2,26 +2,31 @@ from django.views.generic import DetailView, ListView, UpdateView, DeleteView
 from django.views.generic.edit import FormMixin
 from apps.events.audition.models import Audition
 from apps.performer.auditioner.models import Auditioner
-from apps.performer.auditioner.forms import AuditionerForm
+from apps.performer.auditioner.forms import AuditionerForm, PerformResultForm
 from apps.referee.models import Score
 from django.urls import reverse_lazy
 from core.mixins import IsActiveMixin, IsEditorMixin, IsStaffMixin
 from django.contrib import messages
 from django.shortcuts import redirect
 
-class AuditionerListView(IsEditorMixin, ListView):
+class AuditionerListView(IsEditorMixin, ListView, FormMixin):
 
     model = Auditioner
+    form_class = PerformResultForm
     template_name = 'performer/auditioners/auditioner_list.html'
     context_object_name = 'auditioners'
 
+    def get_success_url(self) -> str:
+        return reverse_lazy('audition:list')
+    
     def get_context_data(self, **kwargs):
         """
             1. because self.kwargs is dict. I need to do loop for get value of self.kwargs.
             2. self.kwargs of this class is id of audition.
             3. audit_name is audition name after queryset.
         """
-        context = super().get_context_data(**kwargs)
+        context = super(AuditionerListView, self).get_context_data(**kwargs)
+        context['form'] = self.get_form()
         context["score"] = Score.objects.filter(id=self.kwargs.get('id'))
         for keys, values in self.kwargs.items():
             value = values
@@ -31,6 +36,18 @@ class AuditionerListView(IsEditorMixin, ListView):
 
     def get_queryset(self, *args, **kwargs):
         return Auditioner.objects.filter(audition__id=self.kwargs.get('pk')).order_by('score__average')
+    
+    def post(self, *args, **kwargs):
+        
+        form = self.get_form()
+        if form.is_valid():
+            form.save()
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(form)
+    
+    def form_valid(self, form):
+        return super().form_valid(form)
     
 class AllAuditionerLisview(IsStaffMixin, ListView):
 
