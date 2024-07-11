@@ -1,6 +1,5 @@
 from django.db import models
 from apps.events.participation.models import Participation
-from apps.accounts.models import CustomUser
 from django.core.validators import RegexValidator
 from versatileimagefield.fields import VersatileImageField
 from apps.performer.auditioner.models import Auditioner
