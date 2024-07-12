@@ -5,24 +5,28 @@
 {% block content %}
     <div class="w-8/12 h-full my-12 content-center mx-auto">
             <div class="flex flex-row-reverse mb-5">
-                    {% if not audit_object.participation %}
-                        <button 
-                            type="button" 
-                            class="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xs px-5 py-2 text-center dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800"
-                            onclick="location.href='{% url "participation:form" audit_object.id %}'">
-                            Make Participation Form
-                        </button>
-                    {% else %}
-                        <button 
-                            type="button" 
-                            class="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xs px-5 py-2 text-center dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800"
-                            onclick="location.href='{% url "participation:form" audit_object.id %}'">
-                            View Participation Form
-                        </button>
-                    {% endif %}
+                {% for auditioner in auditioners %}
+                    {% if forloop.first %}
+                        {% if not audit_object.participation %}
+                            <button 
+                                type="button" 
+                                class="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xs px-5 py-2 text-center dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800"
+                                onclick="location.href='{% url "participation:form" auditioner.audition.id %}'">
+                                Make Participation Form
+                            </button>
+                        {% else %}
+                            <button 
+                                type="button" 
+                                class="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xs px-5 py-2 text-center dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800"
+                                onclick="location.href='{% url "participation:form" auditioner.audition.id %}'">
+                                View Participation Form
+                            </button>
+                        {% endif %}
             </div>
             <h1 class="text-4xl font-semibold text-center">
-                {{ audit_object.name }}
+                        {{ auditioner.audition.name|capfirst }}
+                    {% endif %}
+                {% endfor %}
             </h1>
         <div class="overflow-x-auto mt-10">
             <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 border">
@@ -74,7 +78,7 @@
                     <tbody>
                         <tr class="bg-white font-medium border-b dark:bg-gray-800 dark:border-gray-700">
                             <td class="px-6 py-2 text-center" onclick="location.href='{% url "auditioner:detail" auditioner.id %}'">
-                                {{ forloop.counter }} {{ auditioner.id }}
+                                {{ forloop.counter }}
                             </td>
                             <td class="ps-3 py-2 hover:bg-gray-50 cursor-pointer capitalize" onclick="location.href='{% url "auditioner:detail" auditioner.id %}'">
                                 {{ auditioner.name }}
@@ -156,10 +160,6 @@
                                         {% csrf_token %}
                                         {{ form|crispy }}
                                         <button>click</button>
-                                        <script>
-                                            var name = "1";
-                                            document.getElementById('auditioner_id').value = name;
-                                        </script>
                                     </form>
                                 </div>
                             {% endif %}
@@ -167,9 +167,6 @@
                     </tbody>
                     {% endfor %}
             </table>
-            {% for audition in auditioners %}
-                {{ forloop.counter }}
-            {% endfor %}
         </div>
     </div>
     

@@ -52,19 +52,24 @@ class PerformResultForm(forms.ModelForm):
         choices=RESULT,
         widget=forms.RadioSelect()
     )
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        for key, field in self.fields.items():
-            field.label = ""
     
     class Meta:
 
         model = PerformResult
         fields = ('__all__')
 
-        widgets = {
-            'auditioners': forms.TextInput(attrs={
-                'value': '', 'id': 'auditioner_id'
-            }),
-        }
+
+    def __init__(self, *args, **kwargs):
+        # auditioner = kwargs.pop("auditioner", None)
+        auditioner_id = kwargs.pop('initial_author_id', None)
+        super().__init__(*args, **kwargs)
+        # self.initial_auditioner()
+        # self.fields["auditioner"].initial = auditioner[0]["name"]
+        if auditioner_id:
+            self.fields['author'].initial = auditioner_id
+
+        for key, field in self.fields.items():
+            field.label = ""
+
+    # def initial_auditioner(self):
+    #     self.initial["auditioner"] = 2

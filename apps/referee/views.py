@@ -12,4 +12,4 @@ class ScoreUpdateView(UpdateView):
     template_name = 'referee/score_update.html'
 
     def get_success_url(self):
-        return reverse_lazy('auditioner:list', kwargs={"pk": self.get_object().auditioner.competition.id})
+        return reverse_lazy('auditioner:list', kwargs={"pk": self.get_object().auditioner.audition.id})

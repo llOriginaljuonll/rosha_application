@@ -10,4 +10,5 @@ urlpatterns = [
     path('form/<pk>', views.AuditionerFormView.as_view(), name='form'),
     path('update/<pk>', views.AuditionerUpdateView.as_view(), name='update'),
     path('delete/<pk>', views.AuditionerDeleteView.as_view(), name="delete"),
+    # path('items/add-related-item/<int:item_id>/', views.AddRelatedItemView.as_view(), name='add_related_item'),
 ]

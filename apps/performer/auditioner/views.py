@@ -19,24 +19,39 @@ class AuditionerListView(IsEditorMixin, ListView, FormMixin):
     def get_success_url(self) -> str:
         return reverse_lazy('audition:list')
     
-    def get_context_data(self, **kwargs):
-        """
-            1. because self.kwargs is dict. I need to do loop for get value of self.kwargs.
-            2. self.kwargs of this class is id of audition.
-            3. audit_name is audition name after queryset.
-        """
-        context = super(AuditionerListView, self).get_context_data(**kwargs)
-        context['form'] = self.get_form()
-        context["score"] = Score.objects.filter(id=self.kwargs.get('id'))
-        for keys, values in self.kwargs.items():
-            value = values
-        context["audit_object"] = Audition.objects.get(id=value)
-
-        return context
-
     def get_queryset(self, *args, **kwargs):
         return Auditioner.objects.filter(audition__id=self.kwargs.get('pk')).order_by('score__average')
     
+    def get_context_data(self, **kwargs):
+
+        context = super(AuditionerListView, self).get_context_data(**kwargs)
+        # auditioners = Auditioner.objects.all()
+        # for auditioner in auditioners:
+        #     result_form = PerformResultForm(auditioner=auditioner.name)
+        # print(self.kwargs.get())
+
+        # context["form"] = result_form
+        context['auditioners'] = Auditioner.objects.all()
+        auditioner_id = self.request.GET.get("auditioner_id")
+        context["form"] = self.get_form()
+        form = self.form_class(initial=auditioner_id)
+        context["form"] = form
+        context["score"] = Score.objects.filter(id=self.kwargs.get('id'))
+
+        return context
+    
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs['audit_id'] = self.kwargs['audit_id']
+        return kwargs
+    
+    # def get_form_kwargs(self):
+    #     kwargs = super().get_form_kwargs()
+    #     auditioners = Auditioner.objects.all()
+    #     for auditioner in auditioners:
+    #         kwargs["auditioner"] = auditioner
+    #     return kwargs
+
     def post(self, *args, **kwargs):
         
         form = self.get_form()
@@ -47,6 +62,11 @@ class AuditionerListView(IsEditorMixin, ListView, FormMixin):
             return self.form_invalid(form)
     
     def form_valid(self, form):
+        auditioner_id = form.cleaned_data['auditioner']
+        auditioner = Auditioner.objects.get(pk=auditioner_id)
+        form.save(commit=False)
+        form.instance.auditioner = auditioner
+        form.save()
         return super().form_valid(form)
     
 class AllAuditionerLisview(IsStaffMixin, ListView):
