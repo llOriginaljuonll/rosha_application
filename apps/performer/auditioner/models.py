@@ -6,6 +6,12 @@ from datetime import date
 from apps.events.audition.models import Audition
 from apps.accounts.models import CustomUser
 
+RESULT = [
+    ('', 'Select the result.'),
+    ('1', 'Pass'),
+    ('2', 'No Pass'),
+]
+
 class Auditioner(models.Model):
     audition = models.ForeignKey(Audition, on_delete=models.CASCADE)
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)

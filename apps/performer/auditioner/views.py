@@ -11,28 +11,34 @@ from django.shortcuts import redirect
 
 class AuditionerListView(IsEditorMixin, ListView):
 
-    model = Auditioner
+    model = Audition
     template_name = 'performer/auditioners/auditioner_list.html'
     context_object_name = 'auditioners'
 
+    def get_success_url(self) -> str:
+        return reverse_lazy('audition:list')
+    
+    def get_queryset(self, *args, **kwargs):
+        return Auditioner.objects.filter(audition__id=self.kwargs.get('pk')).order_by('-score__result')
+    
     def get_context_data(self, **kwargs):
-        """
-            1. because self.kwargs is dict. I need to do loop for get value of self.kwargs.
-            2. self.kwargs of this class is id of audition.
-            3. audit_name is audition name after queryset.
-        """
-        context = super().get_context_data(**kwargs)
-        context["score"] = Score.objects.filter(id=self.kwargs.get('id'))
-        for keys, values in self.kwargs.items():
-            value = values
-        context["audit_object"] = Audition.objects.get(id=value)
 
+        context = super().get_context_data(**kwargs)
+        
+        context["score"] = Score.objects.filter(id=self.kwargs.get('id'))
         return context
 
-    def get_queryset(self, *args, **kwargs):
-        return Auditioner.objects.filter(audition__id=self.kwargs.get('pk')).order_by('score__average')
+    def post(self, request, *args, **kwargs):
+
+        form = self.get_form()
+        if form.is_valid():
+            form.save()
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(form)
+
     
-class AllAuditionerLisview(IsStaffMixin, ListView):
+class AllAuditionerListview(IsStaffMixin, ListView):
 
     model = Auditioner
     template_name = "performer/auditioners/auditioner_all_list.html"

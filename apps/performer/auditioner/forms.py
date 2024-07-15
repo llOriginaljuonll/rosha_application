@@ -43,3 +43,21 @@ class AuditionerForm(forms.ModelForm):
                 'type': 'hidden'
             }),
         }
+
+# class PerformResultForm(forms.ModelForm):
+
+#     class Meta:
+
+#         model = PerformResult
+#         fields = ('__all__')
+
+#         widgets = {
+#             # 'auditioner': forms.HiddenInput(),
+#         }
+
+
+#     def __init__(self, *args, **kwargs):
+#         super().__init__(*args, **kwargs)
+
+#         for key, field in self.fields.items():
+#             field.label = ""

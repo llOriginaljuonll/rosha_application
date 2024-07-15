@@ -1,11 +1,10 @@
 from django.contrib import admin
 from apps.performer.auditioner.models import Auditioner
-from apps.events.audition.models import Audition
 from apps.referee.models import Score
 from django.db import models
 from django import forms
 
-
+# admin.site.register(PerformResult)
 
 class ScoreInline(admin.StackedInline):
     model = Score
