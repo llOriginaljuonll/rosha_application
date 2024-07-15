@@ -1,5 +1,5 @@
 from django import forms
-from apps.performer.auditioner.models import Auditioner, PerformResult
+from apps.performer.auditioner.models import Auditioner
 
 class AuditionerForm(forms.ModelForm):
 
@@ -44,26 +44,23 @@ class AuditionerForm(forms.ModelForm):
             }),
         }
 
-class PerformResultForm(forms.ModelForm):
+# class PerformResultForm(forms.ModelForm):
 
-    RESULT = ((1, 'Pass'), (2, 'No Pass'))
+#     class Meta:
 
-    result = forms.ChoiceField(
-        choices=RESULT,
-        widget=forms.RadioSelect()
-    )
-    
-    class Meta:
+#         model = PerformResult
+#         fields = ('__all__')
 
-        model = PerformResult
-        fields = ('__all__')
+#         widgets = {
+#             # 'auditioner': forms.HiddenInput(),
+#         }
 
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+#     def __init__(self, *args, **kwargs):
+#         super().__init__(*args, **kwargs)
 
-        for key, field in self.fields.items():
-            field.label = ""
+#         for key, field in self.fields.items():
+#             field.label = ""
 
     # def initial_auditioner(self):
     #     self.initial["auditioner"] = 2

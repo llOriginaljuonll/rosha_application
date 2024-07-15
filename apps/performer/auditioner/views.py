@@ -2,19 +2,18 @@ from django.views.generic import DetailView, ListView, UpdateView, DeleteView
 from django.views.generic.edit import FormMixin
 from apps.events.audition.models import Audition
 from apps.performer.auditioner.models import Auditioner
-from apps.performer.auditioner.forms import AuditionerForm, PerformResultForm
+from apps.performer.auditioner.forms import AuditionerForm
 from apps.referee.models import Score
 from django.urls import reverse_lazy
 from core.mixins import IsActiveMixin, IsEditorMixin, IsStaffMixin
 from django.contrib import messages
 from django.shortcuts import redirect
 
-class AuditionerListView(IsEditorMixin, ListView, FormMixin):
+class AuditionerListView(IsEditorMixin, ListView):
 
-    model = Auditioner
-    form_class = PerformResultForm
+    model = Audition
     template_name = 'performer/auditioners/auditioner_list.html'
-    context_object_name = 'auditioner_objects'
+    context_object_name = 'auditioners'
 
     def get_success_url(self) -> str:
         return reverse_lazy('audition:list')
@@ -25,54 +24,18 @@ class AuditionerListView(IsEditorMixin, ListView, FormMixin):
     def get_context_data(self, **kwargs):
 
         context = super().get_context_data(**kwargs)
-        context['auditioners'] = Auditioner.objects.all()
-        context['forms'] = {auditioner.id: PerformResultForm(initial={'auditioner': auditioner}) for auditioner in context['auditioners']}
-        for auditioner in context['auditioners']:
-            auditioner = {auditioner.id: PerformResultForm(initial={'auditioner': auditioner})}
-            print(auditioner)
+        
         context["score"] = Score.objects.filter(id=self.kwargs.get('id'))
         return context
 
-
-
-
-
-        # auditioners = Auditioner.objects.all()
-        # for auditioner in auditioners:
-        #     result_form = PerformResultForm(auditioner=auditioner.name)
-        # print(self.kwargs.get())
-
-        # context["form"] = result_form
-        # auditioner_id = self.request.GET.get("auditioner_id")
-        # context["form"] = self.get_form()
-        # form = self.form_class(initial=auditioner_id)
-        # context["form"] = form
-        
-
-    
-    # def get_form_kwargs(self):
-    #     kwargs = super().get_form_kwargs()
-    #     kwargs['audit_id'] = self.kwargs['audit_id']
-    #     return kwargs
-    
-    # def get_form_kwargs(self):
-    #     kwargs = super().get_form_kwargs()
-    #     auditioners = Auditioner.objects.all()
-    #     for auditioner in auditioners:
-    #         kwargs["auditioner"] = auditioner
-    #     return kwargs
-
     def post(self, request, *args, **kwargs):
-        
-        form = PerformResultForm(request.POST)
 
+        form = self.get_form()
         if form.is_valid():
             form.save()
+            return self.form_valid(form)
         else:
-            context = self.get_context_data()
-            writer_id = int(request.POST.get('auditioner'))
-            context['forms'][writer_id] = form
-            return self.render_to_response(context)
+            return self.form_invalid(form)
 
     
 class AllAuditionerLisview(IsStaffMixin, ListView):

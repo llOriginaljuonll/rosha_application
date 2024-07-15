@@ -60,6 +60,9 @@ class Auditioner(models.Model):
     def __str__(self):
         return f"No.{self.id} {self.name}"
     
-class PerformResult(models.Model):
-    auditioner = models.ForeignKey(Auditioner, on_delete= models.CASCADE)
-    result = models.CharField(max_length=255)
+# class PerformResult(models.Model):
+#     auditioner = models.ForeignKey(Auditioner, on_delete= models.CASCADE)
+#     result = models.CharField(max_length=50, choices=RESULT)
+
+#     def __str__(self):
+#         return f"No.{self.id} {self.auditioner.id}"
