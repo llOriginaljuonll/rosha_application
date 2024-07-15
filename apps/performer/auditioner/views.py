@@ -19,7 +19,7 @@ class AuditionerListView(IsEditorMixin, ListView):
         return reverse_lazy('audition:list')
     
     def get_queryset(self, *args, **kwargs):
-        return Auditioner.objects.filter(audition__id=self.kwargs.get('pk')).order_by('score__average')
+        return Auditioner.objects.filter(audition__id=self.kwargs.get('pk')).order_by('-score__result')
     
     def get_context_data(self, **kwargs):
 
@@ -38,7 +38,7 @@ class AuditionerListView(IsEditorMixin, ListView):
             return self.form_invalid(form)
 
     
-class AllAuditionerLisview(IsStaffMixin, ListView):
+class AllAuditionerListview(IsStaffMixin, ListView):
 
     model = Auditioner
     template_name = "performer/auditioners/auditioner_all_list.html"

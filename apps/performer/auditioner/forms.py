@@ -61,6 +61,3 @@ class AuditionerForm(forms.ModelForm):
 
 #         for key, field in self.fields.items():
 #             field.label = ""
-
-    # def initial_auditioner(self):
-    #     self.initial["auditioner"] = 2
