@@ -60,13 +60,7 @@ class PerformResultForm(forms.ModelForm):
 
 
     def __init__(self, *args, **kwargs):
-        # auditioner = kwargs.pop("auditioner", None)
-        auditioner_id = kwargs.pop('initial_author_id', None)
         super().__init__(*args, **kwargs)
-        # self.initial_auditioner()
-        # self.fields["auditioner"].initial = auditioner[0]["name"]
-        if auditioner_id:
-            self.fields['author'].initial = auditioner_id
 
         for key, field in self.fields.items():
             field.label = ""

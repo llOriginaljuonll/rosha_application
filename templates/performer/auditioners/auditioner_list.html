@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load crispy_forms_tags %}
 {% load tailwind_filters %}
+{% load auditioner %}
 
 {% block content %}
     <div class="w-8/12 h-full my-12 content-center mx-auto">
@@ -74,7 +75,7 @@
                         </th>
                     </tr>
                 </thead>
-                {% for auditioner in auditioners %}
+                {% for auditioner in auditioner_objects %}
                     <tbody>
                         <tr class="bg-white font-medium border-b dark:bg-gray-800 dark:border-gray-700">
                             <td class="px-6 py-2 text-center" onclick="location.href='{% url "auditioner:detail" auditioner.id %}'">
@@ -158,8 +159,12 @@
                                 <div id="dropdownRadio{{ forloop.counter }}" class="z-10 hidden w-48 bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600 px-3">
                                     <form method="post">
                                         {% csrf_token %}
-                                        {{ form|crispy }}
-                                        <button>click</button>
+                                        {% if forms|get:auditioner.id %}
+                                            {% with form=forms|get:auditioner.id %}
+                                                {{ form|crispy }}
+                                            {% endwith %}
+                                        {% endif %}
+                                        <button type=submit>click</button>
                                     </form>
                                 </div>
                             {% endif %}
