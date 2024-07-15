@@ -6,6 +6,12 @@ from datetime import date
 from apps.events.audition.models import Audition
 from apps.accounts.models import CustomUser
 
+RESULT = [
+    ('', 'Select the result.'),
+    ('1', 'Pass'),
+    ('2', 'No Pass'),
+]
+
 class Auditioner(models.Model):
     audition = models.ForeignKey(Audition, on_delete=models.CASCADE)
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
@@ -59,10 +65,3 @@ class Auditioner(models.Model):
 
     def __str__(self):
         return f"No.{self.id} {self.name}"
-    
-# class PerformResult(models.Model):
-#     auditioner = models.ForeignKey(Auditioner, on_delete= models.CASCADE)
-#     result = models.CharField(max_length=50, choices=RESULT)
-
-#     def __str__(self):
-#         return f"No.{self.id} {self.auditioner.id}"
