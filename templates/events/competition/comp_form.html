@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load tailwind_filters %}
+
+{% block content %}
+    <div class="w-8/12 h-full my-12 content-center mx-auto">
+        <h1 class="text-4xl font-semibold text-center pb-">Competition Form</h1>
+        <form method="post">
+            {% csrf_token %}
+            {{ form|crispy }}
+            {{ form.elig }}
+            {{ form.elig.as_hidden }}
+            <div id="elig-inputs" class="mb-3 flex flex-col gap-2 font-bold">
+                <label>Eligibility</label>
+                <input name="color"
+                    type="text"
+                    placeholder="Example: Class A (4-6 years old) (3-4 ปี)" 
+                    class="w-full py-2 px-3 border border-gray-300 rounded-md font-normal focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    required>
+            </div>
+            <button type="button" onclick="addEligInput()" class="btn btn-primary">Add Another Color</button>
+
+            <div id="instr_type-inputs" class="mb-3 flex flex-col gap-2 font-bold">
+                <label>Eligibility</label>
+                <input name="color"
+                    type="text"
+                    placeholder="Example: Class A (4-6 years old) (3-4 ปี)" 
+                    class="w-full py-2 px-3 border border-gray-300 rounded-md font-normal focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    required>
+            </div>
+            <button type="button" onclick="addInstrumentInput()" class="btn btn-primary">Add Another Color</button>
+            
+            <button type="submit" class="btn btn-success">Save</button>
+        </form>
+    </div>
+
+{% endblock content %}
+{% block script %}
+    <script>
+        function addEligInput() {
+            const eligInputs = document.getElementById("elig-inputs");
+            const newInput = document.createElement("div");
+            newInput.className = "color-input mb-2";
+            newInput.innerHTML = `
+                <input type="text" name="color" placeholder="Extra field" required class="w-full p-2 border border-gray-300 rounded-md font-normal focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                <button type="button" onclick="removeColorInput(this)" class="btn btn-danger mt-1">Remove</button>
+            `;
+            eligInputs.appendChild(newInput);
+        }
+
+        function removeColorInput(button) {
+            const colorInputDiv = button.parentElement;
+            colorInputDiv.remove();
+        };
+        function addInstrumentInput() {
+            
+        } 
+    </script>
+{% endblock script %}
+
