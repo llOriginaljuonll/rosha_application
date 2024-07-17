@@ -13,35 +13,24 @@ class Audition(models.Model):
     description_payment = models.CharField(max_length=255, null=True, blank=True)
     create_at = models.DateTimeField(auto_now_add=True)
 
-    def get_deadline(self):
-        untildays = self.deadline - date.today()
+    def get_days_left(self, target_date):
+        untildays = target_date - date.today()
         untildays = untildays.days
         if untildays > 1:
-            return str(untildays) + " days left"
-        elif untildays == 1:
-            return str(untildays) + " day left"
+            return f"{untildays} days left"
+        elif untildays >= 0:
+            return "1 day left"
         else:
             return "Expired period"
+
+    def get_deadline(self):
+        return self.get_days_left(self.deadline)
         
     def get_announcement_date(self):
-        untildays = self.announcement_date - date.today()
-        untildays = untildays.days
-        if untildays > 1:
-            return str(untildays) + " days left"
-        elif untildays == 1:
-            return str(untildays) + " day left"
-        else:
-            return "Expired period"
+        return self.get_days_left(self.announcement_date)
         
     def get_concert_date(self):
-        untildays = self.concert_date - date.today()
-        untildays = untildays.days
-        if untildays > 1:
-            return str(untildays) + " days left"
-        elif untildays == 1:
-            return str(untildays) + " day left"
-        else:
-            return "Let's start the show!"
+        return self.get_days_left(self.concert_date)
         
     def __str__(self):
         return f"{self.name}"
