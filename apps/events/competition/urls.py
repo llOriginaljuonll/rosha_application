@@ -1,6 +1,6 @@
 from django.urls import path
-from apps.events.competition.views import CompetitionFormtView
+from apps.events.competition.views import CompetitionFormView
 
 urlpatterns = [
-    path('form/', CompetitionFormtView.as_view(), name='form'),
+    path('form/', CompetitionFormView.as_view(), name='form'),
 ]
