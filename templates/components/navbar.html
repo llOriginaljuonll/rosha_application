@@ -45,6 +45,21 @@
                                 </div>
                             </li>
                             <li class="border-b">
+                                <button id="auditionDropdownButton" data-dropdown-toggle="comptDropdown" data-dropdown-placement="right-start" type="button" class="flex items-center w-full px-2 py-1.5 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                                    <svg class="w-2.5 h-2.5 me-3 mt-[1px]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4"/>
+                                    </svg>
+                                    <div>Competition</div>
+                                </button>
+                                <div id="comptDropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-sm shadow w-44 dark:bg-gray-700">
+                                    <ul class="text-sm text-gray-700 dark:text-gray-200" aria-labelledby="auditionDropdownButton">
+                                        <li>
+                                            <a href="{% url "compt:form" %}" class="block px-4 py-1.5 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Competition Form</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="border-b">
                                 <button id="doubleDropdownButton" data-dropdown-toggle="doubleDropdown" data-dropdown-placement="right-start" type="button" class="flex items-center w-full px-2 py-1.5 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
                                     <svg class="w-2.5 h-2.5 me-3 mt-[1px]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4"/>
