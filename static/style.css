@@ -34,3 +34,7 @@
 input[type='file'] {
     color: transparent;
 }
+
+.no-float {
+    clear: both;
+}

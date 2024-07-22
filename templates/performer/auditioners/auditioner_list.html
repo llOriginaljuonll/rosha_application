@@ -1,7 +1,6 @@
 {% extends "base.html" %}
 {% load crispy_forms_tags %}
 {% load tailwind_filters %}
-{% load auditioner %}
 
 {% block content %}
     <div class="w-8/12 h-full my-12 content-center mx-auto">
@@ -51,7 +50,7 @@
                         <th scope="col" class="pe-6 py-3 text-center">
                             Avg.
                         </th>
-                        <th scope="col" class="py-3 text-[11px] text-center border-s" colspan="2">
+                        <th scope="col" class="py-3 text-[11px] text-center border-s">
                             {% if auditioners.count == 1 %}
                                 <div class="flex gap-1 justify-center items-center">
                                     amount {{ auditioners.count }} auditioner
@@ -70,7 +69,7 @@
                                 - &nbsp;auditioners
                             {% endif %}
                         </th>
-                        <th scope="col" class="px-3 py-3 text-center border-s">
+                        <th scope="col" class="px-3 py-3 text-center border-x">
                             Result
                         </th>
                     </tr>
@@ -118,6 +117,15 @@
                                 {% endif %}
                             {% endif %}
                             {% if user.is_staff %}
+                                <td class="py-2 text-center gap-1 hover:bg-gray-100 text-blue-500 border-s cursor-pointer">
+                                    {% if auditioner.score.result == "Pass" %}
+                                        <p class="text-green-500">{{ auditioner.score.result }}</p>
+                                    {% elif auditioner.score.result == "No Pass" %}
+                                        <p class="text-red-500">{{ auditioner.score.result }}</p>
+                                    {% else %}
+                                        Waiting
+                                    {% endif %}
+                                </td>
                                 <td class="py-2 text-center gap-1 hover:bg-gray-100 text-red-500 border-s cursor-pointer" data-modal-target="popup-modal" data-modal-toggle="popup-modal">
                                     Delete
                                 </td>
@@ -146,16 +154,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                {{ auditioner.score.result }}
-                                <td class="py-2 text-center gap-1 hover:bg-gray-100 text-blue-500 border-s cursor-pointer">
-                                    {% if auditioner.score.result == "Pass" %}
-                                        <p class="text-green-500">{{ auditioner.score.result }}</p>
-                                    {% elif auditioner.score.result == "No Pass" %}
-                                        <p class="text-red-500">{{ auditioner.score.result }}</p>
-                                    {% else %}
-                                        Waiting
-                                    {% endif %}
-                                </td>
+                                
 
                             {% endif %}
                         </tr>

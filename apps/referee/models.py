@@ -27,7 +27,7 @@ class Score(models.Model):
         super().save(*args, **kwargs)
 
     def performer_result(self): 
-        if self.average > 5:
+        if self.average >= 5:
             return f"Pass"  
         elif self.average > 0:
             return f"No Pass"

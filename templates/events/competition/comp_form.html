@@ -1,0 +1,199 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load tailwind_filters %}
+{% load crispy_tags %}
+ิ
+{% block content %}
+    <div class="w-8/12 h-full my-12 content-center mx-auto">
+        <h1 class="text-4xl w-1/2 font-medium mx-auto pb-4 uppercase">Competition form</h1>
+        <form method="post" class="w-1/2 mx-auto mt-12 font-garamond" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% for field in form %}
+                {% if not field.is_hidden %}
+                    {% if 'calendar' in field.field.widget.attrs.class or 'time' in field.field.widget.attrs.class %}
+                            {% if 'calendar' in field.field.widget.attrs.class %}
+                                <div class="w-2/3 pr-2 float-left">
+                                    <label for="{{ field.id_for_label }}" class="font-medium mb-1 block text-xs">{{ field.label }}</label>
+                                    <div class="relative">
+                                        <div class="absolute flex items-center inset-y-0 ms-3">
+                                            <svg class="h-6 w-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                                                <path fill-rule="evenodd" d="M5 5a1 1 0 0 0 1-1 1 1 0 1 1 2 0 1 1 0 0 0 1 1h1a1 1 0 0 0 1-1 1 1 0 1 1 2 0 1 1 0 0 0 1 1h1a1 1 0 0 0 1-1 1 1 0 1 1 2 0 1 1 0 0 0 1 1 2 2 0 0 1 2 2v1a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V7a2 2 0 0 1 2-2ZM3 19v-7a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Zm6.01-6a1 1 0 1 0-2 0 1 1 0 0 0 2 0Zm2 0a1 1 0 1 1 2 0 1 1 0 0 1-2 0Zm6 0a1 1 0 1 0-2 0 1 1 0 0 0 2 0Zm-10 4a1 1 0 1 1 2 0 1 1 0 0 1-2 0Zm6 0a1 1 0 1 0-2 0 1 1 0 0 0 2 0Zm2 0a1 1 0 1 1 2 0 1 1 0 0 1-2 0Z" clip-rule="evenodd"/>
+                                            </svg>
+                                        </div>
+                                        {{ field|as_crispy_field_no_label }}
+                                    </div>
+                                </div>
+                            {% else %}
+                                <div class="w-1/3 float-right">
+                                    <label for="{{ field.id_for_label }}" class="font-medium mb-1 block text-xs invisible">{{ field.label }}</label>
+                                    <div class="relative">
+                                        <div class="absolute flex items-center inset-y-0 ms-3">
+                                            <svg class="size-6 text-gray-800 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                                                <path fill-rule="evenodd" d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm11-4a1 1 0 1 0-2 0v4a1 1 0 0 0 .293.707l3 3a1 1 0 0 0 1.414-1.414L13 11.586V8Z" clip-rule="evenodd"/>
+                                            </svg>
+                                        </div>
+                                        {{ field|as_crispy_field_no_label }}
+                                    </div>
+                                </div>
+                            {% endif %}
+                    {% elif field.name == 'email' %}
+                        <div class="mb-4">
+                            <label for="{{ field.id_for_label }}" class="font-medium mb-1 block text-xs">{{ field.label }}</label>
+                            <div class="relative">
+                                <div class="absolute flex items-center inset-y-0 ms-3">
+                                    <svg class="size-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M2.038 5.61A2.01 2.01 0 0 0 2 6v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6c0-.12-.01-.238-.03-.352l-.866.65-7.89 6.032a2 2 0 0 1-2.429 0L2.884 6.288l-.846-.677Z"/>
+                                        <path d="M20.677 4.117A1.996 1.996 0 0 0 20 4H4c-.225 0-.44.037-.642.105l.758.607L12 10.742 19.9 4.7l.777-.583Z"/>
+                                    </svg>
+                                </div>
+                                {{ field|as_crispy_field_no_label }}
+                            </div>
+                        </div>
+                    {% elif field.name == 'name' %}
+                        <div class="mb-4">
+                            <label for="{{ field.id_for_label }}" class="font-medium mb-1 block text-xs">{{ field.label }}</label>
+                            <div class="relative">
+                                <div class="absolute flex items-center inset-y-0 ms-3">
+                                    <svg class="size-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                                        <path fill-rule="evenodd" d="M10.915 2.345a2 2 0 0 1 2.17 0l7 4.52A2 2 0 0 1 21 8.544V9.5a1.5 1.5 0 0 1-1.5 1.5H19v6h1a1 1 0 1 1 0 2H4a1 1 0 1 1 0-2h1v-6h-.5A1.5 1.5 0 0 1 3 9.5v-.955a2 2 0 0 1 .915-1.68l7-4.52ZM17 17v-6h-2v6h2Zm-6-6h2v6h-2v-6Zm-2 6v-6H7v6h2Z" clip-rule="evenodd"/>
+                                        <path d="M2 21a1 1 0 0 1 1-1h18a1 1 0 1 1 0 2H3a1 1 0 0 1-1-1Z"/>
+                                    </svg>
+                                </div>
+                                {{ field|as_crispy_field_no_label }}
+                            </div>
+                        </div>
+                    {% elif field.name == 'compt_poster' %}
+                        <label for="{{ field.id_for_label }}" class="font-medium mb-1 block  text-xs">{{ field.label }}</label>
+                        {{ field|as_crispy_field_no_label }}
+                    {% else %}
+                        <div class="mb-4">
+                            <label for="{{ field.id_for_label }}" class="font-medium mb-1 block  text-xs">{{ field.label }}</label>
+                            {{ field|as_crispy_field_no_label }}
+                        </div>
+                    {% endif %}
+                {% else %}
+                        {{ field }}
+                {% endif %}
+            {% endfor %}
+            
+            <!-- Eligibility input field -->
+            <div id="elig-inputs" class="mb-3 flex flex-col gap-1 font-medium no-float">
+                <label class="text-xs  mb-0.5">Eligibility</label>
+                <div class="relative">
+                    <input name="eligible"
+                        type="text"
+                        placeholder="Example: Class A (4-6 years old) (3-4 ปี)"
+                        class="w-full py-2 pr-16 border border-gray-300 rounded-[2.5px] placeholder-bold focus:ring-2 focus:ring-blue-500 focus:border-blue-500 placeholder-gray-400/50"
+                        required>
+                    <button type="button" onclick="addEligInput()" class="absolute right-2 bottom-1/2 translate-y-1/2 text-xs px-2 pb-1 pt-0.5 bg-green-300 hover:bg-green-400 text-white rounded font-semibold duration-300">Add more</button>
+                </div>
+            </div>
+
+            <!-- Instrument type input field -->
+            <div id="instr_type-inputs" class="mb-3 flex flex-col gap-1 font-medium">
+                <label class="text-xs  mb-0.5">Instrument type</label>
+                <div class="relative">
+                    <input name="type"
+                        type="text"
+                        placeholder="Example: Winds / เครื่องลม"
+                        class="w-full py-2 pr-16 border border-gray-300 rounded-[2.5px] focus:ring-2 focus:ring-blue-500 focus:border-blue-500 placeholder-gray-400/50 placeholder-bold"
+                        required>
+                    <button type="button" onclick="addTypeInput()" class="absolute right-2 bottom-1/2 translate-y-1/2 text-xs px-2 pb-1 pt-0.5 bg-green-300 hover:bg-green-400 text-white rounded font-semibold duration-300">Add more</button>
+                </div>
+            </div>
+            <div class="mt-4 flex flex-col gap-1 font-medium">
+                <label for="id_descr_payment" class="block text-xs  mb-0.5">Description of Payment</label>
+                <textarea name="descr_payment" id="id_descr_payment" rows="4" class="w-full py-2 border border-gray-300 rounded-[2.5px]"></textarea>
+            </div>
+
+            <button type="submit" class="bg-blue-500 text-white font-semibold py-1.5 px-4 rounded hover:bg-blue-600 duration-300 mx-auto block mt-4">
+                Submit
+            </button>
+        </form>
+    </div>
+    <!-- For Testing -->
+    {% if form.errors %}
+    <ul>
+        {% for field in form %}
+            {% if field.errors %}
+                <li>{{ field.label }}: {{ field.errors|striptags }}</li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+{% endif %}
+    {% comment %} <form method="post">
+        {% csrf_token %}
+        {% for field in form %}
+            {% if 'dateinput' in field.field.widget.attrs.class %}
+                <div class="mb-3 relative">
+                    <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                        <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                           <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
+                         </svg>
+                     </div>
+                    {{ field }}
+                    {% if field.errors %}
+                        <div class="invalid-feedback">
+                            {{ field.errors }}
+                        </div>
+                    {% endif %}
+                </div>
+            {% endif %}  {# ปิด if tag ที่นี่ #}
+        {% endfor %}
+        <button type="submit">Submit</button>
+    </form> {% endcomment %}
+{% endblock content %}
+{% block script %}
+    <script>
+
+        // Eligibility
+        function addEligInput() {
+            const eligInputs = document.getElementById("elig-inputs");
+            const newInput = document.createElement("div");
+            newInput.className = "relative flex items-center";
+            newInput.innerHTML = `
+                <input type="text" name="eligible" placeholder="Extra field" required class="placeholder-gray-400/50 flex-1 py-2 px-3 border border-gray-300 rounded-md font-normal placeholder-bold focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                <button type="button" onclick="removeEligInput(this)" class="absolute right-2 p-1 text-white rounded">
+                    <svg class="w-6 h-6 text-gray-400/50 hover:text-gray-500/50" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18 17.94 6M18 18 6.06 6"/>
+                    </svg>
+                </button>
+            `;
+            eligInputs.appendChild(newInput);
+        }
+
+        function removeEligInput(button) {
+            const eligInputDiv = button.parentElement;
+            eligInputDiv.remove();
+        }
+
+        // Instrument type
+        function addTypeInput() {
+            const eligInputs = document.getElementById("instr_type-inputs");
+            const newInput = document.createElement("div");
+            newInput.className = "relative flex items-center";
+            newInput.innerHTML = `
+                <input type="text" name="type" placeholder="Extra field" required class="placeholder-gray-400/50 placeholder-bold flex-1 py-2 px-3 border border-gray-300 rounded-md font-normal focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                <button type="button" onclick="removeTypeInput(this)" class="absolute right-2 p-1 text-white rounded">
+                    <svg class="w-6 h-6 text-gray-400/50 hover:text-gray-500/50" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18 17.94 6M18 18 6.06 6"/>
+                    </svg>
+                </button>
+            `;
+            eligInputs.appendChild(newInput);
+        }
+        function removeTypeInput(button) {
+            const typeInputDiv = button.parentElement;
+            typeInputDiv.remove();
+        }
+        
+        
+        // format dates to look like calendar.
+        {% comment %} document.addEventListener('DOMContentLoaded', function () {
+            document.body.innerHTML = document.body.innerHTML.replace(/(\d+)(st|nd|rd|th)/g, '$1<sup>$2</sup>');
+        }); {% endcomment %}
+    </script>
+{% endblock script %}
+
+
+

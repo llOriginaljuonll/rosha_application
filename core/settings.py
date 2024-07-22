@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'apps.events.participation',
     'apps.performer.auditioner',
     'apps.performer.participant',
+    'apps.events.competition',
     'apps.accounts',
     'apps.referee',
 

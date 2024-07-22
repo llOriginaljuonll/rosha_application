@@ -8,4 +8,7 @@
     <li class="-mb-px mr-1">
         <a class="{% if '/participation/' not in request.path %} border-none text-gray-300 {% else %} text-blue-500  {% endif %} bg-white inline-block py-2 px-4 hover:text-blue-500 font-semibold border-slate-400 inline-block border-l border-t border-r rounded-t" href="{% url "participation:list" %}">Participations</a>
     </li>
+    <li class="-mb-px mr-1">
+        <a class="{% if '/competition/' not in request.path %} border-none text-gray-300 {% else %} text-blue-500  {% endif %} bg-white inline-block py-2 px-4 hover:text-blue-500 font-semibold border-slate-400 inline-block border-l border-t border-r rounded-t" href="{% url "participation:list" %}">Competitions</a>
+    </li>
 </ul>
