@@ -1,12 +1,18 @@
 from django import forms
 from django.db.models import DateField
 from .models import Competition
+from versatileimagefield.fields import VersatileImageField
 
 class CompetitionForm(forms.ModelForm):
 
     input_style = {
         'style': 'border-radius: 2.5px; padding: 8px 42px;',
-        'class': 'font-medium placeholder-gray-400/50 placeholder-bold ordinal'
+        'class': 'font-medium placeholder-gray-400/50 placeholder-bold',
+    }
+
+    time_input_attrs = {
+        'class': 'cursor-pointer time font-medium placeholder-gray-400/50 placeholder-bold text-center placeholder-center',
+        'placeholder': 'Ex. 15:00',
     }
 
     date_input_attrs = {
@@ -24,6 +30,7 @@ class CompetitionForm(forms.ModelForm):
         'deadline': 'Select a competition deadline',
         'ann_date': 'Select a competition announcement date',
         'compt_date': 'Select a competition date',
+        'copt_poster': 'Competition Poster',
     }
 
     field_to_hide = ['elig', 'instr_type', 'category', 'descr_payment']
@@ -35,11 +42,10 @@ class CompetitionForm(forms.ModelForm):
 
 
         labels = {
-            'comp_poster': 'Competition Poster',
+            'compt_poster': 'Competition Poster',
             'ann_date': 'Announcement Date',
-            'compet_date': 'Competition Date',
+            'compt_date': 'Competition Date',
         }
-
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -51,6 +57,7 @@ class CompetitionForm(forms.ModelForm):
 
         # if 'class' in self.fields['name'].widget.attrs:
         #     del self.fields['name'].widget.attrs['class']
+
         for field in self.fields.values():
             field.widget.attrs.update(self.input_style)
 
@@ -62,6 +69,20 @@ class CompetitionForm(forms.ModelForm):
                 field.widget = forms.TextInput()
                 field.widget.attrs.update(self.date_input_attrs)
 
+        for field_name, field in self.fields.items():
+            if isinstance(field, forms.TimeField):
+                field.widget.attrs.update(self.time_input_attrs)
+                
+        
+        for field_name, field in self.fields.items():
+            if isinstance(field, forms.ImageField):
+                field.widget = forms.ClearableFileInput()
+                field.widget.attrs.update({
+                    'class': "block w-full text-sm text-gray-900 border border-gray-300 rounded-[2.5px] cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                })
+
+
+        
         # placeholder
         for field, placeholder in self.placeholders.items():
             if field in self.fields:
