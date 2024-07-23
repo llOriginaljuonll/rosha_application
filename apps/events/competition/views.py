@@ -3,8 +3,8 @@ from django.urls import reverse_lazy
 from django.views.generic import FormView
 from .forms import CompetitionForm
 
-class CompetitionFormView(FormView):
-    template_name = 'events/competition/comp_form.html'
+class ComptFormView(FormView):
+    template_name = 'events/competition/compt_form.html'
     form_class = CompetitionForm
     success_url = reverse_lazy('audition:list')
 
