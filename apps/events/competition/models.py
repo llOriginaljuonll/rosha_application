@@ -6,7 +6,6 @@ class Competition(models.Model):
 
     """
         auto_now : When set to True, the current timestamp will be saved every time the object is saved.
-        editable : If set to False, this field will not be displayed in the admin form.
     """
 
     name = models.CharField(max_length=255)
