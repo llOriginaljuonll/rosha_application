@@ -29,6 +29,7 @@ urlpatterns = [
     path('performer/', include('apps.performer.auditioner.urls')),
     path('participant/', include('apps.performer.participant.urls')),
     path('competition/', include('apps.events.competition.urls')),
+    path('entrant/', include('apps.performer.entrant.urls')),
     path('referee/', include('apps.referee.urls')),
 ]
 
