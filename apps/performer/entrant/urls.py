@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import EntrantCreateView, EntrantFormView
+from .views import EntrantFormView
 
 app_name="entrant"
 
