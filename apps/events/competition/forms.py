@@ -55,12 +55,8 @@ class CompetitionForm(forms.ModelForm):
             if field in self.fields:
                 self.fields[field].widget = forms.HiddenInput()
 
-        # if 'class' in self.fields['name'].widget.attrs:
-        #     del self.fields['name'].widget.attrs['class']
-
         for field in self.fields.values():
             field.widget.attrs.update(self.input_style)
-
 
 
         # Only DateField fields that receive values from the date_input_attr variable.

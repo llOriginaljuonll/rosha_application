@@ -2,7 +2,7 @@
     display: none;
 }
 
-#div_id_cpr_permission, #div_id_practice_room{
+#div_id_cpr_permission, #div_id_practice_room, #div_id_cpr{
     display: flex;
     flex-direction: row-reverse;
     justify-content: start;
@@ -10,7 +10,7 @@
     gap: 10px;
 }
 
-#div_id_cpr_permission > label, #div_id_practice_room > label{
+#div_id_cpr_permission > label, #div_id_practice_room > label, #div_id_cpr > label{
     margin-top: 8px;
 }
 
@@ -31,10 +31,17 @@
 }
 
 /* remove text => "No File Chosen */
-input[type='file'] {
+/* input[type='file'] {
     color: transparent;
-}
+} */
 
 .no-float {
     clear: both;
+}
+
+/* remove dropdown indicator */
+#id_entity, #id_compt {
+    -webkit-appearance: none; /* ซ่อนลูกศรบนเบราว์เซอร์ Chrome, Safari, Edge */
+    appearance: none;         /* ซ่อนลูกศรบนเบราว์เซอร์อื่นๆ */
+    background: transparent;  /* ทำให้พื้นหลังของ select โปร่งใส */
 }
