@@ -6,13 +6,6 @@ from django.urls import reverse_lazy
 from core.mixins import IsActiveMixin
 from apps.events.competition.models import Competition
 
-class EntrantCreateView(CreateView):
-
-    model = Entrant
-    form_class = EntrantForm
-    template_name = "performer/entrant/entrant_form.html"
-    success_url = reverse_lazy("compt:list")
-
 class EntrantFormView(IsActiveMixin, DetailView, FormMixin):
 
     model = Competition
