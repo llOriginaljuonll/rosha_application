@@ -7,7 +7,6 @@ class Competition(models.Model):
     """
         auto_now : When set to True, the current timestamp will be saved every time the object is saved.
     """
-
     name = models.CharField(max_length=255)
     category = models.CharField(max_length=255, default="competition")
     compt_poster = VersatileImageField()
