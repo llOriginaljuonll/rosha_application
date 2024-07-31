@@ -17,12 +17,17 @@ class EntrantFormView(IsActiveMixin, DetailView, FormMixin):
         return reverse_lazy('compt:list')
     
     def get_context_data(self, **kwargs):
-        context = super(EntrantFormView, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         context['form'] = self.get_form()
         return context
     
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs['pk'] = self.kwargs.get('pk')
+        return kwargs
+    
     def post(self, *args, **kwargs):
-        
+        self.object = self.get_object()
         form = self.get_form()
         if form.is_valid():
             form.save()
@@ -32,3 +37,11 @@ class EntrantFormView(IsActiveMixin, DetailView, FormMixin):
     
     def form_valid(self, form):
         return super().form_valid(form)
+        
+    
+    # get_form_kwargs คือ method ที่ทำหน้าที่ เพิ่มข้อมูลที่ถูกส่งไปยังฟอร์มของวิวนั้นๆ ได้
+
+    # def get_form_kwargs(self):
+    #     kwargs = super().get_form_kwargs()
+    #     kwargs['compt'] = self.get_object()
+    #     return kwargs

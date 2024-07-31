@@ -4,12 +4,152 @@
 {% load tailwind_filters %}
 
 {% block content %}
-{{ competition.name }}
 <div class="m-[36px_auto] w-8/12">
+    <div>
+        <h1 class="text-4xl font-semibold border-gray-400 mb-5 ps-32">
+            {{ competition.name }}
+        </h1>
+        <div class="grid grid-cols-2 text-lg font-semibold mt-5 px-10">
+            <div class="py-20 px-5">
+                {% if competition.compt_poster %}
+                    <img src="{{ competition.compt_poster.url }}" 
+                    data-modal-target="image-audition-modal"
+                    data-modal-toggle="image-audition-modal" 
+                    class="mx-auto block cursor-pointer"> 
+
+                    <!-- Image Modal-->
+                    <div id="image-audition-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                        <div class="mx-auto w-3/5 h-screen flex justify-center items-center">
+                            <img src="{{ competition.compt_poster.url }}" class="mx-auto pt-5">
+                            <button type="button" class="absolute inset-5 text-white bg-transparent hover:text-gray-200 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="image-audition-modal">
+                                <svg class="w-8 h-8" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                                </svg>
+                                <span class="sr-only">Close modal</span>
+                            </button>
+                        </div>
+                    </div>
+                {% endif %}
+                <div class="flex justify-center mt-5">
+                    <h2 class="me-3 px-1.5 pb-0.5 text-center text-blue-800 bg-blue-100 rounded">Contact us</h2><h2>{{ competition.email }}</h2>
+                </div>
+            </div>
+            <div class="py-16 justify-center flex">
+                <div class="inline-flex flex-col justify-center items-center">
+                    <ol class="relative h-full border-s border-gray-200 dark:border-gray-700">
+                        <div class="inset-0 flex flex-col justify-between h-full">
+                            {% if not competition.get_deadline == "Expired period" %}
+                            <li class="ms-8">            
+                                <span class="absolute flex items-center justify-center w-7 h-7 bg-blue-100 rounded-full -start-3 ring-8 ring-white dark:ring-blue-900 dark:bg-blue-900">
+                                    <svg class="w-4 h-4 text-blue-800 dark:text-blue-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                                        <path fill-rule="evenodd" d="M8 3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1h2a2 2 0 0 1 2 2v15a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h2Zm6 1h-4v2H9a1 1 0 0 0 0 2h6a1 1 0 1 0 0-2h-1V4Zm-3 8a1 1 0 0 1 1-1h3a1 1 0 1 1 0 2h-3a1 1 0 0 1-1-1Zm-2-1a1 1 0 1 0 0 2h.01a1 1 0 1 0 0-2H9Zm2 5a1 1 0 0 1 1-1h3a1 1 0 1 1 0 2h-3a1 1 0 0 1-1-1Zm-2-1a1 1 0 1 0 0 2h.01a1 1 0 1 0 0-2H9Z" clip-rule="evenodd"/>
+                                    </svg>
+                                </span>
+                                <time class="block text-base font-normal leading-none text-blue-400 dark:text-blue-500">{{ competition.deadline|date:"j F Y" }}</time>
+                                <h3 class="flex items-center mb-1 text-lg font-semibold text-blue-900 dark:text-white">Deadline Date 
+                                    <span class="bg-blue-100 text-blue-800 text-sm font-medium me-2 px-2.5 pt-0.5 pb-1 rounded dark:bg-blue-900 dark:text-blue-300 ms-3">{{ competition.get_deadline }}</span>
+                                </h3>
+                            </li>
+                        {% else %}
+                            <li class="ms-8">            
+                                <span class="absolute flex items-center justify-center w-7 h-7 bg-red-100 rounded-full -start-3 ring-8 ring-white dark:ring-gray-900 dark:bg-red-900">
+                                    <svg class="w-4 h-4 text-red-800 dark:text-red-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                                        <path fill-rule="evenodd" d="M8 3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1h2a2 2 0 0 1 2 2v15a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h2Zm6 1h-4v2H9a1 1 0 0 0 0 2h6a1 1 0 1 0 0-2h-1V4Zm-3 8a1 1 0 0 1 1-1h3a1 1 0 1 1 0 2h-3a1 1 0 0 1-1-1Zm-2-1a1 1 0 1 0 0 2h.01a1 1 0 1 0 0-2H9Zm2 5a1 1 0 0 1 1-1h3a1 1 0 1 1 0 2h-3a1 1 0 0 1-1-1Zm-2-1a1 1 0 1 0 0 2h.01a1 1 0 1 0 0-2H9Z" clip-rule="evenodd"/>
+                                    </svg>
+                                </span>
+                                <time class="block text-base font-normal leading-none text-red-400 dark:text-red-500">{{ competition.deadline|date:"j F Y" }}</time>
+                                <h3 class="flex items-center mb-1 text-lg font-semibold text-red-900 dark:text-white">Deadline Date 
+                                    <span class="bg-red-100 text-red-800 text-sm font-medium me-2 px-2.5 pt-0.5 pb-1 rounded dark:bg-red-900 dark:text-red-300 ms-3">{{ competition.get_deadline }}</span>
+                                </h3>
+                            </li>
+                        {% endif %}
+    
+                        {% if not competition.get_ann_date == "Expired period" %}
+                            <li class="ms-8">            
+                                <span class="absolute flex items-center justify-center w-7 h-7 bg-blue-100 rounded-full -start-3 ring-8 ring-white dark:ring-gray-900 dark:bg-blue-900">
+                                    <svg class="w-4 h-4 text-blue-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                                        <path fill-rule="evenodd" d="M18.458 3.11A1 1 0 0 1 19 4v16a1 1 0 0 1-1.581.814L12 16.944V7.056l5.419-3.87a1 1 0 0 1 1.039-.076ZM22 12c0 1.48-.804 2.773-2 3.465v-6.93c1.196.692 2 1.984 2 3.465ZM10 8H4a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h6V8Zm0 9H5v3a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1v-3Z" clip-rule="evenodd"/>
+                                    </svg>
+                                </span>
+                                <time class="block text-base font-normal leading-none text-blue-400 dark:text-blue-500">{{ competition.get_ann_date|date:"j F Y" }}</time>
+                                <h3 class="flex items-center mb-1 text-lg font-semibold text-blue-900 dark:text-white">Announcement Date 
+                                    <span class="bg-blue-100 text-blue-800 text-sm font-medium me-2 px-2.5 pt-0.5 pb-1 rounded dark:bg-blue-900 dark:text-blue-300 ms-3">{{ competition.get_ann_date }}</span>
+                                </h3>
+                            </li>
+                        {% else %}
+                            <li class="ms-8">            
+                                <span class="absolute flex items-center justify-center w-7 h-7 bg-red-100 rounded-full -start-3 ring-8 ring-white dark:ring-gray-900 dark:bg-red-900">
+                                    <svg class="w-4 h-4 text-red-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                                        <path fill-rule="evenodd" d="M18.458 3.11A1 1 0 0 1 19 4v16a1 1 0 0 1-1.581.814L12 16.944V7.056l5.419-3.87a1 1 0 0 1 1.039-.076ZM22 12c0 1.48-.804 2.773-2 3.465v-6.93c1.196.692 2 1.984 2 3.465ZM10 8H4a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h6V8Zm0 9H5v3a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1v-3Z" clip-rule="evenodd"/>
+                                    </svg>
+                                        
+                                </span>
+                                <time class="block text-base font-normal leading-none text-red-400 dark:text-red-500">{{ competition.ann_date |date:"j F Y" }}</time>
+                                <h3 class="flex items-center mb-1 text-lg font-semibold text-red-900 dark:text-white">Announcement Date 
+                                    <span class="bg-red-100 text-red-800 text-sm font-medium me-2 px-2.5 pt-0.5 pb-1 rounded dark:bg-red-900 dark:text-red-300 ms-3">{{ competition.get_ann_date }}</span>
+                                </h3>
+                            </li>
+                        {% endif %} 
+    
+                        {% if not competition.get_compt_date == "Let's start the show!" %}
+                            <li class="mb-0 ms-8">            
+                                <span class="absolute flex items-center justify-center w-7 h-7 bg-blue-100 rounded-full -start-3 ring-8 ring-white dark:ring-gray-900 dark:bg-blue-900">
+                                    <svg class="w-4 h-4 text-blue-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M17.133 12.632v-1.8a5.406 5.406 0 0 0-4.154-5.262.955.955 0 0 0 .021-.106V3.1a1 1 0 0 0-2 0v2.364a.955.955 0 0 0 .021.106 5.406 5.406 0 0 0-4.154 5.262v1.8C6.867 15.018 5 15.614 5 16.807 5 17.4 5 18 5.538 18h12.924C19 18 19 17.4 19 16.807c0-1.193-1.867-1.789-1.867-4.175ZM6 6a1 1 0 0 1-.707-.293l-1-1a1 1 0 0 1 1.414-1.414l1 1A1 1 0 0 1 6 6Zm-2 4H3a1 1 0 0 1 0-2h1a1 1 0 1 1 0 2Zm14-4a1 1 0 0 1-.707-1.707l1-1a1 1 0 1 1 1.414 1.414l-1 1A1 1 0 0 1 18 6Zm3 4h-1a1 1 0 1 1 0-2h1a1 1 0 1 1 0 2ZM8.823 19a3.453 3.453 0 0 0 6.354 0H8.823Z"/>
+                                    </svg>
+                                </span>
+                                <time class="block text-base font-normal leading-none text-blue-400 dark:text-blue-500">{{ competition.compt_date|date:"j F Y" }}</time>
+                                <h3 class="flex items-center mb-1 text-lg font-semibold text-blue-900 dark:text-white">Concert Date
+                                    <span class="bg-blue-100 text-blue-800 text-sm font-medium me-2 px-2.5 pt-0.5 pb-1 rounded dark:bg-blue-900 dark:text-blue-300 ms-3">{{ competition.get_compt_date }}</span>
+                                </h3>
+                            </li>
+                        {% else %}
+                            <li class="mb-0 ms-8">            
+                                <span class="absolute flex items-center justify-center w-7 h-7 bg-green-100 rounded-full -start-3 ring-8 ring-white dark:ring-gray-900 dark:bg-green-900">
+                                    <svg class="w-4 h-4 text-green-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M17.133 12.632v-1.8a5.406 5.406 0 0 0-4.154-5.262.955.955 0 0 0 .021-.106V3.1a1 1 0 0 0-2 0v2.364a.955.955 0 0 0 .021.106 5.406 5.406 0 0 0-4.154 5.262v1.8C6.867 15.018 5 15.614 5 16.807 5 17.4 5 18 5.538 18h12.924C19 18 19 17.4 19 16.807c0-1.193-1.867-1.789-1.867-4.175ZM6 6a1 1 0 0 1-.707-.293l-1-1a1 1 0 0 1 1.414-1.414l1 1A1 1 0 0 1 6 6Zm-2 4H3a1 1 0 0 1 0-2h1a1 1 0 1 1 0 2Zm14-4a1 1 0 0 1-.707-1.707l1-1a1 1 0 1 1 1.414 1.414l-1 1A1 1 0 0 1 18 6Zm3 4h-1a1 1 0 1 1 0-2h1a1 1 0 1 1 0 2ZM8.823 19a3.453 3.453 0 0 0 6.354 0H8.823Z"/>
+                                    </svg>
+                                </span>
+                                <time class="block text-base font-normal leading-none text-green-400 dark:text-green-500">{{ competition.compt_date |date:"j F Y" }}</time>
+                                <h3 class="flex items-center mb-1 text-lg font-semibold text-green-900 dark:text-white">Concert Date
+                                    <span class="bg-green-100 text-green-800 text-sm font-medium me-2 px-2.5 pt-0.5 pb-1 rounded dark:bg-green-900 dark:text-green-300 ms-3">{{ competition.get_compt_date }}</span>
+                                </h3>
+                            </li>
+                        {% endif %}
+                        </div> 
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    
     <form class="m-[48px_0_0_0] border border-gray-800 p-[20px_40px_8px]" method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        {{ form|crispy}}
-        <button type="submit">Submit</button>
+        <div class="flex">
+            {% for field in form %}
+                {% if field.name == 'entity' %}
+                    <div class="w-1/3 mr-2">
+                        {{ field|as_crispy_field }}
+                    </div>
+                {% elif field.name == 'name' %}
+                    <div class="flex-1">
+                        {{ field|as_crispy_field }}
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+        {% for field in form %}
+            {% if field.name != 'entity' and field.name != 'name' %}
+                {{ field|as_crispy_field }}
+            {% endif %}
+        {% endfor %}
+        <button type="submit" class="bg-blue-500 text-white font-semibold py-1.5 px-4 rounded hover:bg-blue-600 duration-300 mx-auto block mt-8">Submit</button>
     </form>
 </div>
 {% endblock content %}
+{% block script %}
+    <script>
+        var name = "{{ competition.id }}";
+        document.getElementById('compt_id').value = name;
+    </script>
+{% endblock script %}
