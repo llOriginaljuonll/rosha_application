@@ -15,7 +15,7 @@
                         {% for competition in competitions %}
                             <tr class="bg-white border dark:bg-gray-800 dark:border-gray-700">
                                 <th class="text-center text-md font-medium text-gray-900">{{ forloop.counter }}</th>
-                                <th scope="row" class="border-s flex justify-between px-6 py-2 text-md font-medium text-gray-900 whitespace-nowrap dark:text-white cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600"  onclick="">
+                                <th scope="row" class="border-s flex justify-between px-6 py-2 text-md font-medium text-gray-900 whitespace-nowrap dark:text-white cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600"  onclick="location.href='{% url "entrant:form" competition.id %}'">
                                     <p>{{ competition.name }}</p>
                                     {% if user.is_judge %}
                                         <a 
@@ -23,14 +23,14 @@
                                             data-tooltip-target="tooptip-{{ competition.id }}"
                                             data-tooltip-placement="left"
                                             href="">
-                                            {% if competition.competitioner_set.count <= 0 %}
+                                            {% if competition.entrant_set.count <= 0 %}
                                                 -
                                             {% else %}
-                                                {{ competition.competitioner_set.count }}
+                                                {{ competition.entrant_set.count }}
                                             {% endif %}
                                         </a>
                                         <div id="tooptip-{{ competition.id }}" role="tooltip" class="absolute z-10 invisible inline-block px-2.5 py-1.5 text-xs font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg opacity-0 tooltip dark:text-gray-800 dark:bg-gray-50">
-                                            Amount of competitioners
+                                            Amount of entrants
                                             <div class="tooltip-arrow" data-popper-arrow></div>
                                         </div>
                                     {% endif %}
