@@ -10,7 +10,7 @@ class EntrantFormView(IsActiveMixin, DetailView, FormMixin):
 
     model = Competition
     form_class = EntrantForm
-    template_name = 'performer/entrant/entrant_form.html'
+    template_name = 'performer/entrants/entrant_form.html'
     context_object_name = 'competition'
 
     def get_success_url(self) -> str:
