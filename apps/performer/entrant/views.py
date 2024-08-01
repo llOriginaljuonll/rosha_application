@@ -2,9 +2,12 @@ from django.views.generic import CreateView, DetailView, ListView
 from django.views.generic.edit import FormMixin
 from .models import Entrant
 from .forms import EntrantForm
+from django.contrib import messages
 from django.urls import reverse_lazy
 from core.mixins import IsActiveMixin, IsEditorMixin
 from apps.events.competition.models import Competition
+from django.shortcuts import redirect
+
 
 class EntrantListView(IsEditorMixin, ListView):
 
@@ -55,3 +58,25 @@ class EntrantFormView(IsActiveMixin, DetailView, FormMixin):
     #     kwargs = super().get_form_kwargs()
     #     kwargs['compt'] = self.get_object()
     #     return kwargs
+
+class EntrantDetailView(DetailView):
+
+    model = Entrant
+    object_name = 'entrant'
+    template_name = 'performer/entrants/entrant_detail.html'
+    context_object_name = 'entrant'
+
+    def handle_no_permission(self, request):
+        messages.add_message(request, messages.ERROR, "You need higher permissions in order to access this page.")
+        return redirect("/")
+
+    def dispatch(self, request, *args, **kwargs):
+        obj = self.get_object()
+        if not request.user.is_authenticated:
+            messages.add_message(request, messages.ERROR, "You need to be logged in in order to access this page.")
+            return redirect("account_login")
+        if request.user.is_judge or request.user.id == obj.user.id:
+            pass
+        else:
+            return self.handle_no_permission(request)
+        return super().dispatch(request, *args, **kwargs)
