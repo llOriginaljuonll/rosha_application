@@ -36,7 +36,7 @@
                                     {% endif %}
                                 </th>
                                 {% if user.is_judge %}
-                                    <th scope="row" class="w-1/12 py-2 text-center border-s border-t hover:bg-gray-100 cursor-pointer" onclick="">
+                                    <th scope="row" class="w-1/12 py-2 text-center border-s border-t hover:bg-gray-100 cursor-pointer" onclick="location.href='{% url "entrant:list" competition.id %}'">
                                         Details
                                     </th>
                                 {% endif %}
