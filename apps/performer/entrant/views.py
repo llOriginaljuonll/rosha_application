@@ -1,16 +1,26 @@
-from django.views.generic import CreateView, DetailView
+from django.views.generic import CreateView, DetailView, ListView
 from django.views.generic.edit import FormMixin
 from .models import Entrant
 from .forms import EntrantForm
 from django.urls import reverse_lazy
-from core.mixins import IsActiveMixin
+from core.mixins import IsActiveMixin, IsEditorMixin
 from apps.events.competition.models import Competition
+
+class EntrantListView(IsEditorMixin, ListView):
+
+    model = Entrant
+    template_name = 'performer/entrants/entrant_list.html'
+    context_object_name = 'entrants'
+
+    def get_queryset(self,*args, **kwargs):
+        return Entrant.objects.filter(compt__id=self.kwargs.get('pk'))
+
 
 class EntrantFormView(IsActiveMixin, DetailView, FormMixin):
 
     model = Competition
     form_class = EntrantForm
-    template_name = 'performer/entrant/entrant_form.html'
+    template_name = 'performer/entrants/entrant_form.html'
     context_object_name = 'competition'
 
     def get_success_url(self) -> str:
