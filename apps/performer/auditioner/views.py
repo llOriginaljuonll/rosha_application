@@ -15,8 +15,8 @@ class AuditionerListView(IsEditorMixin, ListView):
     template_name = 'performer/auditioners/auditioner_list.html'
     context_object_name = 'auditioners'
 
-    def get_success_url(self) -> str:
-        return reverse_lazy('audition:list')
+    # def get_success_url(self) -> str:
+    #     return reverse_lazy('audition:list')
     
     def get_queryset(self, *args, **kwargs):
         return Auditioner.objects.filter(audition__id=self.kwargs.get('pk')).order_by('-score__result')
@@ -28,14 +28,14 @@ class AuditionerListView(IsEditorMixin, ListView):
         context["score"] = Score.objects.filter(id=self.kwargs.get('id'))
         return context
 
-    def post(self, request, *args, **kwargs):
+    # def post(self, request, *args, **kwargs):
 
-        form = self.get_form()
-        if form.is_valid():
-            form.save()
-            return self.form_valid(form)
-        else:
-            return self.form_invalid(form)
+    #     form = self.get_form()
+    #     if form.is_valid():
+    #         form.save()
+    #         return self.form_valid(form)
+    #     else:
+    #         return self.form_invalid(form)
 
     
 class AllAuditionerListview(IsStaffMixin, ListView):
