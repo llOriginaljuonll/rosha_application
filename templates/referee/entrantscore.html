@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% load static %}
+{% load static embed_video_tags %}
+{% load crispy_forms_tags %}
+{% load tailwind_filters %}
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'score_update.css' %}">
+{% endblock style %}
+
+{% block content %}
+<!-- parent container -->
+<div class="py-8 px-4 mx-auto text-center lg:py-16 lg:px-12">
+    <!-- wrapper video & form -->
+    <div class="lg:w-3/4 2xl:w-2/3 mx-auto">
+
+        <!-- responsive 1 -->
+        <div class="lg:block">
+            <div class="flex flex-col md:flex-row justify-center items-center space-y-5">
+                <!-- video container -->
+                <!-- responsive video 1 -->
+                <div class="hidden xl:block">
+                    <div class="flex flex-col items-center w-1/2">
+                        {% if entrantscore.entrant.shorts_url %}
+                            <div class="overflow-hidden">{% video entrantscore.entrant.shorts_url "338x600" %}</div>
+                        {% endif %}
+                    </div>
+                </div>
+                <!-- end responsive video 1 -->
+                
+                <!-- responsive video 2 -->
+                <div class="flex flex-col items-center w-1/2 xl:hidden">
+                    {% if entrantscore.entrant.shorts_url %}
+                        <div class="overflow-hidden">{% video entrantscore.entrant.shorts_url "300x533" %}</div>
+                    {% endif %}
+                </div>
+                <!-- end responsive video 2 -->
+
+                <!-- form container -->
+                <form class="border border-gray-500 md:w-1/2 px-8 flex flex-col justify-around h-[300px] md:h-[533px] xl:h-[600px]" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <fieldset class="flex flex-col gap-1 border border-gray-500">
+                        <legend class="text-start font-medium text-xs ms-[1%]">Entrant Name</legend>
+                        <p class="pb-2 pt-0.5 font-medium text-base">{{ entrantscore.entrant.name }}</p>
+                    </fieldset>
+                    {% crispy form %}
+                </form>
+            </div>
+        </div>
+        <!-- end responsive 1 -->
+
+    </div>
+</div>
+{% endblock content %}
+
+{% block script %}
+    <script>
+        var name = "{{ entrantscore.entrant.id }}";
+        document.getElementById('auditioner_id').value = name;
+    </script>
+{% endblock script %}
