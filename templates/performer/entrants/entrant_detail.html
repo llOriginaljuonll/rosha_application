@@ -194,6 +194,19 @@
                 {% endif %}
                 {% comment %} <img src="{{ entrant.slip.thumbnail.400x400 }}" class="mt-5"> {% endcomment %}
             </div>
+            <div class="mt-10 text-xl font-semibold text-yellow-400">
+                {% if entrant.entrantscore.result == "Honorary Award" %}
+                    You have received an Honorary Award.
+                {% elif entrant.entrantscore.result == "Runner-up Honorary Award" %}
+                    You have received an Runner-up Honorary Award.
+                {% elif entrant.entrantscore.result == "Honorable Mention" %}
+                    You have received an Honorable Mention.
+                {% else %}
+                    <div class="text-blue-500">
+                        Waiting for the perform result.
+                    </div>
+                {% endif %}
+            </div>
     
         </div>
         <div class="flex justify-center gap-5">
