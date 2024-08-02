@@ -38,8 +38,8 @@ class Entrant(models.Model):
     address = models.CharField(max_length=255)
     school = models.CharField(max_length=100)
     prim_contact = models.CharField(max_length=255)
-    elig = models.JSONField(encoder=DjangoJSONEncoder, null=True, blank=True)
-    instr_type = models.JSONField(encoder=DjangoJSONEncoder, null=True, blank=True)
+    elig = models.CharField(max_length=255)
+    instr_type = models.CharField(max_length=255)
     songs = models.CharField(max_length=255)
 
     # restrict uploads to video files only.
@@ -70,30 +70,15 @@ class Entrant(models.Model):
 
     def __str__(self):
         return f"No.{self.id} {self.name}"
-    
-# def get_elig_values(field_name):
-#         all_values = Competition.objects.values_list('elig', flat=True)
-#         unique_values = set()
-#         for elig in all_values:
-#             if field_name in elig:
-#                 unique_values.add(elig[field_name])
-#         return [(value, value) for value in list(unique_values)]
 
+"""เหมือนจะไม่จำเป็นต้องมี comments ไว้ซักพักหนึ่งถ้าไม่เกิดผลกระทบอะไรกับโปรเจกต์ ก็จะ remove ออกไป"""
+# ----------------------------------------------------------------------------------------------
 # def get_elig_values(field_name):
 #     all_values = Competition.objects.values_list('elig', flat=True)
 #     unique_values = set()
 #     for elig_list in all_values:
-#         for value in elig_list:  # วนลูปผ่านแต่ละค่าใน list
-#             if field_name in value:  # ตรวจสอบ key ใน dictionary
+#         for value in elig_list:
+#             print(value)
+#             if isinstance(value, dict) and field_name in value:
 #                 unique_values.add(value[field_name])
 #     return [(value, value) for value in list(unique_values)]
-
-def get_elig_values(field_name):
-    all_values = Competition.objects.values_list('elig', flat=True)
-    unique_values = set()
-    for elig_list in all_values:
-        for value in elig_list:
-            print(value)
-            if isinstance(value, dict) and field_name in value:
-                unique_values.add(value[field_name])
-    return [(value, value) for value in list(unique_values)]

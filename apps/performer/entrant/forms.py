@@ -13,15 +13,15 @@ class EntrantForm(forms.ModelForm):
         'class': 'font-medium placeholder-gray-400/50 placeholder-bold',
     }
 
-    elig = forms.MultipleChoiceField(
+    elig = forms.ChoiceField(
         choices=[],
-        widget=forms.CheckboxSelectMultiple,
+        widget=forms.RadioSelect,
         label="Eligibility"
     )
 
-    instr_type = forms.MultipleChoiceField(
+    instr_type = forms.ChoiceField(
         choices=[],
-        widget=forms.CheckboxSelectMultiple,
+        widget=forms.RadioSelect,
         label="Categories"
     )
 
