@@ -6,7 +6,6 @@
 
 {% block style %}
     <link rel="stylesheet" href="{% static 'score_update.css' %}">
-    <link rel="stylesheet" href="{% static 'style.css' %}">
 {% endblock style %}
 
 {% block content %}
@@ -14,24 +13,29 @@
 <div class="py-8 px-4 mx-auto text-center lg:py-16 lg:px-12">
     <!-- wrapper video & form -->
     <div class="lg:w-3/4 2xl:w-2/3 mx-auto">
+
         <!-- responsive 1 -->
         <div class="lg:block">
             <div class="flex flex-col md:flex-row justify-center items-center space-y-5">
                 <!-- video container -->
-                 <!-- responsive video 1 -->
+                <!-- responsive video 1 -->
                 <div class="hidden xl:block">
                     <div class="flex flex-col items-center w-1/2">
                         {% if score.auditioner.shorts_url %}
                             <div class="overflow-hidden">{% video score.auditioner.shorts_url "338x600" %}</div>
                         {% endif %}
                     </div>
-                </div><!-- end responsive video 1 -->
+                </div>
+                <!-- end responsive video 1 -->
+                
                 <!-- responsive video 2 -->
                 <div class="flex flex-col items-center w-1/2 xl:hidden">
                     {% if score.auditioner.shorts_url %}
                         <div class="overflow-hidden">{% video score.auditioner.shorts_url "300x533" %}</div>
                     {% endif %}
-                </div><!-- end responsive video 2 -->
+                </div>
+                <!-- end responsive video 2 -->
+
                 <!-- form container -->
                 <form class="border border-gray-500 md:w-1/2 px-8 flex flex-col justify-around h-[300px] md:h-[533px] xl:h-[600px]" method="post" enctype="multipart/form-data">
                     {% csrf_token %}
@@ -42,31 +46,13 @@
                     {% crispy form %}
                 </form>
             </div>
-        </div><!-- end responsive 1 -->
+        </div>
+        <!-- end responsive 1 -->
 
-        {% comment %} <!-- responsive 2 -->
-        <div class="flex">
-            <!-- video container -->
-            <div class="flex flex-col items-center w-1/2">
-                {% if score.auditioner.shorts_url %}
-                    <div class="overflow-hidden">{% video score.auditioner.shorts_url "250x444" %}</div>
-                {% endif %}
-            </div>
-            <!-- form container -->
-            <form class="border border-gray-500 w-1/2 px-8 flex flex-col justify-around" method="post" enctype="multipart/form-data">
-                {% csrf_token %}
-                <fieldset class="flex flex-col gap-1 border border-gray-500">
-                    <legend class="text-start font-medium text-xs ms-[1%]">Auditioner Name</legend>
-                    <p class="pb-2 pt-0.5 font-medium text-base">{{ score.auditioner.name }}</p>
-                </fieldset>
-                {% crispy form %}
-            </form>
-        </div> {% endcomment %}
-    
     </div>
 </div>
-   
 {% endblock content %}
+
 {% block script %}
     <script>
         var name = "{{ score.auditioner.id }}";

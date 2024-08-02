@@ -93,7 +93,7 @@
                 </p>
             </div>
             <div class="mt-10 text-xl font-semibold text-emerald-600">
-                {% if auditioner.audition.participation %}
+                {% if auditioner.audition.participation %} <!-- เช็คว่ามีการสร้าง participation form แล้วหรือยัง? -->
                     {% if auditioner.score.result == "Pass" %}
                         You have passed the selection round.!!
                     {% elif auditioner.score.result == "No Pass" %}
@@ -105,6 +105,10 @@
                             Waiting for the audition result.
                         </div>
                     {% endif %}
+                {% else %}
+                    <div class="text-blue-500">
+                        Waiting for the audition result.
+                    </div>
                 {% endif %}
             </div>
         </div>
