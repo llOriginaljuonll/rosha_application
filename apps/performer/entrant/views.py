@@ -1,4 +1,4 @@
-from django.views.generic import CreateView, DetailView, ListView
+from django.views.generic import DetailView, ListView, UpdateView
 from django.views.generic.edit import FormMixin
 from .models import Entrant
 from .forms import EntrantForm
@@ -16,7 +16,7 @@ class EntrantListView(IsEditorMixin, ListView):
     context_object_name = 'entrants'
 
     def get_queryset(self,*args, **kwargs):
-        return Entrant.objects.filter(compt__id=self.kwargs.get('pk'))
+        return Entrant.objects.filter(compt__id=self.kwargs.get('pk')).order_by('-entrantscore__average')
 
 
 class EntrantFormView(IsActiveMixin, DetailView, FormMixin):
@@ -80,3 +80,27 @@ class EntrantDetailView(DetailView):
         else:
             return self.handle_no_permission(request)
         return super().dispatch(request, *args, **kwargs)
+    
+class EntrantUpdateView(UpdateView):
+
+    model = Entrant
+    form_class = EntrantForm
+    template_name = 'performer/entrants/entrant_update.html'
+
+    # def handle_no_permission(self, request):
+    #     messages.add_message(request, messages.ERROR, "You need higher permissions in order to access this page.")
+    #     return redirect("/")
+
+    # def dispatch(self, request, *args, **kwargs):
+    #     obj = self.get_object()
+    #     if not request.user.is_authenticated:
+    #         messages.add_message(request, messages.ERROR, "You need to be logged in in order to access this page.")
+    #         return redirect("account_login")
+    #     if request.user.is_staff or request.user.id == obj.user.id:
+    #         pass
+    #     else:
+    #         return self.handle_no_permission(request)
+    #     return super().dispatch(request, *args, **kwargs)
+
+    def get_success_url(self):
+        return reverse_lazy('entrant:detail', kwargs={"pk": self.get_object().id})

@@ -32,10 +32,8 @@ class AuditionDeleteView(IsStaffMixin, DeleteView):
     def get(self, request, *args, **kwargs):
         return self.delete(request, *args, **kwargs)
 
-
 class AuditionListView(IsActiveMixin, ListView):
 
     model = Audition
     template_name = 'events/audition/audition_list.html'
     context_object_name = 'auditions'
-    

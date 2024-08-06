@@ -195,15 +195,21 @@
                 {% comment %} <img src="{{ entrant.slip.thumbnail.400x400 }}" class="mt-5"> {% endcomment %}
             </div>
             <div class="mt-10 text-xl font-semibold text-yellow-400">
-                {% if entrant.entrantscore.result == "Honorary Award" %}
-                    You have received an Honorary Award.
-                {% elif entrant.entrantscore.result == "Runner-up Honorary Award" %}
-                    You have received an Runner-up Honorary Award.
+                {% if entrant.entrantscore.result == "Grand Prix" %}
+                    <p class="text-yellow-400">{{ entrant.entrantscore.result }}</p>
+                {% elif entrant.entrantscore.result == "1st" %}
+                    <p class="text-yellow-400">{{ entrant.entrantscore.result }}</p>
+                {% elif entrant.entrantscore.result == "2nd" %}
+                    <p class="text-yellow-400">{{ entrant.entrantscore.result }}</p>
+                {% elif entrant.entrantscore.result == "3rd" %}
+                    <p class="text-yellow-400">{{ entrant.entrantscore.result }}</p>
+                {% elif entrant.entrantscore.result == "4st" %}
+                    <p class="text-yellow-400">{{ entrant.entrantscore.result }}</p>
                 {% elif entrant.entrantscore.result == "Honorable Mention" %}
-                    You have received an Honorable Mention.
+                    <p class="text-emerald-400">{{ entrant.entrantscore.result }}</p>
                 {% else %}
                     <div class="text-blue-500">
-                        Waiting for the perform result.
+                        Waiting for the result.
                     </div>
                 {% endif %}
             </div>
@@ -213,7 +219,7 @@
             {% if user.is_staff %}
                 <button 
                     type="submit" 
-                    onclick=""
+                    onclick="location.href='{% url "entrant:update" entrant.id %}'"
                     class="w-1/12 my-5 border border-gray-400 hover:text-gray-300 hover:border-gray-300 dark:focus:ring-blue-800 font-bold text-md px-5 py-1.5">
                     Edit
                 </button>
