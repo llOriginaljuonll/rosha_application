@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load tailwind_filters %}
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+{% endblock style %}
+
+{% block content %}
+    <div class="my-12 w-8/12 mx-auto">
+        <div>
+            <h1 class="text-4xl font-semibold text-center border-b border-gray-400 pb-5">
+                {{ auditioner.competition.name }}
+            </h1>
+            <div class="flex flex-col gap-2.5 text-lg font-semibold mt-5 border p-4 border-gray-400">
+                <div class="flex">
+                    <h2 class="me-3 px-1.5 bg-yellow-400 text-white">Concert Date</h2><h2>{{ auditioner.competition.concert_date|date:"F j Y" }}</h2>
+                </div>
+                <div class="flex">
+                    <h2 class="me-3 px-1.5 bg-red-500 text-white">Deadline to submit the video</h2><h2>{{ auditioner.competition.deadline|date:"F j Y" }}</h2>
+                </div>
+                <div class="flex">
+                    <h2 class="me-3 px-1.5 bg-blue-500 text-white">Announcement Date</h2><h2>{{ auditioner.competition.announcement_date|date:"F j Y" }}</h2>
+                </div>
+                <div class="flex">
+                    <h2 class="me-3 px-1.5 text-white bg-green-700">Contact us</h2><h2>{{ auditioner.competition.email }}</h2>
+                </div>
+            </div>
+        </div>
+        {% if competition.image %}
+            <img src="{{ competition.image.url }}" class="mt-5 mx-auto">
+        {% endif %}
+        <form class="my-5 border border-gray-800 px-10 pt-5 pb-2" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <div class="flex justify-center items-center mt-10">
+                <button 
+                    type="submit" 
+                    class="w-1/3 my-5 mx-auto text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-bold rounded-lg text-md px-5 py-2.5">
+                    Submit
+                </button>
+            </div>
+        </form>
+    </div>
+{% endblock content %}
+{% block script %}
+    <script>
+        var name = "{{ auditioner.audition.id }}";
+        document.getElementById('audition_id').value = name;
+        var name = "{{ request.user.id }}";
+        document.getElementById('user_id').value = name;
+    </script>
+{% endblock script %}
