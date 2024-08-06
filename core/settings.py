@@ -168,7 +168,7 @@ CRISPY_TEMPLATE_PACK = "tailwind"
 
 LOGIN_REDIRECT_URL = '/'
 
-LOGOUT_REDIRECT_URL = 'account_login'
+LOGOUT_REDIRECT_URL = '/'
 
 # Skip logout confirmation
 ACCOUNT_LOGOUT_ON_GET= True

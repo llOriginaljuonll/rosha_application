@@ -5,8 +5,11 @@
                 <a href="{% url "home" %}" class="text-xl block py-2 px-3 rounded md:p-0" aria-current="page">Home</a>
             </li>
         </ul>
+
+        <!-- empty container for arraging 3 colums -->
         <ul></ul>
-        <ul class="flex flex-col justify-end items-center space-x-4 p-4 md:p-0 mt-4 text-white font-medium text-xl border border-gray-100 rounded-lg rtl:space-x-reverse md:flex-row md:mt-0 md:border-0  dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+
+        <ul class="flex flex-col justify-end items-center space-x-4 p-4 md:p-0 text-white font-medium text-xl border border-gray-100 rounded-lg rtl:space-x-reverse md:flex-row md:mt-0 md:border-0  dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
             {% if user.is_authenticated %}
                 
                 <button 
@@ -102,7 +105,8 @@
                         </li>
                     </ul>
                 </div>
-    
+            {% else %}
+                <a href="{% url "account_login" %}" class="border border-blue-600">Login</a>
             {% endif %}
         </ul>
     </div>
