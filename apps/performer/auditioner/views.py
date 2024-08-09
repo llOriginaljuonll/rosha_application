@@ -128,4 +128,4 @@ class AuditionerDeleteView(DeleteView):
         return self.delete(request, *args, **kwargs)
     
     def get_success_url(self):
-        return reverse_lazy('auditioner:list', kwargs={"pk": self.get_object().competition.id})
+        return reverse_lazy('auditioner:list', kwargs={"pk": self.get_object().audition.id})
