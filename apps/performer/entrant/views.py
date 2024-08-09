@@ -1,4 +1,4 @@
-from django.views.generic import CreateView, DetailView, ListView
+from django.views.generic import CreateView, DetailView, ListView, DeleteView
 from django.views.generic.edit import FormMixin
 from .models import Entrant
 from .forms import EntrantForm
@@ -80,3 +80,14 @@ class EntrantDetailView(DetailView):
         else:
             return self.handle_no_permission(request)
         return super().dispatch(request, *args, **kwargs)
+
+class EntrantDeleteView(DeleteView):
+
+    model = Entrant
+
+    """Overide get method for Creating DeleteView without templates name"""
+    def get(self, request, *args, **kwargs):
+        return self.delete(request, *args, **kwargs)
+    
+    def get_success_url(self):
+        return reverse_lazy('entrant:list', kwargs={"pk": self.get_object().compt.id})
