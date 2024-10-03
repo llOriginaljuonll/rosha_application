@@ -15,11 +15,9 @@ class Entrant(models.Model):
 
     """ 'compt' stand for 'competition'
         'nat' stand for 'nationality'
-        'cpr' stand for 'copyright
-        'pers_info' stand for 'personal infomation
+        'cpr' stand for 'copyright'
         'encoder' is  """
 
-    pers_info = models.CharField(max_length=255, blank=True, null=True)
     entity = models.CharField(max_length=100, choices=ENTITY)
     name = models.CharField(max_length=255)
     compt = models.ForeignKey(Competition, on_delete=models.CASCADE)

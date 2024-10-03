@@ -16,7 +16,6 @@ class Auditioner(models.Model):
     audition = models.ForeignKey(Audition, on_delete=models.CASCADE)
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     slug = models.SlugField(blank=True, null=True)
-    personal_info = models.TextField(max_length=255, blank=True, null=True)
     name = models.CharField(max_length=255)
     nationality = models.CharField(max_length=255)
     birthdate = models.DateField()
@@ -39,9 +38,6 @@ class Auditioner(models.Model):
 
     # 'cpr' stand for 'copyrights'
     cpr_permission = models.BooleanField()
-
-    # standfor 'registration confirmation'
-    regis_confirm = models.BooleanField()
     slip = VersatileImageField('Slip', upload_to='slip/')
 
     def word_number(self):
