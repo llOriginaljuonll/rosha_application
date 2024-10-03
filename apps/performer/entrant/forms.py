@@ -1,12 +1,12 @@
 from .models import Entrant
-from django import forms
+from core.forms import BaseModelForm, forms
 from apps.events.competition.models import Competition
 from django.forms import ModelMultipleChoiceField, CheckboxSelectMultiple
 from embed_video.fields import EmbedVideoField
 from django.forms import URLInput
 
 
-class EntrantForm(forms.ModelForm):
+class EntrantForm(BaseModelForm):
 
     input_style = {
         'style': 'border-radius: 2.5px;',
@@ -64,6 +64,16 @@ class EntrantForm(forms.ModelForm):
             'slip': 'Proof of payment / transfer slip',
         }
 
+        placeholders = {
+            'name': 'Participant Name (If individual apply) / Name of group (If group apply)',
+            'nat': 'Example: Thai, Korean, American etc.',
+            'address': 'Address to receive awards if you win.',
+            'prim_contact': 'Teacher name (If individual apply) / Representative name (If group apply)',
+            'short_url': 'Example: www.youtube.com',
+            'birthdate': 'dd-mm-yyyy',
+            'phone': 'xxx-xxx-xxxx',
+        }
+
         widgets = {
             'pers_info': forms.Textarea(attrs={'rows': 4}),
             'address': forms.Textarea(attrs={'rows': 4}),
@@ -91,10 +101,3 @@ class EntrantForm(forms.ModelForm):
         for field in self.field_to_hide:
             if field in self.fields:
                 self.fields[field].widget = forms.HiddenInput()
-
-        for field, placeholder in self.placeholders.items():
-            if field in self.fields:
-                if isinstance(self.fields[field].widget, (forms.TextInput, forms.Textarea, forms.EmailInput, forms.PasswordInput, forms.DateField)):
-                    self.fields[field].widget.attrs.update({
-                        'placeholder': placeholder
-                    })
