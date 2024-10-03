@@ -16,7 +16,6 @@ class AuditionerForm(BaseModelForm):
             'instrument': 'Instrument / (If Group) Write all instruments',
             'name': 'Auditioner Name(If Individual apply) / Name of group(If Group apply)',
             'nationlity': 'e.g. American, Korean, Thai',
-            'personal_info': 'Personal Information',
             'phone': 'Mobile number',
             'regis_confirm': 'Registration Confirmation',
             'school': 'School Name',
@@ -38,9 +37,6 @@ class AuditionerForm(BaseModelForm):
             }),
             'slug': forms.TextInput(attrs={
                 'type': 'hidden',
-            }),
-            'personal_info': forms.Textarea(attrs={
-                'rows': '4'
             }),
             'age': forms.TextInput(attrs={
                 'type': 'hidden'

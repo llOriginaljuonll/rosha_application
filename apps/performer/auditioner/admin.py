@@ -37,7 +37,6 @@ class AuditionerAdmin(admin.ModelAdmin):
                      "age",
                      "school",
                      "grade",
-                     "personal_info",
                      "image",
                 )
             }

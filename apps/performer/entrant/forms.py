@@ -42,7 +42,6 @@ class EntrantForm(BaseModelForm):
         fields = '__all__'
 
         labels = {
-            'pers_info': 'Personal Infomation',
             'entity': 'Choose one of the following options',
             'nat': 'Nationality',
             'birthdate': 'Date of Birth',
@@ -67,7 +66,6 @@ class EntrantForm(BaseModelForm):
         }
 
         widgets = {
-            'pers_info': forms.Textarea(attrs={'rows': 4}),
             'address': forms.Textarea(attrs={'rows': 4}),
             'short_url': forms.TextInput(),
             'compt': forms.TextInput(attrs={
