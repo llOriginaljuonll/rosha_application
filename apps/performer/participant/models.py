@@ -7,7 +7,7 @@ from apps.performer.auditioner.models import Auditioner
 
 class Participant(models.Model):
     participation = models.ForeignKey(Participation, on_delete=models.CASCADE)
-    auditioner = models.OneToOneField(Auditioner, on_delete=models.CASCADE)
+    # auditioner = models.OneToOneField(Auditioner, on_delete=models.CASCADE) ## มี bug อยู่จึงใช้งานไม่ได้  
     name = models.CharField(max_length=255, blank=True, null=True)
     email = models.EmailField()
     phone = models.CharField(
@@ -18,6 +18,7 @@ class Participant(models.Model):
             )
         ]
     )
+    birthdate = models.DateField()
     instrument = models.CharField(max_length=255)
     school = models.CharField(max_length=255)
     grade = models.CharField(max_length=100)
