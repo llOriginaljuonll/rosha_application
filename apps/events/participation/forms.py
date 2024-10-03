@@ -1,11 +1,17 @@
-from django import forms
+from core.forms import BaseModelForm, forms
 from apps.events.participation.models import Participation
 
-class ParticipationForm(forms.ModelForm):
-
+class ParticipationForm(BaseModelForm):
     class Meta:
         model = Participation
-        fields = ('__all__')
+        fields = '__all__'
+
+        placeholders = {
+            'concert_date': 'dd/mm/yyyy',
+            'deadline': 'dd/mm/yyyy',
+            'rehearsal_date': 'dd/mm/yyyy'
+        }
+        
         widgets = {
             'slug': forms.TextInput(attrs={
                 'type': 'hidden',
@@ -18,15 +24,6 @@ class ParticipationForm(forms.ModelForm):
             }),
             'name': forms.TextInput(attrs={
                 'value': '', 'id': 'name_id',
-            }),
-            'deadline': forms.DateTimeInput(attrs={
-                'type': 'datetime-local'
-            }),
-            'concert_date': forms.DateTimeInput(attrs={
-                'type': 'datetime-local'
-            }),
-            'rehearsal_date': forms.DateTimeInput(attrs={
-                'type': 'datetime-local'
             }),
             'description_payment': forms.Textarea(attrs={
                 'rows': '4'

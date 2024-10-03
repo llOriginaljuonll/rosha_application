@@ -1,17 +1,7 @@
-from django import forms
+from core.forms import BaseModelForm, forms
 from .models import Participant
 
-class ParticipantForm(forms.ModelForm):
-
-    # CHOICES = [
-    #     ('1', 'Option 1'),
-    #     ('2', 'Option 2'),
-    # ]
-
-    # english_skill = forms.ChoiceField(
-    #     widget=forms.RadioSelect,
-    #     choices=CHOICES, 
-    # )
+class ParticipantForm(BaseModelForm):
 
     class Meta:
         model = Participant
@@ -41,30 +31,10 @@ class ParticipantForm(forms.ModelForm):
         widgets = {
             'participation': forms.TextInput(attrs={
                 'value': '', 'id': 'participation_id', 'type': 'hidden',
-            }),
-            'auditioner': forms.TextInput(attrs={
-                'value': '', 'id': 'auditioner_id', 'type': 'hidden',
-            }),
-            'name': forms.TextInput(attrs={
-                'value': '', 'id': 'auditioner_name',
-            }),
-            'email': forms.EmailInput(attrs={
-                'value': '', 'id': 'auditioner_email',
-            }),
-            'phone': forms.TextInput(attrs={
-                'value': '', 'id': 'auditioner_phone',
-            }),
-            'instrument': forms.TextInput(attrs={
-                'value': '', 'id': 'auditioner_instrument',
-            }),
-            'school': forms.TextInput(attrs={
-                'value': '', 'id': 'auditioner_school',
-            }),
-            'grade': forms.TextInput(attrs={
-                'value': '', 'id': 'auditioner_grade',
-            }),
-            'teacher': forms.TextInput(attrs={
-                'value': '', 'id': 'auditioner_teacher',
-            }),
+            })
+        }
+
+        placeholders = {
+            'birthdate': 'dd/mm/yyyy'
         }
             

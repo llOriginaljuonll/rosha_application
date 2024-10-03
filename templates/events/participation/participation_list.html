@@ -15,7 +15,7 @@
                     {% for participation in participations %}
                         <tr class="bg-white border dark:bg-gray-800 dark:border-gray-700">
                             <th class="text-center text-md font-medium text-gray-900">{{ forloop.counter }}</th>
-                            <th scope="row" class="border-s flex justify-between px-6 py-2 text-md font-medium text-gray-900 whitespace-nowrap dark:text-white cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600"  onclick="">
+                            <th scope="row" class="border-s flex justify-between px-6 py-2 text-md font-medium text-gray-900 whitespace-nowrap dark:text-white cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600"  onclick="location.href='{% url "participant:form" participation.id %}'">
                                 <p>{{ participation.name }}</p>
                                 {% if user.is_judge %}
                                     <a 
