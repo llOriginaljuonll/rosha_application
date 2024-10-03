@@ -32,22 +32,14 @@ class EntrantForm(BaseModelForm):
         )
     )
 
-    placeholders = {
-        'name': 'Participant Name (If individual apply) / Name of group (If group apply)',
-        'nat': 'Example: Thai, Korean, American etc.',
-        'address': 'Address to receive awards if you win.',
-        'prim_contact': 'Teacher name (If individual apply) / Representative name (If group apply)',
-        'short_url': 'Example: www.youtube.com',
-        'birthdate': 'dd-mm-yyyy',
-        'phone': 'xxx-xxx-xxxx',
-    }
+    
 
     field_to_hide = ['age',]
 
     class Meta:
 
         model = Entrant
-        fields = ('__all__')
+        fields = '__all__'
 
         labels = {
             'pers_info': 'Personal Infomation',
