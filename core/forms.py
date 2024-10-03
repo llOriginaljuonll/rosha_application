@@ -1,4 +1,5 @@
 from django import forms
+from django.forms.widgets import SplitDateTimeWidget
 from core.widgets import date_input_attrs
 
 class BaseModelForm(forms.ModelForm):
@@ -16,4 +17,8 @@ class BaseModelForm(forms.ModelForm):
         if hasattr(self.Meta, 'placeholders'):
             for field_name, placeholder in self.Meta.placeholders.items():
                 if field_name in self.fields:
-                    self.fields[field_name].widget.attrs.update({'placeholder': placeholder})
+                    # ตรวจสอบว่า widget เป็น SplitDateTimeWidget หรือไม่
+                    if isinstance(self.fields[field_name].widget, SplitDateTimeWidget):
+                        # อัปเดต placeholder เฉพาะสำหรับ date input (index 0) และ time input (index 1)
+                        self.fields[field_name].widget.widgets[0].attrs.update({'placeholder': placeholder['date']})
+                        self.fields[field_name].widget.widgets[1].attrs.update({'placeholder': placeholder['time']})
