@@ -23,15 +23,17 @@ class ParticipationFormView(IsActiveMixin, DetailView, FormMixin):
         return context
     
     def post(self, *args, **kwargs):
-        
+        # เรียกใช้ self.get_object() เพื่อกำหนด self.object
+        self.object = self.get_object()
         form = self.get_form()
+
         if form.is_valid():
-            form.save()
             return self.form_valid(form)
         else:
             return self.form_invalid(form)
     
     def form_valid(self, form):
+        form.save()
         return super().form_valid(form)
     
 class ParticipationUpdateView(IsStaffMixin, UpdateView):
