@@ -5,6 +5,6 @@ date_input_attrs = {
     'datepicker-buttons': 'datepicker-buttons',
     'style': 'padding: 8px 42px; border-radius: 2.5px;',
     'data-datepicker': 'data-datepicker',
-    'datepicker-format': 'dd/mm/yyyy',
+    'datepicker-format': 'mm/dd/yyyy',
     'datepicker-autohide': 'datepicker-autohide',
 }
