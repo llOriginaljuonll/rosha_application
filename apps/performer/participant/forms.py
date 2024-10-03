@@ -34,5 +34,7 @@ class ParticipantForm(BaseModelForm):
             })
         }
 
+        placeholders = {
+            'birthdate': 'dd/mm/yyyy'
         }
             

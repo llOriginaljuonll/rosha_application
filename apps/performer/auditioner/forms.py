@@ -25,6 +25,8 @@ class AuditionerForm(BaseModelForm):
             'song': 'Title of songs'
         }
 
+        placeholders = {
+            'birthdate': 'dd/mm/yyyy'
         }
 
         widgets = {

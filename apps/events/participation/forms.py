@@ -6,6 +6,12 @@ class ParticipationForm(BaseModelForm):
         model = Participation
         fields = '__all__'
 
+        placeholders = {
+            'concert_date': 'dd/mm/yyyy',
+            'deadline': 'dd/mm/yyyy',
+            'rehearsal_date': 'dd/mm/yyyy'
+        }
+        
         widgets = {
             'slug': forms.TextInput(attrs={
                 'type': 'hidden',
