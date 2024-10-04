@@ -4,10 +4,14 @@ from apps.events.audition.models import Audition
 class AuditionForm(BaseModelForm):
     class Meta:
 
+        labels = {
+            'concert_date': 'Concert date and time'
+        }
+
         placeholders = {
-            'concert_date': 'dd/mm/yyyy',
-            'deadline': 'dd/mm/yyyy',
-            'announcement_date': 'dd/mm/yyyy'
+            'concert_date': {'date': '', 'time': 'hh:mm'},
+            'deadline': {'date': '', 'time': 'hh:mm'},
+            'announcement_date': {'date': '', 'time': 'hh:mm'}
         }
 
         model = Audition
@@ -18,3 +22,5 @@ class AuditionForm(BaseModelForm):
                 'rows': '4'
             })
         }
+
+        
