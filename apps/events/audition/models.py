@@ -7,9 +7,9 @@ class Audition(models.Model):
     category = models.CharField(max_length=255, default="audition")
     image = VersatileImageField('Image', upload_to='image/', null=True, blank=True)
     email = models.EmailField(default='rosha.thailand@gmail.com', null=True, blank=True)
-    concert_date = models.DateField(null=True, blank=True)
-    deadline = models.DateField(null=True, blank=True)
-    announcement_date = models.DateField(null=True, blank=True)
+    concert_date = models.DateTimeField(null=True, blank=True)
+    deadline = models.DateTimeField(null=True, blank=True)
+    announcement_date = models.DateTimeField(null=True, blank=True)
     description_payment = models.CharField(max_length=255, null=True, blank=True)
     create_at = models.DateTimeField(auto_now_add=True)
 
