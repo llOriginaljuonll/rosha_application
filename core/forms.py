@@ -6,9 +6,26 @@ class BaseModelForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        # Loop through all fields and apply date_input_attrs to DateField widgets
+        # DateTimeField
         for field_name, field in self.fields.items():
-            if isinstance(field, (forms.DateField, forms.DateTimeField)):  # รองรับทั้ง DateField และ DateTimeField
+            if isinstance(field, forms.DateTimeField):
+                # เก็บค่า label เดิม
+                label = field.label
+
+                # สร้างฟิลด์ใหม่ด้วย SplitDateTimeField
+                self.fields[field_name] = forms.SplitDateTimeField(
+                    widget=SplitDateTimeWidget(
+                        date_attrs=date_input_attrs,
+                        time_attrs={}
+                    )
+                )
+
+                # กำหนด label เดิมให้ฟิลด์ใหม่
+                self.fields[field_name].label = label
+
+        # DateField
+        for field_name, field in self.fields.items():
+            if isinstance(field, forms.DateField):
                 field.widget = forms.TextInput(attrs={})
                 field.widget.attrs.update(date_input_attrs)
 
