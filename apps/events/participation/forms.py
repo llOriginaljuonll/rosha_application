@@ -7,9 +7,7 @@ class ParticipationForm(BaseModelForm):
         fields = '__all__'
 
         placeholders = {
-            'concert_date': 'dd/mm/yyyy',
-            'deadline': 'dd/mm/yyyy',
-            'rehearsal_date': 'dd/mm/yyyy'
+           
         }
         
         widgets = {
