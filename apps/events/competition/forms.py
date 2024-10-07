@@ -1,9 +1,9 @@
-from django import forms
+from core.forms import BaseModelForm, forms
 from django.db.models import DateField
 from .models import Competition
 from versatileimagefield.fields import VersatileImageField
 
-class CompetitionForm(forms.ModelForm):
+class CompetitionForm(BaseModelForm):
 
     input_style = {
         'style': 'border-radius: 2.5px; padding: 8px 42px;',
@@ -13,16 +13,6 @@ class CompetitionForm(forms.ModelForm):
     time_input_attrs = {
         'class': 'cursor-pointer time font-medium placeholder-gray-400/50 placeholder-bold text-center placeholder-center',
         'placeholder': 'Ex. 15:00',
-    }
-
-    date_input_attrs = {
-        'class': 'cursor-pointer calendar font-medium placeholder-gray-400/50 placeholder-bold',
-        'datepicker': 'datepicker',
-        'datepicker-buttons': 'datepicker-buttons',
-        'style': 'padding: 8px 42px; border-radius: 2.5px;',
-        'data-datepicker': 'data-datepicker',
-        'datepicker-format': 'd MM yyyy',
-        'datepicker-autohide': 'datepicker-autohide',
     }
 
     placeholders = {
@@ -57,13 +47,6 @@ class CompetitionForm(forms.ModelForm):
 
         for field in self.fields.values():
             field.widget.attrs.update(self.input_style)
-
-
-        # Only DateField fields that receive values from the date_input_attr variable.
-        for field_name, field in self.fields.items():
-            if isinstance(field, forms.DateField):
-                field.widget = forms.TextInput()
-                field.widget.attrs.update(self.date_input_attrs)
 
         for field_name, field in self.fields.items():
             if isinstance(field, forms.TimeField):
