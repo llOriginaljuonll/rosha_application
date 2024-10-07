@@ -14,7 +14,7 @@ class Audition(models.Model):
     create_at = models.DateTimeField(auto_now_add=True)
 
     def get_days_left(self, target_date):
-        untildays = target_date - date.today()
+        untildays = target_date.date() - date.today()
         untildays = untildays.days
         if untildays > 1:
             return f"{untildays} days left"
