@@ -33,7 +33,7 @@ class AuditionDeleteView(IsStaffMixin, DeleteView):
         return self.delete(request, *args, **kwargs)
 
 
-class AuditionListView(IsActiveMixin, ListView):
+class AuditionListView(ListView):
 
     model = Audition
     template_name = 'events/audition/audition_list.html'
