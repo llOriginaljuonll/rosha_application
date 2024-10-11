@@ -12,7 +12,7 @@ class ParticipationForm(BaseModelForm):
         
         widgets = {
             'slug': forms.TextInput(attrs={
-                'type': 'hidden',
+            'type': 'hidden',
             }),
             'audition': forms.TextInput(attrs={
                 'value': '', 'id': 'audition_id', 'type': 'hidden'
