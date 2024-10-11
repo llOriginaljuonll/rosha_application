@@ -68,7 +68,7 @@ class AuditionerDetailView(DetailView):
         return super().dispatch(request, *args, **kwargs)
 
 
-class AuditionerFormView(IsActiveMixin, DetailView, FormMixin):
+class AuditionerFormView(DetailView, FormMixin):
     model = Audition
     form_class = AuditionerForm
     template_name = 'performer/auditioners/auditioner_form.html'
