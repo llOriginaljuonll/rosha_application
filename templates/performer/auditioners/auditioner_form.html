@@ -19,16 +19,23 @@
 {% endblock style %}
 
 {% block content %}
-    <div class="my-12 w-4/5 mx-auto">
-        <div>
-            <h1 class="text-4xl font-semibold text-center border-gray-400 mb-4 pb-5">
+    <main class="w-4/5 mx-auto space-y-[2rem] pb-[5rem]">
+
+        <section class="h-screen flex flex-col justify-center gap-y-[4rem]">
+            <h1 class="text-4xl font-bold uppercase text-center tracking-tight mt-[2rem]">
                 {{ audition.name }}
-            </h1>
-            <!-- wrapper -->
-            <div class="mx-auto relative border-4 mb-[5rem]">
-                <h2 class="absolute font-thin tracking-wide text-white top-[1rem] right-[1rem] text-2xl bg-gray-700/50 px-2 py-1">Cadence Auditorium&emsp;카덴스 아트홀</h2>
-                <img 
-                    src="https://images.unsplash.com/photo-1458639817867-2c9d4c5dcad4?q=80&w=2069&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="concert hall" class="object-cover mx-auto aspect-[3/2]">
+            </h1> 
+            <div class="gap-x-[2rem] mx-auto overflow-hidden relative grid grid-cols-5">
+                <div class="relative aspect-[3/2] mx-auto col-span-3">
+                    <img 
+                        src="https://images.unsplash.com/photo-1519682718457-c82ce8296645?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="concert hall" 
+                        class="object-cover h-full w-full mx-auto active carousel-item inset-0 opacity-100 transition-opacity duration-1000 ease-in-out">
+                    <img 
+                        src="https://images.unsplash.com/photo-1531660963020-52ba84d92593?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="concert hall" 
+                        class="object-cover h-full w-full mx-auto absolute carousel-item inset-0 opacity-100 transition-opacity duration-1000 ease-in-out">
+                    <img 
+                        src="https://images.unsplash.com/photo-1651606682103-6725b81d7edd?q=80&w=1632&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="concert hall" 
+                        class="object-cover h-full w-full mx-auto absolute carousel-item inset-0 opacity-100 transition-opacity duration-1000 ease-in-out">
                 </div>
                 <div class="grid grid-cols-2 mb-[5rem]">
                     {% if audition.image %}
@@ -108,5 +115,31 @@
             const content = document.getElementById(itemId);
             content.classList.toggle('show');
         }
+    </script>
+    <script>
+        let currentIndex = 0;
+        const slides = document.getElementsByClassName('carousel-item');
+        const totalSlides = slides.length;
+
+        function showSlide(index) {
+            for (let i = 0; i < totalSlides; i++) {
+                slides[i].classList.remove('opacity-100');
+                slides[i].classList.add('opacity-0');
+            }
+            slides[index].classList.remove('opacity-0');
+            slides[index].classList.add('opacity-100');
+        }
+
+        function nextSlide() {
+            currentIndex = (currentIndex + 1) % totalSlides;
+            showSlide(currentIndex);
+        }
+
+        function startCarousel() {
+            showSlide(currentIndex);
+            setInterval(nextSlide, 7000);
+        }
+
+        window.onload = startCarousel;
     </script>
 {% endblock script %}
