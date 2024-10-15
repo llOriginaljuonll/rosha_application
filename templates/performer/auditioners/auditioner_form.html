@@ -37,70 +37,64 @@
                         src="https://images.unsplash.com/photo-1651606682103-6725b81d7edd?q=80&w=1632&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="concert hall" 
                         class="object-cover h-full w-full mx-auto absolute carousel-item inset-0 opacity-100 transition-opacity duration-1000 ease-in-out">
                 </div>
-                <div class="grid grid-cols-2 mb-[5rem]">
-                    {% if audition.image %}
-                        <button 
-                            href="#"
-                            data-modal-target="poster-modal"
-                            data-modal-toggle="poster-modal"
-                            >
-                            <img src="{{ audition.image.url }}" class="col-span-1 h-full">
-                        </button>
+                <div class="col-span-2 p-[1rem] pt-0">
+                    <h2 class="font-bold text-xl mb-[1rem]">Art Gallery Hall 미술관 홀</h2>
+                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Incidunt quidem aliquam quos, cum officiis maxime est hic unde quo possimus modi molestiae. Magnam, ducimus aperiam. Commodi quam dolor veniam cum dolore iure cupiditate consequatur soluta aliquam? Animi quae hic consectetur culpa dolorem impedit sequi, itaque recusandae excepturi, commodi accusamus ea?</p>
+                    <p class="mt-[1rem] text-gray-700"><strong>Location:</strong> 123 Art Street, Seoul, South Korea</p>
+                    <p class="mt-[1rem]">
+                        <a href="https://www.google.com/maps?q=123+Art+Street,+Seoul,+South+Korea" target="_blank" class="text-blue-500 hover:underline">
+                            View on Google Maps
+                        </a>
+                    </p>
+                </div>
+                
+            </div>
+        </section>
 
-                        <!-- Poster Modal-->
-                        {% include "components/poster_modal.html" %}
-                    {% endif %}
-                    <div class="col-span-1 ps-[5rem]">
-                        <h2 class="font-medium tracking-tight text-xl text-center py-2 border-b-2 border-black mb-[2rem]">
-                            OTHER CONCERTS
-                        </h2>
-                        <div class="grid grid-cols-3 gap-[2.5rem]">
-                            <div class="bg-rose-100 aspect-[0.8/1]">1</div>
-                            <div class="bg-rose-100 aspect-[0.8/1]">1</div>
-                            <div class="bg-rose-100 aspect-[0.8/1]">1</div>
-                            <div class="bg-rose-100 aspect-[0.8/1]">1</div>
-                            <div class="bg-rose-100 aspect-[0.8/1]">1</div>
-                            <div class="bg-rose-100 aspect-[0.8/1]">1</div>
-                            <div class="bg-rose-100 aspect-[0.8/1]">1</div>
-                            <div class="bg-rose-100 aspect-[0.8/1]">1</div>
-                        </div>
-                    </div>
+        <section class="grid grid-cols-2 gap-x-[3rem]">
+            {% if audition.image %}
+                <div class="col-span-1 overflow-hidden aspect-[0.8/1] gap-y-[1rem]">
+                    <img src="{{ audition.image.url }}" class="object-contain w-full h-full object-top">
                 </div>
 
-                <div onclick="toggleAccordion('accordion-collapse-body-1')">
-                    {% if user.is_authenticated %}
-                        <h2 id="accordion-collapse-heading-1">
-                            <button type="button"
-                                class="flex items-center justify-center gap-[1rem] w-full p-5 font-medium rtl:text-right text-gray-500 border border-b-0 border-gray-200 rounded-t-xl focus:ring-4 focus:ring-gray-200 hover:bg-gray-100"
-                                data-accordion-target="#accordion-collapse-body-1" aria-expanded="true"
-                                aria-controls="accordion-collapse-body-1">
-                                <span>Register for the Audition</span>
-                                <svg data-accordion-icon class="w-3 h-3 transition-transform duration-200 ease-in-out" aria-hidden="true"
-                                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M9 5 5 1 1 5" />
-                                </svg>
-                            </button>
-                        </h2>
-                    {% endif %}
-            
-                    <div id="accordion-collapse-body-1" class="accordion-content transition-all duration-500 ease-in-out" aria-labelledby="accordion-collapse-heading-1">
-                        <form class="border px-10 pt-5 pb-2" method="post" enctype="multipart/form-data">
-                            {% csrf_token %}
-                            {{ form|crispy }}
-                            <img class="mt-[2rem] w-1/3 h-auto" src="https://lh7-us.googleusercontent.com/tE_P9qKIIm_auJ5DbdkzQfjdQW0qUsO8ASSmpcnVmqhNI0C0bQzs7As1MBeOPCQG8fUnfFpKytoDJeIIeazhilh8n1qDtUfjSHgSgLx7owDRW0FdMMT7OziYlV7Q44zOlqO4bso4Spn3_pmBUMqlzlBf1HL5Mw" alt="qrcode for payment">
-                            <div class="flex justify-center items-center mt-10">
-                                <button 
-                                    type="submit" 
-                                    class="w-1/3 my-5 mx-auto text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-bold rounded-lg text-md px-5 py-2.5">
-                                    Submit
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-                <div>
+                <!-- Poster Modal-->
+                {% include "components/poster_modal.html" %}
+            {% endif %}
+            <div class="col-span-1 grid grid-cols-2 gap-[1rem]">
+                <img class="bg-rose-100 aspect-[0.8/1]" src="https://cdn.imweb.me/thumbnail/20240926/4785672b42da1.jpg"></img>
+                <img class="bg-rose-100 aspect-[0.8/1]" src="https://cdn.imweb.me/thumbnail/20240810/544bb8fa37d37.png"></img>
+                <img class="bg-rose-100 aspect-[0.8/1]" src="https://cdn.imweb.me/thumbnail/20240623/aa71b245e3bb6.jpg"></img>
+                <img class="bg-rose-100 aspect-[0.8/1]" src="https://cdn.imweb.me/thumbnail/20240515/ea24fca51aa75.jpg"></img>
+            </div>
+        </section>
 
-    </div>
+        <a {% if user.is_authenticated %}onclick="toggleAccordion('accordion-collapse-body-1')"{% else %}href="{% url 'account_login' %}"{% endif %} class="grid grid-cols-2 gap-x-[1rem] gap-y-[2rem]">
+            <h2 id="accordion-collapse-heading-1" class="col-span-1 gap-y-[1rem]">
+                <button type="button"
+                    class="gap-[1rem] w-full p-[1rem] rounded font-bold border bg-gray-200 hover:bg-gray-300 focus:ring-4 focus:ring-gray-200"
+                    data-accordion-target="#accordion-collapse-body-1" aria-expanded="true"
+                    aria-controls="accordion-collapse-body-1">JOIN THE AUDITION
+                </button>
+            </h2>
+            
+            <!-- form --> ``
+            <div id="accordion-collapse-body-1" class="accordion-content transition-all duration-500 ease-in-out col-span-4" aria-labelledby="accordion-collapse-heading-1">
+                <form class="pt-5 pb-2" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form|crispy }}
+                    <img class="mt-[2rem] w-1/3 h-auto" src="https://lh7-us.googleusercontent.com/tE_P9qKIIm_auJ5DbdkzQfjdQW0qUsO8ASSmpcnVmqhNI0C0bQzs7As1MBeOPCQG8fUnfFpKytoDJeIIeazhilh8n1qDtUfjSHgSgLx7owDRW0FdMMT7OziYlV7Q44zOlqO4bso4Spn3_pmBUMqlzlBf1HL5Mw" alt="qrcode for payment">
+                    <div class="flex justify-center items-center mt-10">
+                        <button 
+                            type="submit" 
+                            class="w-1/3 my-5 mx-auto text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-bold rounded-lg text-md px-5 py-2.5">
+                            Submit 
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </a>
+
+    </main>
 {% endblock content %}
 {% block script %}
     <script>
