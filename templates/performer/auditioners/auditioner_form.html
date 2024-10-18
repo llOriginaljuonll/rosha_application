@@ -58,54 +58,57 @@
         </section>
 
         <!-- accordion -->
-        <div id="accordion-collapse" data-accordion="collapse">
-            <a 
-                {% if not user.is_authenticated %}href="{% url 'account_login' %}"{% endif %} 
-                class="grid grid-cols-2 gap-x-[1rem] gap-y-[2rem]"
-            >
-                <h2 id="accordion-collapse-heading-1" class="col-span-1 gap-y-[1rem]">
-                    <button 
-                        type="button"
-                        data-accordion-target="#accordion-form" 
-                        aria-expanded="false"
-                        aria-controls="accordion-collapse-body-1"
-                        class="flex justify-between items-center w-full gap-x-1 p-[1rem] rounded font-bold border bg-gray-200 hover:bg-gray-300 focus:ring-4 focus:ring-gray-200"
-                    >
-                        <div class="flex-grow"></div>
-                        <span>AUDITION FORM</span>
-                        <div class="flex-grow mt-[1px]">
-                            <svg class="size-5 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m8 7 4 4 4-4m-8 6 4 4 4-4"/>
-                            </svg>
-                        </div>
-                    </button>
-                </h2>
-                
-                <!-- form --> ``
-                <div 
-                    id="accordion-form" 
-                    aria-labelledby="accordion-collapse-heading-1" 
-                    class="hidden accordion-content transition-all duration-500 ease-in-out col-span-4"
+        <a 
+            {% if not user.is_authenticated %}
+                href="{% url 'account_login' %}"
+            {% else %}
+                id="accordion-collapse" 
+                data-accordion="collapse"
+            {% endif %}
+            class="grid grid-cols-2 gap-x-[1rem] gap-y-[2rem]"
+        >
+            <h2 id="accordion-collapse-heading-1" class="col-span-1 gap-y-[1rem]">
+                <button 
+                    type="button"
+                    data-accordion-target="#accordion-form" 
+                    aria-expanded="false"
+                    aria-controls="accordion-collapse-body-1"
+                    class="flex justify-between items-center w-full gap-x-1 p-[1rem] rounded font-bold border bg-gray-200 hover:bg-gray-300 focus:ring-4 focus:ring-gray-200"
                 >
-                    <form method="post" enctype="multipart/form-data" class="pt-5 pb-2">
-                        {% csrf_token %}
-                        {{ form|crispy }}
-                        <img class="mt-[2rem] w-1/3 h-auto" 
-                            src="https://lh7-us.googleusercontent.com/tE_P9qKIIm_auJ5DbdkzQfjdQW0qUsO8ASSmpcnVmqhNI0C0bQzs7As1MBeOPCQG8fUnfFpKytoDJeIIeazhilh8n1qDtUfjSHgSgLx7owDRW0FdMMT7OziYlV7Q44zOlqO4bso4Spn3_pmBUMqlzlBf1HL5Mw" 
-                            alt="qrcode for payment"
+                    <div class="flex-grow"></div>
+                    <span>AUDITION FORM</span>
+                    <div class="flex-grow mt-[1px]">
+                        <svg class="size-5 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m8 7 4 4 4-4m-8 6 4 4 4-4"/>
+                        </svg>
+                    </div>
+                </button>
+            </h2>
+            
+            <!-- form -->
+            <div 
+                id="accordion-form" 
+                aria-labelledby="accordion-collapse-heading-1" 
+                class="hidden accordion-content transition-all duration-500 ease-in-out col-span-4"
+            >
+                <form method="post" enctype="multipart/form-data" class="pt-5 pb-2">
+                    {% csrf_token %}
+                    {{ form|crispy }}
+                    <img class="mt-[2rem] w-1/3 h-auto" 
+                        src="https://lh7-us.googleusercontent.com/tE_P9qKIIm_auJ5DbdkzQfjdQW0qUsO8ASSmpcnVmqhNI0C0bQzs7As1MBeOPCQG8fUnfFpKytoDJeIIeazhilh8n1qDtUfjSHgSgLx7owDRW0FdMMT7OziYlV7Q44zOlqO4bso4Spn3_pmBUMqlzlBf1HL5Mw" 
+                        alt="qrcode for payment"
+                    >
+                    <div class="flex justify-center items-center mt-10">
+                        <button 
+                            type="submit" 
+                            class="w-1/3 my-5 mx-auto text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-bold rounded-lg text-md px-5 py-2.5"
                         >
-                        <div class="flex justify-center items-center mt-10">
-                            <button 
-                                type="submit" 
-                                class="w-1/3 my-5 mx-auto text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-bold rounded-lg text-md px-5 py-2.5"
-                            >
-                                Submit 
-                            </button>
-                        </div>
-                    </form>
-                </div>
-            </a>
-        </div>
+                            Submit 
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </a>
 
     </main>
 {% endblock content %}
