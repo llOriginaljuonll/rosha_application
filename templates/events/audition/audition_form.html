@@ -1,6 +1,12 @@
 {% extends "base.html" %}
+{% load static %}
+
 {% load crispy_forms_tags %}
 {% load tailwind_filters %}
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'dist/audition/audition_form.css' %}">
+{% endblock style %}
 
 {% block content %}
     <div class="w-8/12 h-full my-12 content-center mx-auto">

@@ -3,7 +3,8 @@
     "tailwindcss": "^3.4.4"
   },
   "scripts": {
-    "build": "tailwindcss build -i ./static/src/input.css -o ./static/src/output.css -w"
+    "build": "tailwindcss build -i ./static/src/input.css -o ./static/src/output.css -w",
+    "audition:css": "tailwindcss build -i ./static/css/audition/audition_form.css -o ./static/dist/audition/audition_form.css -w"
   },
   "dependencies": {
     "@tailwindcss/typography": "^0.5.13",
