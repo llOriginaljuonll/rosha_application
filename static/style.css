@@ -30,18 +30,6 @@
     display: none;
 }
 
-/* remove text => "No File Chosen */
-/* input[type='file'] {
-    color: transparent;
-} */
-
 .no-float {
     clear: both;
-}
-
-/* remove dropdown indicator */
-#id_entity, #id_compt {
-    -webkit-appearance: none; /* ซ่อนลูกศรบนเบราว์เซอร์ Chrome, Safari, Edge */
-    appearance: none;         /* ซ่อนลูกศรบนเบราว์เซอร์อื่นๆ */
-    background: transparent;  /* ทำให้พื้นหลังของ select โปร่งใส */
 }
