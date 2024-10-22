@@ -1,8 +1,11 @@
 from django.db import models
 from datetime import date
 from versatileimagefield.fields import VersatileImageField
+from apps.hall.models import Hall
 
 class Audition(models.Model):
+
+    hall = models.ForeignKey(Hall, on_delete=models.CASCADE, null=True)
     name = models.CharField(max_length=255)
     category = models.CharField(max_length=255, default="audition")
     image = VersatileImageField('Image', upload_to='image/', null=True, blank=True)

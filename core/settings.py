@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'apps.performer.entrant',
     'apps.accounts',
     'apps.referee',
+    'apps.hall',
 
     # Third parties
     'allauth',

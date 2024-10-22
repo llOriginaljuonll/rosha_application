@@ -1,0 +1,16 @@
+.btn-add-hall {
+    @apply bg-blue-500 text-white mb-[1.5rem] px-[1rem] rounded hover:bg-blue-600 font-medium text-base cursor-pointer;
+}
+
+select[name="hall"],
+input[type="text"] {
+    @apply rounded;
+}
+
+select[name="hall"] {
+    @apply bg-white font-medium tracking-tight;
+}
+
+div label {
+    @apply text-rose-300;
+}
