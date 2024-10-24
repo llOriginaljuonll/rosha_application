@@ -39,3 +39,22 @@ class BaseModelForm(forms.ModelForm):
                         # อัปเดต placeholder เฉพาะสำหรับ date input (index 0) และ time input (index 1)
                         self.fields[field_name].widget.widgets[0].attrs.update({'placeholder': placeholder['date']})
                         self.fields[field_name].widget.widgets[1].attrs.update({'placeholder': placeholder['time']})
+
+class MultipleFileInput(forms.ClearableFileInput):
+    allow_multiple_selected = True
+
+class MultipleFileField(forms.FileField):
+    def __init__(self, *args, **kwargs):
+        kwargs.setdefault("widget", MultipleFileInput())
+        super().__init__(*args, **kwargs)
+
+    def clean(self, data, initial=None):
+        single_file_clean = super().clean
+        if isinstance(data, (list, tuple)):
+            result = [single_file_clean(d, initial) for d in data]
+        else:
+            result = [single_file_clean(data, initial)]
+        return result
+    
+class FileUploadForm(forms.Form):
+    file = forms.FileField()
