@@ -5,6 +5,12 @@ from versatileimagefield.fields import VersatileImageField
 from apps.performer.auditioner.models import Auditioner
 
 
+APPLICANT_CHOICES = [
+        ('parent', 'Parent'),
+        ('teacher', 'Teacher'),
+        ('self', 'Self'),
+]
+
 class Participant(models.Model):
 
     """
@@ -12,6 +18,7 @@ class Participant(models.Model):
     """
     
     participation = models.ForeignKey(Participation, on_delete=models.CASCADE)
+    applicant_type = models.CharField(max_length=20, choices=APPLICANT_CHOICES, default='self')
     # auditioner = models.OneToOneField(Auditioner, on_delete=models.CASCADE) ## มี bug อยู่จึงใช้งานไม่ได้  
     name = models.CharField(max_length=255, blank=True, null=True)
     email = models.EmailField()

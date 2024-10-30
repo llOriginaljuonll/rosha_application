@@ -41,4 +41,5 @@ class AuditionerForm(BaseModelForm):
             'age': forms.TextInput(attrs={
                 'type': 'hidden'
             }),
+            'applicant_type': forms.RadioSelect()
         }

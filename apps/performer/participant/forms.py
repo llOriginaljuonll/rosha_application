@@ -31,7 +31,8 @@ class ParticipantForm(BaseModelForm):
         widgets = {
             'participation': forms.TextInput(attrs={
                 'value': '', 'id': 'participation_id', 'type': 'hidden',
-            })
+            }),
+            'applicant_type': forms.RadioSelect()
         }
 
         placeholders = {
