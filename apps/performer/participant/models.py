@@ -6,6 +6,11 @@ from apps.performer.auditioner.models import Auditioner
 
 
 class Participant(models.Model):
+
+    """
+    cpr_permission stand for copyright permission
+    """
+    
     participation = models.ForeignKey(Participation, on_delete=models.CASCADE)
     # auditioner = models.OneToOneField(Auditioner, on_delete=models.CASCADE) ## มี bug อยู่จึงใช้งานไม่ได้  
     name = models.CharField(max_length=255, blank=True, null=True)
@@ -32,8 +37,6 @@ class Participant(models.Model):
     amount_people_coming = models.IntegerField()
     plan_comming = models.CharField(max_length=1000)
     practice_room = models.BooleanField()
-
-    # 'cpr' stand for 'copyrights'
     cpr_permission = models.BooleanField()
     slip = VersatileImageField('Slip', upload_to='slip/')
 
