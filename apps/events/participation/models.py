@@ -16,6 +16,7 @@ class Participation(models.Model):
     concert_date = models.DateTimeField(null=True, blank=True)
     rehearsal_date = models.DateTimeField(null=True, blank=True)
     deadline = models.DateTimeField(null=True, blank=True)
+    fee = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
     create_at = models.DateTimeField(auto_now_add=True)
 
     def save(self, *args, **kwargs):
