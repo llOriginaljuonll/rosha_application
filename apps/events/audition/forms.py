@@ -45,5 +45,9 @@ class AuditionForm(BaseModelForm):
                 ),
                 css_class="flex flex-row gap-x-[1rem]"
             ),
-            *[Field(field) for field in self.fields.keys() if field not in ['hall']]
+            *[Field(field) for field in self.fields.keys() if field not in ['hall']],
+            ButtonHolder(
+                Submit("submit", "Submit"),
+                css_class="btn-submit"
+            )
         )
