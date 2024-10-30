@@ -11,6 +11,12 @@ ENTITY = (
     ('2', 'Group (apply as a team)'),
 )
 
+APPLICANT_CHOICES = [
+    ('parent', 'Parent'),
+    ('teacher', 'Teacher'),
+    ('self', 'Self'),
+]
+
 class Entrant(models.Model):
 
     """ 'compt' stand for 'competition'
@@ -19,6 +25,7 @@ class Entrant(models.Model):
         'encoder' is  """
 
     entity = models.CharField(max_length=100, choices=ENTITY)
+    applicant_type = models.CharField(max_length=20, choices=APPLICANT_CHOICES, default='self')
     name = models.CharField(max_length=255)
     compt = models.ForeignKey(Competition, on_delete=models.CASCADE)
     nat = models.CharField(max_length=100)

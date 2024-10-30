@@ -2,9 +2,11 @@ from django.db import models
 from datetime import date
 from versatileimagefield.fields import VersatileImageField
 from apps.events.audition.models import Audition
+from apps.hall.models import Hall
 
 class Participation(models.Model):
     
+    hall = models.ForeignKey(Hall, on_delete=models.CASCADE, null=True)
     audition = models.OneToOneField(Audition, on_delete=models.CASCADE)
     category = models.CharField(max_length=255, default="participation")
     slug = models.SlugField(blank=True, null=True)
@@ -14,7 +16,7 @@ class Participation(models.Model):
     concert_date = models.DateTimeField(null=True, blank=True)
     rehearsal_date = models.DateTimeField(null=True, blank=True)
     deadline = models.DateTimeField(null=True, blank=True)
-    description_payment = models.CharField(max_length=255, null=True, blank=True)
+    fee = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
     create_at = models.DateTimeField(auto_now_add=True)
 
     def save(self, *args, **kwargs):

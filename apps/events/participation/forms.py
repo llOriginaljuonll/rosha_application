@@ -20,9 +20,6 @@ class ParticipationForm(BaseModelForm):
             'category': forms.TextInput(attrs={
                 'type': 'hidden'
             }),
-            'name': forms.TextInput(attrs={
-                'value': '', 'id': 'name_id',
-            }),
             'description_payment': forms.Textarea(attrs={
                 'rows': '4'
             })

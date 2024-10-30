@@ -12,10 +12,18 @@ RESULT = [
     ('2', 'No Pass'),
 ]
 
+APPLICANT_CHOICES = [
+    ('parent', 'Parent'),
+    ('teacher', 'Teacher'),
+    ('self', 'Self'),
+]
+
 class Auditioner(models.Model):
+    
     audition = models.ForeignKey(Audition, on_delete=models.CASCADE)
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     slug = models.SlugField(blank=True, null=True)
+    applicant_type = models.CharField(max_length=20, choices=APPLICANT_CHOICES, default='self')
     name = models.CharField(max_length=255)
     nationality = models.CharField(max_length=255)
     birthdate = models.DateField()

@@ -70,7 +70,8 @@ class EntrantForm(BaseModelForm):
             'short_url': forms.TextInput(),
             'compt': forms.TextInput(attrs={
                 'value': '', 'id': 'compt_id', 'type': 'hidden'
-            })
+            }),
+            'applicant_type': forms.RadioSelect()
         }
 
     def __init__(self, *args, **kwargs):
