@@ -44,7 +44,7 @@ class AuditionerAdmin(admin.ModelAdmin):
         (
             ("Performance"), {
                 "classes": ["collapse"],
-                "fields": ("shorts_url",)
+                "fields": ("shorts_url", "shorts_video")
             }
         ),
         (
