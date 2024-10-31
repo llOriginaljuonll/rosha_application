@@ -20,8 +20,10 @@ APPLICANT_CHOICES = [
 
 class Auditioner(models.Model):
     
+    # Fields ForeignKey
     audition = models.ForeignKey(Audition, on_delete=models.CASCADE)
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+
     slug = models.SlugField(blank=True, null=True)
     applicant_type = models.CharField(max_length=20, choices=APPLICANT_CHOICES, default='self')
     name = models.CharField(max_length=255)
@@ -42,9 +44,8 @@ class Auditioner(models.Model):
     image = VersatileImageField('Image', upload_to='images/')
     instrument = models.CharField(max_length=255)
     song = models.CharField(max_length=255)
-    shorts_url = EmbedVideoField(blank=True)
-
-    # 'cpr' stand for 'copyrights'
+    shorts_url = EmbedVideoField(blank=True, null=True)
+    shorts_video = models.FileField(upload_to="auditioner/{id}", blank=True, null=True)
     cpr_permission = models.BooleanField()
     slip = VersatileImageField('Slip', upload_to='slip/')
 
