@@ -1,6 +1,13 @@
 from django import forms
 from django.forms.widgets import SplitDateTimeWidget
 from core.widgets import date_input_attrs
+from django.core.validators import RegexValidator
+
+
+english_name_validator = RegexValidator(
+    regex=r'^[a-zA-Z0-9\s]*$',
+    message='กรุณากรอกชื่อและนามสกุลเป็นภาษาอังกฤษเท่านั้น',
+)
 
 class BaseModelForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
@@ -29,6 +36,9 @@ class BaseModelForm(forms.ModelForm):
                 field.widget = forms.TextInput(attrs={})
                 field.widget.attrs.update(date_input_attrs)
 
+        for field_name, field in self.fields.items():
+            if isinstance(field.widget, (forms.TextInput, forms.Textarea)):
+                field.validators.append(english_name_validator)
 
         # Loop through all fields to apply placeholders
         if hasattr(self.Meta, 'placeholders'):
@@ -39,6 +49,7 @@ class BaseModelForm(forms.ModelForm):
                         # อัปเดต placeholder เฉพาะสำหรับ date input (index 0) และ time input (index 1)
                         self.fields[field_name].widget.widgets[0].attrs.update({'placeholder': placeholder['date']})
                         self.fields[field_name].widget.widgets[1].attrs.update({'placeholder': placeholder['time']})
+
 
 class MultipleFileInput(forms.ClearableFileInput):
     allow_multiple_selected = True
