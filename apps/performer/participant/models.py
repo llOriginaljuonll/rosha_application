@@ -1,4 +1,5 @@
 from django.db import models
+from embed_video.fields import EmbedVideoField
 from apps.events.participation.models import Participation
 from django.core.validators import RegexValidator
 from versatileimagefield.fields import VersatileImageField
@@ -16,8 +17,9 @@ class Participant(models.Model):
     """
     cpr_permission stand for copyright permission
     """
-    
+    # Field ForeignKey
     participation = models.ForeignKey(Participation, on_delete=models.CASCADE)
+
     applicant_type = models.CharField(max_length=20, choices=APPLICANT_CHOICES, default='self')
     # auditioner = models.OneToOneField(Auditioner, on_delete=models.CASCADE) ## มี bug อยู่จึงใช้งานไม่ได้  
     name = models.CharField(max_length=255, blank=True, null=True)
@@ -44,6 +46,11 @@ class Participant(models.Model):
     amount_people_coming = models.IntegerField()
     plan_comming = models.CharField(max_length=1000)
     practice_room = models.BooleanField()
+
+    # Fields Performance Video
+    shorts_url = EmbedVideoField(blank=True, null=True)
+    shorts_video = models.FileField(upload_to="auditioner/{id}", blank=True, null=True)
+
     cpr_permission = models.BooleanField()
     slip = VersatileImageField('Slip', upload_to='slip/')
 

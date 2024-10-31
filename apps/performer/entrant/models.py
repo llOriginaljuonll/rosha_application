@@ -56,7 +56,11 @@ class Entrant(models.Model):
         blank=True,
         null=True
     )
-    short_url = EmbedVideoField(blank=True, null=True)
+
+    # Fields Performance Video
+    shorts_url = EmbedVideoField(blank=True, null=True)
+    shorts_video = models.FileField(upload_to="auditioner/{id}", blank=True, null=True)
+    
     cpr = models.BooleanField()
     slip = VersatileImageField(upload_to="entrant/slips")
     create_at = models.DateTimeField(auto_now_add=True)

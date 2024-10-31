@@ -92,3 +92,16 @@ class EntrantForm(BaseModelForm):
         for field in self.field_to_hide:
             if field in self.fields:
                 self.fields[field].widget = forms.HiddenInput()
+
+    def clean(self):
+        cleaned_data = super().clean()
+        short_url = cleaned_data.get("shorts_url")
+        short_video = cleaned_data.get("shorts_video")
+
+        if not short_url and not short_video:
+            raise forms.ValidationError("กรุณากรอก URL หรือ อัปโหลดวิดีโออย่างใดอย่างหนึ่ง")
+        
+        if short_url and short_video:
+            raise forms.ValidationError("กรุณากรอกเพียง URL หรือ อัปโหลดวิดีโออย่างใดอย่างหนึ่งเท่านั้น")
+
+        return cleaned_data
