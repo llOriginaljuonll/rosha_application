@@ -45,7 +45,7 @@ class IsStaffMixin(UserPassesTestMixin):
     """Verify that the current user has staff status."""
     def handle_no_permission(self, request):
         messages.add_message(request, messages.ERROR, "You need higher permissions in order to access this page.")
-        return redirect("competition:list")
+        return redirect("home")
     
     def dispatch(self, request, *args, **kwargs):
         if not request.user.is_authenticated:
