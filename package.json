@@ -3,11 +3,11 @@
     "tailwindcss": "^3.4.4"
   },
   "scripts": {
-    "build": "tailwindcss build -i ./static/src/input.css -o ./static/src/output.css -w",
-    "audition:css": "tailwindcss build -i ./static/css/audition/audition_form.css -o ./static/dist/audition/audition_form.css -w"
+    "build": "npx tailwindcss build -i ./static/src/main.css -o ./static/dist/main.css --watch",
+    "audition:css": "tailwindcss build -i ./static/css/audition/audition_form.css -o ./static/dist/audition/audition_form.css -w",
+    "signup:css": "npx tailwindcss build -i ./static/src/accounts/signup.css -o ./static/dist/accounts/signup.css --watch"
   },
   "dependencies": {
-    "@tailwindcss/typography": "^0.5.13",
     "flowbite": "^2.4.1"
   }
 }

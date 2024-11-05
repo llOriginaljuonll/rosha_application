@@ -6,11 +6,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}rosha form{% endblock title %}</title>
-    {% compress css %}
-	    <link rel="stylesheet" href="{% static 'src/output.css' %}">
-        <link rel="stylesheet" href="{% static 'style.css' %}">
-	{% endcompress %}
-    {% block style %}{% endblock style %}
+    {% block header %}{% endblock header %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link rel="stylesheet" href="{% static 'dist/main.css' %}">
 </head>
 <body>
     {% include "components/navbar.html" %}
@@ -18,7 +16,7 @@
 
     {% block script %}{% endblock script %}
     <!-- Flowbite JS -->
-    <script src="https://cdn.jsdelivr.net/npm/flowbite@2.4.1/dist/flowbite.min.js"></script>
+    <script src="{% static 'flowbite/dist/flowbite.min.js' %}"></script>
 
 </body>
 </html>

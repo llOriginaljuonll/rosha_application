@@ -2,19 +2,17 @@
 {% load static %}
 {% load crispy_forms_tags %}
 {% load tailwind_filters %}
-{% block style %}
-    <link rel="stylesheet" href="{% static 'style.css' %}">
-{% endblock style %}
+{% block header %}
+    <link rel="stylesheet" href="{% static 'dist/main.css' %}">
+    <link rel="stylesheet" href="{% static 'dist/accounts/signup.css' %}">
+{% endblock header %}
 
 {% block content %}
-    <div class="w-1/4 h-screen content-center mx-auto">
-        <h1 class="text-4xl text-center font-semibold">SIGNUP</h1>
-        <form method="post" class="mt-8">
-            {% csrf_token %}
-            {{ form|crispy }}
-            <div class="flex justify-center gap-2">
-                <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-s w-full px-5 py-2.5 mt-4 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
-            </div>
+    <section>
+        <h1>SIGNUP FORM</h1>
+        <form method="post">
+            {% crispy form %}
+            <button class="btn-submit">Submit</button>
         </form>
-    </div>
+    </section>
 {% endblock content %}

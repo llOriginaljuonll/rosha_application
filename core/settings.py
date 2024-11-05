@@ -141,7 +141,10 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
-STATICFILES_DIRS = [ "node_modules", BASE_DIR / "static" ]
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+    BASE_DIR / "node_modules",
+]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
@@ -183,6 +186,8 @@ ACCOUNT_EMAIL_REQUIRED = False
 ACCOUNT_FORMS = {"login": "apps.accounts.forms.UserLoginForm", "signup": "apps.accounts.forms.UserSignupForm"}
 
 AUTH_USER_MODEL = "accounts.CustomUser"
+
+# ACCOUNT_SIGNUP_FORM_CLASS = "apps.accounts.forms.UserSignupForm"
 
 # https://www.geeksforgeeks.org/how-to-use-tailwind-css-with-django/
 COMPRESS_ROOT = BASE_DIR / 'static'
