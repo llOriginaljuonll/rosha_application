@@ -4,56 +4,9 @@ from apps.accounts.models import CustomUser
 from allauth.account.admin import EmailAddress
 from django.contrib.auth.models import Group
 
+# unregister
 admin.site.unregister(Group)
-
 admin.site.unregister(EmailAddress)
-@admin.register(CustomUser)
-class CustomUserAdmin(UserAdmin):
-    fieldsets = (
-        (None, {"fields": ("email", "password")}),
-        (
-            ("Permissions"),
-            {
-                "fields": (
-                    "is_active",
-                    "is_judge",
-                    "is_staff",
-                    "is_superuser",
-                    "groups",
-                    "user_permissions",
-                ),
-            },
-        ),
-        (("Important dates"), {"fields": ("last_login", "date_joined")}),
-    )
-    ordering = ( "date_joined", "last_login")
-    list_display = [
-        "id",
-        "username",
-        "is_active",
-        "is_judge",
-        "is_staff",
-        "is_superuser",
-        "date_joined",
-        "last_login",
-    ]
-    list_display_links = ["username",]
-    search_fields = ["username", ]
-    list_filter = (
-        "is_superuser",
-        "is_judge",
-        "is_staff",
-        "is_active",
-        "date_joined",
-        "last_login",
-    )
-    default_selected_columns = [
-        "id",
-        "username",
-        "is_active",
-        "is_judge",
-        "is_staff",
-        "is_superuser",
-        "date_joined",
-        "last_login",
-    ]
+
+# register
+admin.site.register(CustomUser)
