@@ -22,6 +22,7 @@ class UserSignupForm(SignupForm):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.label_class = "font-normal bg-rose-300"
+        self.helper.form_tag = False
         self.fields["email"].label = "Email"
 
     def save(self, request):
