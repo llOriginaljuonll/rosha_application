@@ -20,6 +20,13 @@ class ParticipationUpdateView(IsStaffMixin, UpdateView):
 
     def get_success_url(self) -> str:
         return reverse_lazy('audition:list')
+
+class ParticipationListView(IsStaffMixin, ListView):
+
+    model = Participation
+    template_name = 'events/participation/participation_list.html'
+    context_object_name = 'participations'
+
     
 class ParticipationDeleteView(IsStaffMixin, DeleteView):
 
@@ -29,9 +36,3 @@ class ParticipationDeleteView(IsStaffMixin, DeleteView):
     """Overide get method for Creating DeleteView without templates_name"""
     def get(self, request, *args, **kwargs):
         return self.delete(request, *args, **kwargs)
-
-class ParticipationListView(IsActiveMixin, ListView):
-
-    model = Participation
-    template_name = 'events/participation/participation_list.html'
-    context_object_name = 'participations'
