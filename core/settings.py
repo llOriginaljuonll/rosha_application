@@ -69,7 +69,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
-    # django-allauth
+    # about django-allauth
     'allauth.account.middleware.AccountMiddleware',
 ]
 
@@ -178,8 +178,6 @@ LOGOUT_REDIRECT_URL = '/'
 ACCOUNT_LOGOUT_ON_GET= True
 
 ACCOUNT_EMAIL_VERIFICATION = None
-
-# ACCOUNT_USER_MODEL_EMAIL_FIELD = None
 
 ACCOUNT_EMAIL_REQUIRED = False
 
