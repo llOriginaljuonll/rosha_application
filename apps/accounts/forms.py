@@ -37,3 +37,9 @@ class UserLoginForm(LoginForm):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.fields["password"].help_text = None
+
+        # remove remember field from login page.
+        self.fields["remember"].label = False
+        self.fields["remember"].widget.attrs.update({
+            "class": "hidden"
+        })

@@ -60,7 +60,7 @@
         <!-- accordion -->
         <a 
             {% if not user.is_authenticated %}
-                href="{% url 'account_login' %}"
+                href="{% url 'account_login' %}?next={% url 'auditioner:form' audition.id %}"
             {% else %}
                 id="accordion-collapse" 
                 data-accordion="collapse"

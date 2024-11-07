@@ -25,7 +25,7 @@ class ComptFormView(FormView):
         competition.save()
         return super().form_valid(form)
     
-class ComptListView(IsActiveMixin, ListView):
+class ComptListView(ListView):
 
     model = Competition
     template_name = 'events/competition/compt_list.html'

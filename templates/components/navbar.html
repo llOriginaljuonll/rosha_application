@@ -126,7 +126,7 @@
                     </ul>
                 </div>
             {% else %}
-                <a href="{% url "account_login" %}" class="border border-blue-600">Login</a>
+                <a href="{% url "account_login" %}?next={{ request.path }}" class="border border-blue-600">Login</a>
             {% endif %}
         </ul>
     </div>
