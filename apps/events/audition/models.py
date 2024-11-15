@@ -4,16 +4,24 @@ from versatileimagefield.fields import VersatileImageField
 from apps.hall.models import Hall
 
 class Audition(models.Model):
+    """
+    elig short for eligibility, example อายุไม่เกิน 25 ปี, 
+    """
 
     hall = models.ForeignKey(Hall, on_delete=models.CASCADE, null=True)
     name = models.CharField(max_length=255)
     category = models.CharField(max_length=255, default="audition")
     image = VersatileImageField('Image', upload_to='image/', null=True, blank=True)
     email = models.EmailField(default='rosha.thailand@gmail.com', null=True, blank=True)
+    min_age = models.CharField(max_length=100, null=True, blank=True)
+    max_age = models.CharField(max_length=100, null=True, blank=True)
+    elig = models.TextField(null=True, blank=True)
+    type = models.TextField(null=True, blank=True)
     concert_date = models.DateTimeField(null=True, blank=True)
     deadline = models.DateTimeField(null=True, blank=True)
     announcement_date = models.DateTimeField(null=True, blank=True)
-    fee = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
+    fee  = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
+    description = models.TextField(null=True, blank=True)
     create_at = models.DateTimeField(auto_now_add=True)
 
     def get_days_left(self, target_date):
@@ -34,7 +42,28 @@ class Audition(models.Model):
         
     def get_concert_date(self):
         return self.get_days_left(self.concert_date)
+    
+    @staticmethod
+    def get_choices():
+        # ดึงข้อมูลจากฟิลด์ name ของ NewModel
+        choices = []
+        for obj in Audition.objects.all():
+            # แยกข้อมูลใน name แต่ละชุดโดยใช้ ',' และนำมาเป็น tuple
+            for value in obj.elig.split(','):
+                choices.append((value.strip(), value.strip()))  # เพิ่มข้อมูลในรูปแบบ choices
+        return choices
+    
+    @staticmethod
+    def get_type_choices():
+        # ดึงข้อมูลจากฟิลด์ name ของ NewModel
+        choices = []
+        for obj in Audition.objects.all():
+            # แยกข้อมูลใน name แต่ละชุดโดยใช้ ',' และนำมาเป็น tuple
+            for value in obj.type.split(','):
+                choices.append((value.strip(), value.strip()))  # เพิ่มข้อมูลในรูปแบบ choices
+        return choices
         
     def __str__(self):
-        return f"{self.name}"
+        return f"{self.id} {self.name}"
+    
     

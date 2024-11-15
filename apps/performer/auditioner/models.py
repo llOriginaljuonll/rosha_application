@@ -12,12 +12,6 @@ RESULT = [
     ('2', 'No Pass'),
 ]
 
-APPLICANT_CHOICES = [
-    ('parent', 'Parent'),
-    ('teacher', 'Teacher'),
-    ('self', 'Self'),
-]
-
 class Auditioner(models.Model):
     
     # Fields ForeignKey
@@ -25,7 +19,6 @@ class Auditioner(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
 
     slug = models.SlugField(blank=True, null=True)
-    applicant_type = models.CharField(max_length=20, choices=APPLICANT_CHOICES, default='self')
     name = models.CharField(max_length=255)
     nationality = models.CharField(max_length=255)
     birthdate = models.DateField()
@@ -42,11 +35,19 @@ class Auditioner(models.Model):
     school = models.CharField(max_length=255)
     grade = models.CharField(max_length=100)
     image = VersatileImageField('Image', upload_to='images/')
-    instrument = models.CharField(max_length=255)
+    elig = models.CharField(
+        max_length=255, 
+        choices=Audition.get_choices(), 
+        default='Unspecified'
+    )
+    instrument_type = models.CharField(
+        max_length=255, 
+        choices=Audition.get_type_choices(), 
+        default='Unspecified'
+    )
     song = models.CharField(max_length=255)
     shorts_url = EmbedVideoField(blank=True, null=True)
     shorts_video = models.FileField(upload_to="auditioner/{id}", blank=True, null=True)
-    cpr_permission = models.BooleanField()
     slip = VersatileImageField('Slip', upload_to='slip/')
 
     def word_number(self):
