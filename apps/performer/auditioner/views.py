@@ -81,6 +81,18 @@ class AuditionerFormView(DetailView, FormMixin):
             return self.form_valid(form)
         else:
             return self.form_invalid(form)
+    
+    def get_form(self):
+        form = super().get_form()
+        # ดึงข้อมูล choices จาก NewModel
+        audition_instance = get_object_or_404(Audition, pk=self.kwargs['pk'])
+        elig_choices = [(value.strip(), value.strip()) for value in audition_instance.elig.split(',')]
+        type_choices = [(value.strip(), value.strip()) for value in audition_instance.type.split(',')]
+        
+        # กำหนด choices สำหรับฟิลด์ choice_field
+        form.fields['elig'].choices = elig_choices
+        form.fields['instrument_type'].choices = type_choices
+        return form
 
     def form_valid(self, form):
         form.save()
@@ -107,6 +119,21 @@ class AuditionerUpdateView(UpdateView):
         else:
             return self.handle_no_permission(request)
         return super().dispatch(request, *args, **kwargs)
+    
+    def get_form(self):
+        form = super().get_form()
+        instance = get_object_or_404(Auditioner, pk=self.kwargs['pk'])
+        audition_instance = get_object_or_404(Audition, pk=instance.audition.id)
+        
+        # สร้าง choices ที่เป็น tuple (ค่า, ค่า) จากข้อมูลที่แยกด้วยเครื่องหมายจุลภาค
+        elig_choices = [(value.strip(), value.strip()) for value in audition_instance.elig.split(',')]
+        type_choices = [(value.strip(), value.strip()) for value in audition_instance.type.split(',')]
+        
+        # กำหนดให้ choices ของฟิลด์ในฟอร์ม
+        form.fields['elig'].choices = elig_choices
+        form.fields['instrument_type'].choices = type_choices
+        
+        return form
 
     def get_success_url(self):
         return reverse_lazy('auditioner:detail', kwargs={"pk": self.get_object().id})
