@@ -31,6 +31,7 @@ urlpatterns = [
     path('competition/', include('apps.events.competition.urls')),
     path('entrant/', include('apps.performer.entrant.urls')),
     path('referee/', include('apps.referee.urls')),
+    path('hall/', include('apps.hall.urls')),
 ]
 
 if settings.DEBUG:
