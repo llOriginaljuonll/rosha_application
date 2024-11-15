@@ -1,0 +1,32 @@
+{% load crispy_forms_tags %}
+
+<form method="post" enctype="multipart/form-data" class="p-[2rem] border shadow-md mt-[0.5rem] bg-white">
+    {% csrf_token %}
+    {{ form.name|as_crispy_field }}
+    {{ form.image|as_crispy_field }}
+    {{ form.nationality|as_crispy_field }}
+    {{ form.birthdate|as_crispy_field }}
+    {{ form.grade|as_crispy_field }}
+    {{ form.school|as_crispy_field }}
+    <hr>
+    <h4>Contact</h4>
+    {{ form.phone|as_crispy_field }}
+    {{ form.email|as_crispy_field }}
+    <hr>
+    <h4>manual classification</h4>
+    {{ form.elig|as_crispy_field }}
+    {{ form.instrument_type|as_crispy_field }}
+    {{ form.song|as_crispy_field }}
+    {{ form.shorts_url|as_crispy_field }}
+    {{ form.shorts_video|as_crispy_field }}
+    {{ form.slip|as_crispy_field }}
+    {{ form.audition|as_crispy_field }}
+    {{ form.user|as_crispy_field }}
+    <hr>
+    <p class="mt-[0.5rem]"><strong>Registration fee:</strong>&nbsp;{{ audition.fee }} Bath</p>
+    <img class="mt-[1rem] w-1/3 h-auto" 
+        src="https://lh7-us.googleusercontent.com/tE_P9qKIIm_auJ5DbdkzQfjdQW0qUsO8ASSmpcnVmqhNI0C0bQzs7As1MBeOPCQG8fUnfFpKytoDJeIIeazhilh8n1qDtUfjSHgSgLx7owDRW0FdMMT7OziYlV7Q44zOlqO4bso4Spn3_pmBUMqlzlBf1HL5Mw" 
+        alt="qrcode for payment"
+    >
+    <button type="submit" class="btn-submit rounded-full mt-[2rem] block mx-auto">Submit</button>
+</form>

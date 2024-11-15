@@ -3,52 +3,134 @@
 {% load crispy_forms_tags %}
 {% load tailwind_filters %}
 
-{% block style %}
-    <link rel="stylesheet" href="{% static 'style.css' %}">
-{% endblock style %}
-
 {% block content %}
-    <div class="my-12 w-8/12 mx-auto">
-        <div>
-            <h1 class="text-4xl font-semibold text-center border-b border-gray-400 pb-5">
-                {{ auditioner.competition.name }}
-            </h1>
-            <div class="flex flex-col gap-2.5 text-lg font-semibold mt-5 border p-4 border-gray-400">
-                <div class="flex">
-                    <h2 class="me-3 px-1.5 bg-yellow-400 text-white">Concert Date</h2><h2>{{ auditioner.competition.concert_date|date:"F j Y" }}</h2>
+    <main class="container bg-gray-200">
+        <main class="w-4/5 mx-auto space-y-[2rem] pb-[5rem]">
+
+            <section class="h-screen flex flex-col justify-center gap-y-[4rem]">
+                <h1 class="text-4xl font-bold uppercase text-center tracking-tight mt-[2rem]">
+                    {{ auditioner.audition.name }}
+                </h1> 
+                <div class="gap-x-[2rem] mx-auto overflow-hidden relative grid grid-cols-5">
+                    <div class="relative aspect-[3/2] mx-auto col-span-3 bg-black">
+                        <img 
+                            src="https://scontent.fbkk22-8.fna.fbcdn.net/v/t39.30808-6/466492904_122164638338053701_889847483162013726_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeEUxwEd8Ig0NJoj34GVwfboQgA40MNPoHdCADjQw0-gd7qTkr_deUL9qtS0SkiZAiWSfU3Rc9flKWGAlHp3kBJc&_nc_ohc=i0qA6Ydyxe4Q7kNvgGZVXnV&_nc_zt=23&_nc_ht=scontent.fbkk22-8.fna&_nc_gid=AwOpyZ9z0MeVR3dgX7oCAG3&oh=00_AYBYSB9DtDjIQWzHr836yFrPDQ0GjYleJdzgyx736kf-QQ&oe=673975CA" alt="concert hall" 
+                            class="object-contain h-full w-full mx-auto active carousel-item inset-0 opacity-100 transition-opacity duration-1000 ease-in-out">
+                        <img 
+                            src="https://images.unsplash.com/photo-1531660963020-52ba84d92593?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="concert hall" 
+                            class="object-contain h-full w-full mx-auto absolute carousel-item inset-0 opacity-100 transition-opacity duration-1000 ease-in-out">
+                        <img 
+                            src="https://images.unsplash.com/photo-1651606682103-6725b81d7edd?q=80&w=1632&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="concert hall" 
+                            class="object-contain h-full w-full mx-auto absolute carousel-item inset-0 opacity-100 transition-opacity duration-1000 ease-in-out">
+                    </div>
+                    <div class="col-span-2 p-[1rem] pt-0">
+                        <h2 class="font-bold text-xl mb-[1rem]">{{ auditioner.audition.hall.name }}</h2>
+                        <p>{{ auditioner.audition.hall.detail }}</p>
+                        <p class="mt-[1rem] text-gray-700"><strong>Location:</strong> {{ auditioner.audition.hall.location }}</p>
+                        <p class="mt-[1rem]">
+                            <a href="{{ auditioner.audition.hall.location_link }}" target="_blank" class="text-blue-500 hover:underline">
+                                View on Google Maps
+                            </a>
+                        </p>
+                    </div>
+                    
                 </div>
-                <div class="flex">
-                    <h2 class="me-3 px-1.5 bg-red-500 text-white">Deadline to submit the video</h2><h2>{{ auditioner.competition.deadline|date:"F j Y" }}</h2>
+            </section>
+    
+            <div class="flex items-start">
+                <!-- poster section -->
+                <div class="w-3/5">
+                    <div class="gap-y-[0.5rem] pb-[2rem] w-full">
+                        <img src="{{ auditioner.audition.image.url }}" class="object-contain object-top aspect-[0.8/1]">
+                    </div>
+                    <!-- accordion -->
+                    <a 
+                        {% if not user.is_authenticated %}
+                            href="{% url 'account_login' %}?next={% url 'auditioner:form' audition.id %}"
+                        {% else %}
+                            id="accordion-collapse" 
+                            data-accordion="collapse"
+                        {% endif %}
+                        class="gap-x-[1rem] gap-y-[2rem]"
+                    >
+                        <div id="accordion-collapse-heading-1" class="w-full gap-y-[1rem]">
+                            <button 
+                                type="button"
+                                data-accordion-target="#accordion-form" 
+                                aria-expanded="true"
+                                aria-controls="accordion-collapse-body-1"
+                                class="flex justify-between items-center w-full gap-x-1 p-[1rem] rounded font-bold border bg-gray-200 hover:bg-gray-300 focus:ring-4 focus:ring-gray-200"
+                            >
+                                <div class="flex-grow"></div>
+                                <span>AUDITION FORM</span>
+                                <div class="flex-grow mt-[1px]">
+                                    <svg class="size-5 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m8 7 4 4 4-4m-8 6 4 4 4-4"/>
+                                    </svg>
+                                </div>
+                            </button>
+                        </div>
+                        
+                        <!-- form -->
+                        <section id="accordion-form" aria-labelledby="accordion-collapse-heading-1" class="hidden accordion-content col-span-4">
+                            {% include "performer/auditioners/widgets/auditioner-form.html" %}
+                        </section>
+                    </a>
+                    
+                    {% include "components/poster_modal.html" %}
                 </div>
-                <div class="flex">
-                    <h2 class="me-3 px-1.5 bg-blue-500 text-white">Announcement Date</h2><h2>{{ auditioner.competition.announcement_date|date:"F j Y" }}</h2>
-                </div>
-                <div class="flex">
-                    <h2 class="me-3 px-1.5 text-white bg-green-700">Contact us</h2><h2>{{ auditioner.competition.email }}</h2>
-                </div>
+                    
+                    <!-- Related Poster -->
+                <section class="w-2/5 px-[2.5rem] sticky top-0">
+                    <h4 class="text-xl text-center font-extrabold mb-[2.5rem] underline">Interesting contest</h4>
+                    <div class="grid grid-cols-2 gap-x-4 gap-y-[2rem]">
+                        <div>
+                            <img class="bg-rose-100 aspect-[0.8/1]" src="https://cdn.imweb.me/thumbnail/20240926/4785672b42da1.jpg"></img>
+                            <h4 class="tracking-tighter px-2">Junior royals's concert in museum</h4>
+                        </div>
+                        <div>
+                            <img class="bg-rose-100 aspect-[0.8/1]" src="https://cdn.imweb.me/thumbnail/20240810/544bb8fa37d37.png"></img>
+                            <h4 class="tracking-tighter px-2">Junior royals's concert in museum</h4>
+                        </div>
+                        <div>
+                            <img class="bg-rose-100 aspect-[0.8/1]" src="https://cdn.imweb.me/thumbnail/20240623/aa71b245e3bb6.jpg"></img>
+                            <h4 class="tracking-tighter px-2">Junior royals's concert in museum</h4>
+                        </div>
+                        <div>
+                            <img class="bg-rose-100 aspect-[0.8/1]" src="https://cdn.imweb.me/thumbnail/20240623/aa71b245e3bb6.jpg"></img>
+                            <h4 class="tracking-tighter px-2">Junior royals's concert in museum</h4>
+                        </div>
+                    </div>
+                </section>
             </div>
-        </div>
-        {% if competition.image %}
-            <img src="{{ competition.image.url }}" class="mt-5 mx-auto">
-        {% endif %}
-        <form class="my-5 border border-gray-800 px-10 pt-5 pb-2" method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            {{ form|crispy }}
-            <div class="flex justify-center items-center mt-10">
-                <button 
-                    type="submit" 
-                    class="w-1/3 my-5 mx-auto text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-bold rounded-lg text-md px-5 py-2.5">
-                    Submit
-                </button>
-            </div>
-        </form>
-    </div>
+        </main>
+    </main>
 {% endblock content %}
 {% block script %}
     <script>
-        var name = "{{ auditioner.audition.id }}";
-        document.getElementById('audition_id').value = name;
-        var name = "{{ request.user.id }}";
-        document.getElementById('user_id').value = name;
+        let currentIndex = 0;
+        const slides = document.getElementsByClassName('carousel-item');
+        const totalSlides = slides.length;
+
+        function showSlide(index) {
+            for (let i = 0; i < totalSlides; i++) {
+                slides[i].classList.remove('opacity-100');
+                slides[i].classList.add('opacity-0');
+            }
+            slides[index].classList.remove('opacity-0');
+            slides[index].classList.add('opacity-100');
+        }
+
+        function nextSlide() {
+            currentIndex = (currentIndex + 1) % totalSlides;
+            showSlide(currentIndex);
+        }
+
+        function startCarousel() {
+            showSlide(currentIndex);
+            setInterval(nextSlide, 7000);
+        }
+
+        window.onload = startCarousel;
     </script>
 {% endblock script %}

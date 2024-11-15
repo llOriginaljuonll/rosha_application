@@ -1,29 +1,199 @@
 {% extends "base.html" %}
 {% load static %}
-
 {% load crispy_forms_tags %}
-{% load tailwind_filters %}
-
-{% block style %}
-    <link rel="stylesheet" href="{% static 'dist/audition/audition_form.css' %}">
-{% endblock style %}
 
 {% block content %}
-    <div class="w-7/12 h-full my-12 content-center mx-auto">
-        <h1 class="text-4xl font-semibold text-center pb-5">Audition Form</h1>
-        <form action="{% url "audition:form" %}" method="post" enctype="multipart/form-data" class="mt-5 border border-gray-400 pt-5 pb-2 px-6 bg-gray-100">
+    <div class="w-full h-full py-[5rem] content-center mx-auto bg-gray-200">
+        <form method="post" enctype="multipart/form-data"
+            class="w-1/2 mx-auto border py-5 font-light px-6 bg-white shadow-md">
             {% csrf_token %}
-            {% crispy form %}
+            <h1 class="text-4xl font-bold tracking-tight mb-[3rem]">Audition Form</h1>
+            {% csrf_token %}
+            <div class="flex gap-x-[0.5rem]">
+                <div class="w-full">
+                    {{ form.hall|as_crispy_field }}
+                </div>
+                <a href="{% url 'hall:hall-form' %}?next={{request.path}}" class="btn-submit rounded-full text-sm text-center w-[150px] mb-3">Create hall</a>
+            </div>
+            {{ form.name|as_crispy_field }}
+            {{ form.image|as_crispy_field }}
+            {{ form.email|as_crispy_field }}
+            <hr class="mt-4">
+            <h4 class="font-extrabold">Egibility</h4>
+            <h4>age classification</h4>
+            <div id="ageEligWrapper" class="flex gap-x-[0.5rem] justify-between">
+                <div class="w-full">{{ form.min_age|as_crispy_field }}</div>
+                <div class="w-full">{{ form.max_age|as_crispy_field }}</div>
+                <button id="addAgeEligWrapper" type="button" class="mb-3">
+                    <svg class="w-6 h-6 text-blue-500 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 7.757v8.486M7.757 12h8.486M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+                    </svg>
+                </button>
+            </div>
+            <h4>manual classification</h4>
+            <div id="manualEligWrapper" class="flex gap-x-[0.5rem] justify-between">
+                <div class="w-full">{{ form.elig|as_crispy_field }}</div>
+                <button id="addManualEligWrapper" type="button" class="mb-3">
+                    <svg class="w-6 h-6 text-blue-500 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 7.757v8.486M7.757 12h8.486M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+                    </svg>
+                </button>
+            </div>
+            <h4>Divisions</h4>
+            <div id="typeWrapper" class="flex gap-x-[0.5rem] justify-between">
+                <div class="w-full">{{ form.type|as_crispy_field }}</div>
+                <button id="addTypeWrapper" type="button" class="mb-3">
+                    <svg class="w-6 h-6 text-blue-500 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 7.757v8.486M7.757 12h8.486M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+                    </svg>
+                </button>
+            </div>
+            <hr>
+            <h4>Schedule</h4>
+            {{ form.deadline|as_crispy_field }}
+            {{ form.announcement_date|as_crispy_field }}
+            {{ form.concert_date|as_crispy_field }}
+            <hr>
+            <h4 class="text-sm font-extrabold mt-[0.5rem] mb-[0.5rem] tracking-tight">Other</h4>
+            {{ form.fee|as_crispy_field }}
+
+            <!-- ถูกำหนด hidden ใน forms.py -->
+            {{ form.category|as_crispy_field }}
+            {{ form.description|as_crispy_field }}
+            <button type="submit" class="btn-submit mt-[0.5rem]">Submit</button>
         </form>
     </div>
+{% endblock content %}
 
+{% block script %}
     <script>
-        // เพิ่ม attribute 'multiple' ให้กับ input
-        document.addEventListener("DOMContentLoaded", function() {
-            var imageInput = document.getElementById("id_image");
-            if (imageInput) {
-                imageInput.setAttribute("multiple", "");
-            }
+        document.getElementById("addAgeEligWrapper").addEventListener("click", function() {
+            // Clone the original ageEligWrapper
+            const originalWrapper = document.getElementById("ageEligWrapper");
+            const newWrapper = originalWrapper.cloneNode(true);
+        
+            // Remove the add button from the cloned wrapper and add a delete button
+            const addButton = newWrapper.querySelector("#addAgeEligWrapper");
+            addButton.remove();
+        
+            const deleteButton = document.createElement("button");
+            deleteButton.type = "button";
+            deleteButton.classList.add("mb-3");
+            deleteButton.innerHTML = `
+                <svg class="w-6 h-6 text-red-500 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 6l12 12M6 18L18 6"/>
+                </svg>
+            `;
+            deleteButton.addEventListener("click", function() {
+                newWrapper.remove();
+            });
+            newWrapper.appendChild(deleteButton);
+        
+            // Get the parent of originalWrapper to append newWrapper correctly
+            const parent = originalWrapper.parentNode;
+        
+            // Find the position to insert the newWrapper (after the last one)
+            const existingWrappers = parent.querySelectorAll("#ageEligWrapper");
+            const lastWrapper = existingWrappers[existingWrappers.length - 1];
+        
+            // Append the new wrapper after the last existing one
+            parent.insertBefore(newWrapper, lastWrapper.nextSibling);
         });
     </script>
-{% endblock content %}
+    <script>
+        document.getElementById("addManualEligWrapper").addEventListener("click", function() {
+            // Clone the original manualEligWrapper
+            const originalWrapper = document.getElementById("manualEligWrapper");
+            const newWrapper = originalWrapper.cloneNode(true);
+        
+            // Reset the input value in the new wrapper and set the same name attribute
+            const inputField = newWrapper.querySelector('input[name="elig"]');
+            if (inputField) {
+                inputField.value = ''; // Reset the input value
+            }
+        
+            // Remove the add button from the cloned wrapper
+            const addButton = newWrapper.querySelector("#addManualEligWrapper");
+            if (addButton) {
+                addButton.remove();
+            }
+        
+            // Create delete button
+            const deleteButton = document.createElement("button");
+            deleteButton.type = "button";
+            deleteButton.classList.add("mb-3"); // Add margin or other styling as needed
+            deleteButton.innerHTML = `
+                <svg class="w-6 h-6 text-red-500 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 6l12 12M6 18L18 6"/>
+                </svg>
+            `;
+        
+            // Add event listener to delete the newWrapper on click
+            deleteButton.addEventListener("click", function() {
+                newWrapper.remove();
+            });
+        
+            // Append the delete button to the new wrapper
+            newWrapper.appendChild(deleteButton);
+        
+            // Find the last manualEligWrapper and insert the new wrapper after it
+            const parent = originalWrapper.parentNode;
+            const existingWrappers = parent.querySelectorAll("#manualEligWrapper");
+            const lastWrapper = existingWrappers[existingWrappers.length - 1];
+        
+            // Insert the new wrapper after the last existing one
+            parent.insertBefore(newWrapper, lastWrapper.nextSibling);
+        });
+    </script>
+    <script>
+        document.getElementById("addTypeWrapper").addEventListener("click", function() {
+            // Clone the original typeWrapper
+            const originalWrapper = document.getElementById("typeWrapper");
+            const newWrapper = originalWrapper.cloneNode(true);
+        
+            // Reset the input value in the new wrapper and set the same name attribute
+            const inputField = newWrapper.querySelector('input[name="type"]');
+            if (inputField) {
+                inputField.value = ''; // Reset the input value
+            }
+        
+            // Remove the add button from the cloned wrapper
+            const addButton = newWrapper.querySelector("#addTypeWrapper");
+            if (addButton) {
+                addButton.remove();
+            }
+        
+            // Create delete button
+            const deleteButton = document.createElement("button");
+            deleteButton.type = "button";
+            deleteButton.classList.add("mb-3"); // Add margin or other styling as needed
+            deleteButton.innerHTML = `
+                <svg class="w-6 h-6 text-red-500 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 6l12 12M6 18L18 6"/>
+                </svg>
+            `;
+        
+            // Add event listener to delete the newWrapper on click
+            deleteButton.addEventListener("click", function() {
+                newWrapper.remove();
+            });
+        
+            // Append the delete button to the new wrapper
+            newWrapper.appendChild(deleteButton);
+        
+            // Find the last typeWrapper and insert the new wrapper after it
+            const parent = originalWrapper.parentNode;
+            const existingWrappers = parent.querySelectorAll("#typeWrapper");
+            const lastWrapper = existingWrappers[existingWrappers.length - 1];
+        
+            // Insert the new wrapper after the last existing one
+            parent.insertBefore(newWrapper, lastWrapper.nextSibling);
+        });
+    </script>
+    <script>
+        document.getElementById('id_min_age').name = 'min_age[]';
+        document.getElementById('id_max_age').name = 'max_age[]';
+        document.getElementById('id_elig').name = 'elig[]';
+        document.getElementById('id_type').name = 'type[]';
+    </script>
+{% endblock script %}
