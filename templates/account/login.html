@@ -7,8 +7,8 @@
         <form method="post">
             {% csrf_token %}
             {{ form|crispy }}
-            <div class="flex justify-center gap-2">
-                <button type="submit" class="btn-submit">Submit</button>
+            <div class="text-center">
+                <button type="submit" class="btn-submit rounded-full">Submit</button>
                 <a href="{% url "account_signup" %}?next={{ request.GET.next|urlencode }}" class="btn-signup">
                     Signup
                 </a>

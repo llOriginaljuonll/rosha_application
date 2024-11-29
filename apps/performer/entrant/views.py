@@ -50,14 +50,6 @@ class EntrantFormView(IsActiveMixin, DetailView, FormMixin):
     
     def form_valid(self, form):
         return super().form_valid(form)
-        
-    
-    # get_form_kwargs คือ method ที่ทำหน้าที่ เพิ่มข้อมูลที่ถูกส่งไปยังฟอร์มของวิวนั้นๆ ได้
-
-    # def get_form_kwargs(self):
-    #     kwargs = super().get_form_kwargs()
-    #     kwargs['compt'] = self.get_object()
-    #     return kwargs
 
 class EntrantDetailView(DetailView):
 

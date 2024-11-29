@@ -7,19 +7,32 @@ class AuditionForm(BaseModelForm):
     class Meta:
 
         labels = {
+            'hall': '',
+            'name': 'audition name',
             'concert_date': 'Concert date and time',
-            'hall': ''
+            'image': 'audition poster',
+            'email': 'email',
+            'min_age': '',
+            'max_age': '',
+            'elig': '',
+            'type': '',
+            'deadline': 'deadline',
+            'announcement_date': 'announcement day',
+            'concert_date': 'performance day',
+            'fee': 'fee',
+            'description': 'other descriptions',
         }
 
         placeholders = {
-            'concert_date': {'date': '', 'time': 'hh:mm'},
-            'deadline': {'date': '', 'time': 'hh:mm'},
-            'announcement_date': {'date': '', 'time': 'hh:mm'}
+            'min_age': 'Minimum age',
+            'max_age': 'Maximum age',
         }
 
         model = Audition
         fields = '__all__'
         widgets = {
+            'elig': forms.TextInput(),
+            'type': forms.TextInput(),
             'category': forms.TextInput(attrs={'type': 'hidden'}),
             'description_payment': forms.Textarea(attrs={
                 'rows': '4'
@@ -28,26 +41,6 @@ class AuditionForm(BaseModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.helper = FormHelper()
-        self.fields['hall'].empty_label = "Select Hall"
-
-        self.helper.layout = Layout(
-            Div(
-                Field(
-                    'hall',
-                    wrapper_class="w-1/2 mb-0",
-                    css_class="bg-white"
-                ),
-                Submit(
-                    "button", 
-                    "Create Hall", 
-                    css_class="btn-add-hall"
-                ),
-                css_class="flex flex-row gap-x-[1rem]"
-            ),
-            *[Field(field) for field in self.fields.keys() if field not in ['hall']],
-            ButtonHolder(
-                Submit("submit", "Submit"),
-                css_class="btn-submit"
-            )
-        )
+        # เปลี่ยน name ให้เป็น min_age[] 
+        self.fields['min_age'].widget.attrs.pop('name', None)  # ลบ name เดิมออก
+        self.fields['min_age'].widget.attrs['name'] = 'min_age[]'  

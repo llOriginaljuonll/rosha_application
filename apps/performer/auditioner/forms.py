@@ -1,31 +1,26 @@
-from core.forms import BaseModelForm, forms
+from core.forms import BaseModelForm, forms, RegexForm
 from apps.performer.auditioner.models import Auditioner
 
-class AuditionerForm(BaseModelForm):
+class AuditionerForm(BaseModelForm, RegexForm):
 
     class Meta:
         model = Auditioner
         fields = '__all__'
 
         labels = {
-            'birthdate': 'Date of Birth',
-            'cpr_permission': 'We may feature your video on our social media channels to promote other auditions. Please indicate your consent by checking the box below to grant permission for the use of copyrighted content.',
-            'email': 'E-mail address',
-            'grade': 'Grade of School',
-            'image': 'Profile Picture -> Picture taken within 6 months and showing the face clearly.',
-            'instrument': 'Instrument / (If Group) Write all instruments',
-            'name': 'Auditioner Name(If Individual apply) / Name of group(If Group apply)',
-            'nationlity': 'e.g. American, Korean, Thai',
-            'phone': 'Mobile number',
-            'regis_confirm': 'Registration Confirmation',
-            'school': 'School Name',
-            'shorts_url': 'Video link for audition',
-            'slip': 'Proof of payment / transfer slip -> It can be the e-slip of transaction or the picture of paper slip.',
-            'song': 'Title of songs'
-        }
-
-        placeholders = {
-            'birthdate': 'dd/mm/yyyy'
+            'name': 'auditioner name',
+            'nationality': 'nationality',
+            'birthdate': 'birthdate',
+            'phone': 'phone number',
+            'email': 'e-mail address',
+            'grade': 'education level',
+            'school': 'school name',
+            'elig': '',
+            'image': 'profile image',
+            'instrument_type': 'instruments',
+            'shorts_url': 'video link for audition',
+            'slip': 'proof of payment',
+            'song': 'songs name'
         }
 
         widgets = {
@@ -41,18 +36,19 @@ class AuditionerForm(BaseModelForm):
             'age': forms.TextInput(attrs={
                 'type': 'hidden'
             }),
-            'applicant_type': forms.RadioSelect()
+            'elig': forms.RadioSelect(),
+            'instrument_type': forms.RadioSelect(),
         }
 
-    def clean(self):
-        cleaned_data = super().clean()
-        short_url = cleaned_data.get("shorts_url")
-        short_video = cleaned_data.get("shorts_video")
+    # def clean(self):
+    #     cleaned_data = super().clean()
+    #     short_url = cleaned_data.get("shorts_url")
+    #     short_video = cleaned_data.get("shorts_video")
 
-        if not short_url and not short_video:
-            raise forms.ValidationError("กรุณากรอก URL หรือ อัปโหลดวิดีโออย่างใดอย่างหนึ่ง")
+    #     if not short_url and not short_video:
+    #         raise forms.ValidationError("กรุณากรอก URL หรือ อัปโหลดวิดีโออย่างใดอย่างหนึ่ง")
         
-        if short_url and short_video:
-            raise forms.ValidationError("กรุณากรอกเพียง URL หรือ อัปโหลดวิดีโออย่างใดอย่างหนึ่งเท่านั้น")
+    #     if short_url and short_video:
+    #         raise forms.ValidationError("กรุณากรอกเพียง URL หรือ อัปโหลดวิดีโออย่างใดอย่างหนึ่งเท่านั้น")
 
-        return cleaned_data
+    #     return cleaned_data

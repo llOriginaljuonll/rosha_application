@@ -5,18 +5,15 @@ from apps.performer.auditioner.models import Auditioner
 from apps.performer.auditioner.forms import AuditionerForm
 from apps.referee.models import Score
 from django.urls import reverse_lazy
-from core.mixins import IsActiveMixin, IsEditorMixin, IsStaffMixin
+from core.mixins import IsEditorMixin, IsStaffMixin
 from django.contrib import messages
-from django.shortcuts import redirect
+from django.shortcuts import redirect, get_object_or_404
 
 class AuditionerListView(IsEditorMixin, ListView):
 
     model = Audition
     template_name = 'performer/auditioners/auditioner_list.html'
     context_object_name = 'auditioners'
-
-    # def get_success_url(self) -> str:
-    #     return reverse_lazy('audition:list')
     
     def get_queryset(self, *args, **kwargs):
         return Auditioner.objects.filter(audition__id=self.kwargs.get('pk')).order_by('-score__result')
@@ -27,15 +24,6 @@ class AuditionerListView(IsEditorMixin, ListView):
         
         context["score"] = Score.objects.filter(id=self.kwargs.get('id'))
         return context
-
-    # def post(self, request, *args, **kwargs):
-
-    #     form = self.get_form()
-    #     if form.is_valid():
-    #         form.save()
-    #         return self.form_valid(form)
-    #     else:
-    #         return self.form_invalid(form)
 
     
 class AllAuditionerListview(IsStaffMixin, ListView):
@@ -80,9 +68,11 @@ class AuditionerFormView(DetailView, FormMixin):
     def get_context_data(self, **kwargs):
         context = super(AuditionerFormView, self).get_context_data(**kwargs)
         context['form'] = self.get_form()
+        context['all_auditions'] = Audition.objects.all()
         return context
     
     def post(self, *args, **kwargs):
+
         # เรียกใช้ self.get_object() เพื่อกำหนด self.object
         self.object = self.get_object()
         form = self.get_form()
@@ -91,6 +81,18 @@ class AuditionerFormView(DetailView, FormMixin):
             return self.form_valid(form)
         else:
             return self.form_invalid(form)
+    
+    def get_form(self):
+        form = super().get_form()
+        # ดึงข้อมูล choices จาก NewModel
+        audition_instance = get_object_or_404(Audition, pk=self.kwargs['pk'])
+        elig_choices = [(value.strip(), value.strip()) for value in audition_instance.elig.split(',')]
+        type_choices = [(value.strip(), value.strip()) for value in audition_instance.type.split(',')]
+        
+        # กำหนด choices สำหรับฟิลด์ choice_field
+        form.fields['elig'].choices = elig_choices
+        form.fields['instrument_type'].choices = type_choices
+        return form
 
     def form_valid(self, form):
         form.save()
@@ -117,6 +119,21 @@ class AuditionerUpdateView(UpdateView):
         else:
             return self.handle_no_permission(request)
         return super().dispatch(request, *args, **kwargs)
+    
+    def get_form(self):
+        form = super().get_form()
+        instance = get_object_or_404(Auditioner, pk=self.kwargs['pk'])
+        audition_instance = get_object_or_404(Audition, pk=instance.audition.id)
+        
+        # สร้าง choices ที่เป็น tuple (ค่า, ค่า) จากข้อมูลที่แยกด้วยเครื่องหมายจุลภาค
+        elig_choices = [(value.strip(), value.strip()) for value in audition_instance.elig.split(',')]
+        type_choices = [(value.strip(), value.strip()) for value in audition_instance.type.split(',')]
+        
+        # กำหนดให้ choices ของฟิลด์ในฟอร์ม
+        form.fields['elig'].choices = elig_choices
+        form.fields['instrument_type'].choices = type_choices
+        
+        return form
 
     def get_success_url(self):
         return reverse_lazy('auditioner:detail', kwargs={"pk": self.get_object().id})
