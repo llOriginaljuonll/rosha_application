@@ -81,18 +81,6 @@ class AuditionerFormView(DetailView, FormMixin):
             return self.form_valid(form)
         else:
             return self.form_invalid(form)
-    
-    def get_form(self):
-        form = super().get_form()
-        # ดึงข้อมูล choices จาก NewModel
-        audition_instance = get_object_or_404(Audition, pk=self.kwargs['pk'])
-        elig_choices = [(value.strip(), value.strip()) for value in audition_instance.elig.split(',')]
-        type_choices = [(value.strip(), value.strip()) for value in audition_instance.type.split(',')]
-        
-        # กำหนด choices สำหรับฟิลด์ choice_field
-        form.fields['elig'].choices = elig_choices
-        form.fields['instrument_type'].choices = type_choices
-        return form
 
     def form_valid(self, form):
         form.save()
