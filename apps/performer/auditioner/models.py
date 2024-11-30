@@ -35,16 +35,6 @@ class Auditioner(models.Model):
     school = models.CharField(max_length=255)
     grade = models.CharField(max_length=100)
     image = VersatileImageField('Image', upload_to='images/')
-    elig = models.CharField(
-        max_length=255, 
-        choices=Audition.get_choices(), 
-        default='Unspecified'
-    )
-    instrument_type = models.CharField(
-        max_length=255, 
-        choices=Audition.get_type_choices(), 
-        default='Unspecified'
-    )
     song = models.CharField(max_length=255)
     shorts_url = EmbedVideoField(blank=True, null=True)
     shorts_video = models.FileField(upload_to="auditioner/{id}", blank=True, null=True)

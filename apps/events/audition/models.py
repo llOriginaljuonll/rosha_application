@@ -42,26 +42,6 @@ class Audition(models.Model):
         
     def get_concert_date(self):
         return self.get_days_left(self.concert_date)
-    
-    @staticmethod
-    def get_choices():
-        # ดึงข้อมูลจากฟิลด์ name ของ NewModel
-        choices = []
-        for obj in Audition.objects.all():
-            # แยกข้อมูลใน name แต่ละชุดโดยใช้ ',' และนำมาเป็น tuple
-            for value in obj.elig.split(','):
-                choices.append((value.strip(), value.strip()))  # เพิ่มข้อมูลในรูปแบบ choices
-        return choices
-    
-    @staticmethod
-    def get_type_choices():
-        # ดึงข้อมูลจากฟิลด์ name ของ NewModel
-        choices = []
-        for obj in Audition.objects.all():
-            # แยกข้อมูลใน name แต่ละชุดโดยใช้ ',' และนำมาเป็น tuple
-            for value in obj.type.split(','):
-                choices.append((value.strip(), value.strip()))  # เพิ่มข้อมูลในรูปแบบ choices
-        return choices
         
     def __str__(self):
         return f"{self.id} {self.name}"
