@@ -25,12 +25,7 @@ class EntrantForm(BaseModelForm):
         label="Categories"
     )
 
-    birthdate = forms.DateField(
-        input_formats=['%d-%m-%Y'], # รูปแบบที่คาดหวังจากผู้ใช้
-        widget=forms.DateInput(
-            format='%d-%m-%Y',
-        )
-    )
+    birthdate = forms.DateField()
 
     
 
@@ -69,7 +64,7 @@ class EntrantForm(BaseModelForm):
             'address': forms.Textarea(attrs={'rows': 4}),
             'short_url': forms.TextInput(),
             'compt': forms.TextInput(attrs={
-                'value': '', 'id': 'compt_id', 'type': 'hidden'
+                'value': '', 'id': 'compt_id',
             }),
             'applicant_type': forms.RadioSelect()
         }

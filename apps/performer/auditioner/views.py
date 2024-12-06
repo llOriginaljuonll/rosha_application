@@ -1,4 +1,4 @@
-from django.views.generic import DetailView, ListView, UpdateView, DeleteView
+from django.views.generic import DetailView, ListView, UpdateView, DeleteView, CreateView
 from django.views.generic.edit import FormMixin
 from apps.events.audition.models import Audition
 from apps.performer.auditioner.models import Auditioner
@@ -56,58 +56,25 @@ class AuditionerDetailView(DetailView):
         return super().dispatch(request, *args, **kwargs)
 
 
-class AuditionerFormView(DetailView, FormMixin):
-    model = Audition
+class AuditionerCreateView(CreateView):
+
+    model = Auditioner
     form_class = AuditionerForm
     template_name = 'performer/auditioners/auditioner_form.html'
-    context_object_name = 'audition'
-
-    def get_success_url(self) -> str:
-        return reverse_lazy('audition:list')
+    success_url = reverse_lazy('audition:list')
     
     def get_context_data(self, **kwargs):
-        context = super(AuditionerFormView, self).get_context_data(**kwargs)
-        context['form'] = self.get_form()
-        context['all_auditions'] = Audition.objects.all()
+        context = super().get_context_data(**kwargs)
+        audition_id = self.kwargs.get("audition_id")
+        context["related_posters"] = Audition.objects.values("id", "poster", "name").order_by("-id")[:4]
+        context["audition"] = Audition.objects.get(pk=audition_id)
         return context
-    
-    def post(self, *args, **kwargs):
-
-        # เรียกใช้ self.get_object() เพื่อกำหนด self.object
-        self.object = self.get_object()
-        form = self.get_form()
-
-        if form.is_valid():
-            return self.form_valid(form)
-        else:
-            return self.form_invalid(form)
-    
-    def get_form(self):
-        form = super().get_form()
-        # ดึงข้อมูล choices จาก NewModel
-        audition_instance = get_object_or_404(Audition, pk=self.kwargs['pk'])
-        elig_choices = [(value.strip(), value.strip()) for value in audition_instance.elig.split(',')]
-        type_choices = [(value.strip(), value.strip()) for value in audition_instance.type.split(',')]
-        
-        # กำหนด choices สำหรับฟิลด์ choice_field
-        form.fields['elig'].choices = elig_choices
-        form.fields['instrument_type'].choices = type_choices
-        return form
-
-    def form_valid(self, form):
-        form.save()
-        return super().form_valid(form)
-
     
 class AuditionerUpdateView(UpdateView):
 
     model = Auditioner
     form_class = AuditionerForm
-    template_name = 'performer/auditioners/auditioner_update.html'
-
-    def handle_no_permission(self, request):
-        messages.add_message(request, messages.ERROR, "You need higher permissions in order to access this page.")
-        return redirect("/")
+    template_name = "performer/auditioners/auditioner_update.html"
 
     def dispatch(self, request, *args, **kwargs):
         obj = self.get_object()
@@ -119,21 +86,6 @@ class AuditionerUpdateView(UpdateView):
         else:
             return self.handle_no_permission(request)
         return super().dispatch(request, *args, **kwargs)
-    
-    def get_form(self):
-        form = super().get_form()
-        instance = get_object_or_404(Auditioner, pk=self.kwargs['pk'])
-        audition_instance = get_object_or_404(Audition, pk=instance.audition.id)
-        
-        # สร้าง choices ที่เป็น tuple (ค่า, ค่า) จากข้อมูลที่แยกด้วยเครื่องหมายจุลภาค
-        elig_choices = [(value.strip(), value.strip()) for value in audition_instance.elig.split(',')]
-        type_choices = [(value.strip(), value.strip()) for value in audition_instance.type.split(',')]
-        
-        # กำหนดให้ choices ของฟิลด์ในฟอร์ม
-        form.fields['elig'].choices = elig_choices
-        form.fields['instrument_type'].choices = type_choices
-        
-        return form
 
     def get_success_url(self):
         return reverse_lazy('auditioner:detail', kwargs={"pk": self.get_object().id})
@@ -141,6 +93,7 @@ class AuditionerUpdateView(UpdateView):
 class AuditionerDeleteView(DeleteView):
 
     model = Auditioner
+    success_message = "Auditioner is deleted successfully"
 
     """Overide get method for Creating DeleteView without templates name"""
     def get(self, request, *args, **kwargs):

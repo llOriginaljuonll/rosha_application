@@ -43,8 +43,6 @@ class Entrant(models.Model):
     address = models.CharField(max_length=255)
     school = models.CharField(max_length=100)
     prim_contact = models.CharField(max_length=255)
-    elig = models.JSONField(encoder=DjangoJSONEncoder, null=True, blank=True)
-    instr_type = models.JSONField(encoder=DjangoJSONEncoder, null=True, blank=True)
     songs = models.CharField(max_length=255)
 
     # restrict uploads to video files only.

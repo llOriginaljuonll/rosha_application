@@ -3,6 +3,11 @@
 {% load tailwind_filters %}
 
 {% block content %}
+    {% if messages %}
+        {% for message in messages %}
+            {% include "components/messages.html" %}
+        {% endfor %}
+    {% endif %}
     <div class="w-1/4 h-screen mx-auto content-center">
         <form method="post">
             {% csrf_token %}

@@ -10,6 +10,11 @@
 </head>
 <body>
     {% include "components/navbar.html" %}
+    {% if messages %}
+        {% for message in messages %}
+            {% include "components/messages.html" %}
+        {% endfor %}
+    {% endif %}
     {% block content %}{% endblock content %}
     {% block script %}{% endblock script %}
     

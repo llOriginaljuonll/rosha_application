@@ -19,37 +19,27 @@ class EntrantListView(IsEditorMixin, ListView):
         return Entrant.objects.filter(compt__id=self.kwargs.get('pk'))
 
 
-class EntrantFormView(IsActiveMixin, DetailView, FormMixin):
+class EntrantCreateView(CreateView):
 
-    model = Competition
+    model = Entrant
     form_class = EntrantForm
     template_name = 'performer/entrants/entrant_form.html'
-    context_object_name = 'competition'
+    success_url = reverse_lazy("compt:compeition_list")
 
-    def get_success_url(self) -> str:
-        return reverse_lazy('compt:list')
+    def dispatch(self, request, *args, **kwargs):
+        self.competition_id = self.kwargs.get("compeition_id")
+        self.competition = Competition.objects.get(pk=self.competition_id)
+        return super().dispatch(request, *args, **kwargs)
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['form'] = self.get_form()
+        context["competition"] = self.competition_id
         return context
     
-    def get_form_kwargs(self):
-        kwargs = super().get_form_kwargs()
-        kwargs['pk'] = self.kwargs.get('pk')
-        return kwargs
-    
-    def post(self, *args, **kwargs):
-        self.object = self.get_object()
-        form = self.get_form()
-        if form.is_valid():
-            form.save()
-            return self.form_valid(form)
-        else:
-            return self.form_invalid(form)
-    
-    def form_valid(self, form):
+    def form_valid(self,form):
+        form.instance.audition = self.competition_id
         return super().form_valid(form)
+
 
 class EntrantDetailView(DetailView):
 
