@@ -8,7 +8,7 @@ from .models import Competition
 class ComptFormView(FormView):
     template_name = 'events/competition/compt_form.html'
     form_class = CompetitionForm
-    success_url = reverse_lazy('compt:list')
+    success_url = reverse_lazy('compt:competition_list')
 
     def form_valid(self, form):
         elig_objs = self.request.POST.getlist("eligible") 
