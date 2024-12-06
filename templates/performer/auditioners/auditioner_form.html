@@ -4,8 +4,8 @@
 {% load tailwind_filters %}
 
 {% block content %}
-    <main class="bg-gray-200">
-        <main class="w-4/5 mx-auto space-y-[2rem]">
+    <main class="w-4/5 mx-auto space-y-[2rem]">
+        <main class="">
 
             <section class="h-screen flex flex-col justify-center gap-y-[4rem]">
                 <h1 class="text-4xl font-bold uppercase text-center tracking-tight">
@@ -33,7 +33,6 @@
                             </a>
                         </p>
                     </div>
-                    
                 </div>
             </section>
     
@@ -41,7 +40,7 @@
                 <!-- poster section -->
                 <div class="w-3/5">
                     <div class="gap-y-[0.5rem] pb-[2rem] w-full">
-                        <img src="{{ audition.image.url }}" class="object-contain object-top aspect-[0.8/1]">
+                        <img src="{{ audition.poster.url }}" class="object-contain object-top aspect-[0.8/1]">
                     </div>
                     <!-- accordion -->
                     <a 
@@ -84,10 +83,10 @@
                 <section class="w-2/5 px-[2.5rem] sticky top-0">
                     <h4 class="text-xl text-center font-extrabold mb-[2.5rem] underline">Interesting contest</h4>
                     <div class="grid grid-cols-2 gap-x-4 gap-y-[2rem]">
-                        {% for audition in all_auditions %}
+                        {% for related_poster in related_posters %}
                             <div>
-                                <img class="bg-rose-100 aspect-[0.8/1]" src="{{audition.image.url}}"></img>
-                                <h4 class="tracking-tighter px-2">Junior royals's concert in museum</h4>
+                                <img class="bg-rose-100 aspect-[0.8/1]" src="/media/{{ related_poster.poster }}"></img>
+                                <h4 class="tracking-tighter px-2">{{ related_poster.name }}</h4>
                             </div>
                         {% endfor %}
                     </div>
