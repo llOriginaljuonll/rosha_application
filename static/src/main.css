@@ -28,4 +28,20 @@ input {
     .btn-submit {
         @apply text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800;
     }
+
+    .message.success {
+        @apply text-green-800 bg-green-50 dark:bg-gray-800 dark:text-green-400;
+    }
+
+    .message.success button {
+        @apply bg-green-50 text-green-500 focus:ring-green-400 hover:bg-green-200 dark:bg-gray-800 dark:text-green-400 dark:hover:bg-gray-700
+    }
+
+    .message.error {
+        @apply text-red-800 bg-red-50 dark:bg-gray-800 dark:text-red-400;
+    }
+
+    .message.error button {
+        @apply bg-red-50 text-red-500 focus:ring-red-400 hover:bg-red-200 dark:bg-gray-800 dark:text-red-400 dark:hover:bg-gray-700
+    }
 }
